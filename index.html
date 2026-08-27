@@ -93,12 +93,16 @@
   /* ---------- animations ---------- */
   @keyframes bounce-subtle{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
   .animate-bounce-subtle{animation:bounce-subtle 2s infinite ease-in-out;}
-  @keyframes pulse-subtle{0%,100%{opacity:1}50%{opacity:.85;box-shadow:0 0 20px rgba(99,102,241,.5)}}
+  @keyframes pulse-subtle{0%,100%{box-shadow:0 0 0 0 rgba(99,102,241,.35)}50%{box-shadow:0 0 0 6px rgba(99,102,241,0)}}
   .animate-pulse-subtle{animation:pulse-subtle 3s infinite ease-in-out;}
   @keyframes float-slow{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-16px) rotate(1.5deg)}}
   .animate-float-slow{animation:float-slow 7s infinite ease-in-out;}
   @keyframes fill-bar{from{width:0}to{width:var(--fill-width)}}
-  .progress-bar-fill{animation:fill-bar 1.4s ease-out forwards;position:relative;}
+  .progress-bar-fill{position:relative;width:0;}
+  .progress-bar-fill::after{
+    content:"";position:absolute;top:0;right:0;width:3px;height:100%;
+    background:#fff;box-shadow:0 0 6px 1px rgba(99,102,241,.7);border-radius:2px;
+  }
 
   .reveal{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.65,0,.35,1),transform .8s cubic-bezier(.65,0,.35,1);}
   .reveal.active{opacity:1;transform:translateY(0);}
@@ -252,7 +256,7 @@
         <span class="eyebrow">// hakkımda</span>
         <h2 class="font-headline text-headline-lg text-on-background mb-8 relative inline-block">
           Profesyonel Yaklaşım
-          <span class="absolute bottom-0 left-0 w-1/2 h-1 bg-indigo-electric rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]"></span>
+          <span class="absolute bottom-0 left-0 w-1/2 h-1 bg-indigo-electric rounded-full shadow-[0_0_3px_rgba(99,102,241,.5),0_0_14px_rgba(99,102,241,.25)]"></span>
         </h2>
         <p class="font-body text-body-lg text-on-surface-variant mb-6 leading-relaxed">
           Yazılıma olan yoğun ilgim sayesinde bu alanda kendimi geliştirmeye odaklanmış biriyim. <strong class="text-indigo-electric font-semibold">Analitik düşünme</strong> yeteneğimle karmaşık problemleri küçük ve yönetilebilir parçalara ayırarak çözüme ulaştırıyorum.
@@ -268,15 +272,15 @@
           <div class="w-3 h-3 rounded-full bg-green-500"></div>
           <span class="ml-4 text-xs text-gray-400">nilay@portfolio ~ zsh</span>
         </div>
-        <div class="p-6 space-y-2">
-          <p><span class="text-green-400">➜</span> <span class="text-blue-400">~</span> whoami</p>
-          <p>Nilay Balcı</p>
-          <p class="mt-4"><span class="text-green-400">➜</span> <span class="text-blue-400">~</span> cat egitim.txt</p>
-          <p class="text-gray-400">İzmir Ekonomi Üniversitesi</p>
-          <p class="text-gray-400">Bilgisayar Programcılığı, 2023–2025</p>
-          <p class="mt-4"><span class="text-green-400">➜</span> <span class="text-blue-400">~</span> cat sertifikalar.txt</p>
-          <p class="text-gray-400">Yapay Zekâ (Techcareer, devam ediyor)</p>
-          <p class="mt-4 animate-pulse">_</p>
+        <div class="p-6 space-y-2" id="aboutTerm">
+          <p><span class="text-green-400">➜</span> <span class="text-blue-400">~</span> <span class="term-type" data-cmd="whoami"></span></p>
+          <p class="term-out opacity-0 transition-opacity duration-300">Nilay Balcı</p>
+          <p class="mt-4"><span class="text-green-400">➜</span> <span class="text-blue-400">~</span> <span class="term-type" data-cmd="cat egitim.txt"></span></p>
+          <p class="term-out opacity-0 transition-opacity duration-300 text-gray-400">İzmir Ekonomi Üniversitesi</p>
+          <p class="term-out opacity-0 transition-opacity duration-300 text-gray-400">Bilgisayar Programcılığı, 2023–2025</p>
+          <p class="mt-4"><span class="text-green-400">➜</span> <span class="text-blue-400">~</span> <span class="term-type" data-cmd="cat sertifikalar.txt"></span></p>
+          <p class="term-out opacity-0 transition-opacity duration-300 text-gray-400">Yapay Zekâ (Techcareer, devam ediyor)</p>
+          <p class="mt-4 opacity-0 transition-opacity duration-300 term-out"><span class="animate-pulse">_</span></p>
         </div>
       </div>
     </div>
@@ -284,11 +288,12 @@
 
   <!-- ACTIVITY (bespoke) -->
   <section class="reveal relative" id="activity">
+    <div class="code-float hidden lg:block text-[11px]" style="top:-1rem;left:2rem;">git log --oneline | wc -l</div>
     <div class="text-center mb-16">
       <span class="eyebrow justify-center">// commit geçmişi</span>
       <h2 class="font-headline text-headline-lg text-on-background inline-block relative">
         Düzenli üretmeye özen gösteriyorum.
-        <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-24 h-1 bg-indigo-electric rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]"></span>
+        <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-24 h-1 bg-indigo-electric rounded-full shadow-[0_0_3px_rgba(99,102,241,.5),0_0_14px_rgba(99,102,241,.25)]"></span>
       </h2>
     </div>
     <div class="glass-panel rounded-2xl p-8 hover-card max-w-4xl mx-auto">
@@ -310,7 +315,7 @@
       <span class="eyebrow justify-center">// deneyim</span>
       <h2 class="font-headline text-headline-lg text-on-background inline-block relative bg-surface px-4">
         Deneyim
-        <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-indigo-electric rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]"></span>
+        <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-indigo-electric rounded-full shadow-[0_0_3px_rgba(99,102,241,.5),0_0_14px_rgba(99,102,241,.25)]"></span>
       </h2>
     </div>
     <div class="max-w-4xl mx-auto">
@@ -327,7 +332,7 @@
             </div>
             <div class="flex items-center gap-3">
               <span class="font-code text-xs text-on-surface-variant">Temmuz — Eylül 2024</span>
-              <span class="inline-block px-4 py-2 bg-indigo-electric/10 border border-indigo-electric/30 rounded-full font-code text-xs text-indigo-electric shadow-[0_0_15px_rgba(99,102,241,0.2)]">Staj</span>
+              <span class="inline-block px-4 py-2 bg-indigo-electric/10 border border-indigo-electric/30 rounded-full font-code text-xs text-indigo-electric shadow-[0_0_12px_rgba(99,102,241,.15)]">Staj</span>
             </div>
           </div>
           <ul class="space-y-3 mb-6">
@@ -348,11 +353,12 @@
 
   <!-- SKILLS -->
   <section class="reveal relative" id="skills">
+    <div class="code-float hidden lg:block text-[11px]" style="top:-1rem;right:2rem;">Authorization: Bearer eyJhbGci...</div>
     <div class="text-center mb-16">
       <span class="eyebrow justify-center">// yetenekler</span>
       <h2 class="font-headline text-headline-lg text-on-background inline-block relative">
         Yetenekler
-        <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-indigo-electric rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]"></span>
+        <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-indigo-electric rounded-full shadow-[0_0_3px_rgba(99,102,241,.5),0_0_14px_rgba(99,102,241,.25)]"></span>
       </h2>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto auto-rows-min">
@@ -365,15 +371,18 @@
           </div>
           <h3 class="font-headline text-headline-md text-on-background">Programlama</h3>
         </div>
-        <div class="space-y-3 relative z-10">
-          <div class="flex items-center justify-between p-3 rounded-xl border border-indigo-electric/20 bg-surface-container">
-            <span class="font-code text-sm">Java</span><span class="material-symbols-outlined text-indigo-electric text-lg">done_all</span>
+        <div class="space-y-5 relative z-10" id="langBars">
+          <div>
+            <div class="flex justify-between font-code text-sm mb-2 text-on-surface-variant"><span>Java</span><span class="text-indigo-electric">88%</span></div>
+            <div class="h-2 bg-surface-container rounded-full overflow-hidden shadow-inner"><div class="h-full bg-gradient-to-r from-indigo-electric/60 to-indigo-electric rounded-full progress-bar-fill" style="--fill-width:88%"></div></div>
           </div>
-          <div class="flex items-center justify-between p-3 rounded-xl border border-indigo-electric/20 bg-surface-container">
-            <span class="font-code text-sm">Python</span><span class="material-symbols-outlined text-indigo-electric text-lg">done_all</span>
+          <div>
+            <div class="flex justify-between font-code text-sm mb-2 text-on-surface-variant"><span>Python</span><span class="text-indigo-electric">92%</span></div>
+            <div class="h-2 bg-surface-container rounded-full overflow-hidden shadow-inner"><div class="h-full bg-gradient-to-r from-indigo-electric/60 to-indigo-electric rounded-full progress-bar-fill" style="--fill-width:92%"></div></div>
           </div>
-          <div class="flex items-center justify-between p-3 rounded-xl border border-indigo-electric/20 bg-surface-container">
-            <span class="font-code text-sm">C#</span><span class="material-symbols-outlined text-indigo-electric text-lg">done_all</span>
+          <div>
+            <div class="flex justify-between font-code text-sm mb-2 text-on-surface-variant"><span>C#</span><span class="text-indigo-electric">80%</span></div>
+            <div class="h-2 bg-surface-container rounded-full overflow-hidden shadow-inner"><div class="h-full bg-gradient-to-r from-indigo-electric/60 to-indigo-electric rounded-full progress-bar-fill" style="--fill-width:80%"></div></div>
           </div>
         </div>
       </div>
@@ -448,7 +457,7 @@
       <span class="eyebrow justify-center">// projeler</span>
       <h2 class="font-headline text-headline-lg text-on-background inline-block relative bg-surface px-4">
         Projeler
-        <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-indigo-electric rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]"></span>
+        <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-indigo-electric rounded-full shadow-[0_0_3px_rgba(99,102,241,.5),0_0_14px_rgba(99,102,241,.25)]"></span>
       </h2>
       <p class="font-body text-body-md text-on-surface-variant mt-4 max-w-xl mx-auto">github.com/nilaybalci üzerinde yayınlanan 6 projeden seçmeler. Her karta tıklayarak detaylarını görebilir, dosya sekmesinden doğrudan GitHub'a gidebilirsin.</p>
     </div>
@@ -457,6 +466,7 @@
 
   <!-- CONTACT -->
   <section class="reveal relative" id="contact">
+    <div class="code-float hidden lg:block text-[11px]" style="top:-1rem;left:2rem;">export default function Contact() { ... }</div>
     <div class="max-w-2xl mx-auto text-center glass-panel rounded-2xl p-12 shadow-[0_0_50px_rgba(99,102,241,0.1)] relative overflow-hidden bg-surface/80">
       <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-indigo-electric to-transparent"></div>
       <span class="eyebrow justify-center">// iletişim</span>
@@ -562,10 +572,53 @@
     entries.forEach(entry => {
       if(!entry.isIntersecting) return;
       entry.target.classList.add('active');
+      entry.target.querySelectorAll('.progress-bar-fill').forEach(bar => {
+        bar.style.animation = 'fill-bar 1.4s cubic-bezier(.4,0,.2,1) forwards';
+      });
       observer.unobserve(entry.target);
     });
   }, { threshold: .15, rootMargin: "0px 0px -50px 0px" });
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ---------- about terminal typewriter ----------
+  (function(){
+    const term = document.getElementById('aboutTerm');
+    if(!term) return;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(prefersReduced){
+      term.querySelectorAll('.term-type').forEach(el => el.textContent = el.dataset.cmd);
+      term.querySelectorAll('.term-out').forEach(el => el.classList.remove('opacity-0'));
+      return;
+    }
+    function typeInto(el, text){
+      return new Promise(resolve => {
+        let i = 0;
+        (function step(){
+          el.textContent = text.slice(0, i);
+          if(i < text.length){ i++; setTimeout(step, 28 + Math.random()*26); }
+          else resolve();
+        })();
+      });
+    }
+    async function runSequence(){
+      for(const child of term.children){
+        const typer = child.querySelector('.term-type');
+        if(typer){
+          await typeInto(typer, typer.dataset.cmd);
+          await new Promise(r => setTimeout(r, 220));
+        } else if(child.classList.contains('term-out')){
+          child.classList.remove('opacity-0');
+          await new Promise(r => setTimeout(r, 260));
+        }
+      }
+    }
+    const termIo = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){ runSequence(); termIo.unobserve(entry.target); }
+      });
+    }, { threshold: .4 });
+    termIo.observe(term);
+  })();
 
   // ---------- navbar blur on scroll ----------
   const navbar = document.getElementById('navbar');
@@ -660,14 +713,10 @@
             <span class="px-3 py-1 bg-indigo-electric/10 text-indigo-electric rounded-md font-code text-xs border border-indigo-electric/20 whitespace-nowrap ml-2">${p.lang}</span>
           </div>
           <p class="font-body text-body-md text-on-surface-variant flex-grow mb-6 relative z-10">${p.desc}</p>
-          <div class="relative overflow-hidden h-8 group">
-            <button class="proj-details absolute inset-0 flex items-center gap-2 text-indigo-electric font-code text-sm transition-transform duration-300 group-hover:-translate-y-full text-left">
-              <span class="material-symbols-outlined text-sm">arrow_forward</span> Detayları Gör
-            </button>
-            <a class="proj-source absolute inset-0 flex items-center gap-2 text-indigo-electric font-code text-sm transition-transform duration-300 translate-y-full group-hover:translate-y-0" href="https://github.com/nilaybalci/${p.repo}" target="_blank" rel="noopener">
-              <span class="material-symbols-outlined text-sm">code</span> Kaynağı Gör
-            </a>
-          </div>
+          <button class="proj-details h-8 flex items-center gap-2 text-indigo-electric font-code text-sm text-left w-fit group/btn">
+            <span class="material-symbols-outlined text-sm transition-transform duration-300 group-hover/btn:translate-x-1">arrow_forward</span>
+            <span class="relative">Detayları Gör<span class="absolute left-0 -bottom-0.5 w-0 h-px bg-indigo-electric transition-all duration-300 group-hover/btn:w-full"></span></span>
+          </button>
         </div>
       </div>
     `;
