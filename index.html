@@ -211,22 +211,12 @@
   .modal-preview .mp-image-area img{
     width:100%;height:100%;object-fit:contain;object-position:center;display:block;
   }
-  .modal-preview-code{
-    flex:1;min-height:0;padding:1.2rem 1.3rem 2rem;font-family:'Fira Code',monospace;font-size:.78rem;
-    line-height:1.85;color:#B9BEC9;position:relative;overflow:hidden;
-  }
-  .modal-preview::after{
-    content:"";position:absolute;left:0;right:0;bottom:0;height:56px;
-    background:linear-gradient(180deg, transparent, rgba(30,30,30,.9));pointer-events:none;
-  }
-  .modal-preview.is-image::after{ display:none; }
-  .mp-kw{color:#7FA7E0;} .mp-str{color:#E7B983;} .mp-key{color:#8FD4B4;} .mp-punc{color:#6E7386;} .mp-com{color:#767a8a;font-style:italic;}
 
   /* wider viewports: preview sits beside the content instead of above it */
-  @media (min-width:820px){
-    .modal-box{ max-width:900px; }
+  @media (min-width:860px){
+    .modal-box{ max-width:1000px; }
     .modal-body{ display:flex;flex-direction:row;align-items:stretch; }
-    .modal-preview{ width:340px;height:auto;border-right:1px solid rgba(99,102,241,.15); }
+    .modal-preview{ width:460px;height:auto;border-right:1px solid rgba(99,102,241,.15); }
     .modal-content-pad{ flex:1;min-width:0; }
   }
 
@@ -722,21 +712,7 @@
       desc:"Masaüstü uygulaması olarak geliştirilmiş, satış ve stok yönetimi sağlayan bir kasa / POS sistemi simülasyonu.",
       tags:["Python","Sistem Tasarımı"],
       langs:[{n:"Python",p:100,c:"#3572A5"}],
-      preview:{ type:"code", file:"ADİSYON SİSTEMİ.py", html:
-        '<div><span class="mp-kw">import</span> customtkinter <span class="mp-kw">as</span> ctk</div>' +
-        '<div><span class="mp-kw">from</span> tkinter <span class="mp-kw">import</span> messagebox</div>' +
-        '<div>&nbsp;</div>' +
-        '<div>ctk.set_appearance_mode(<span class="mp-str">"System"</span>)</div>' +
-        '<div>root = ctk.CTk()</div>' +
-        '<div>root.geometry(<span class="mp-str">"850x750"</span>)</div>' +
-        '<div>root.title(<span class="mp-str">"Restoran Adisyon Sistemi"</span>)</div>' +
-        '<div>&nbsp;</div>' +
-        '<div><span class="mp-com"># sipariş kalemleri</span></div>' +
-        '<div>fis_no = ctk.StringVar()</div>' +
-        '<div>tavuk_burger = ctk.StringVar(value=<span class="mp-str">"0"</span>)</div>' +
-        '<div>dana_burger = ctk.StringVar(value=<span class="mp-str">"0"</span>)</div>' +
-        '<div>tarih = ctk.StringVar(</div>' +
-        '<div>&nbsp;&nbsp;&nbsp;&nbsp;value=time.strftime(<span class="mp-str">"%d/%m/%Y"</span>))</div>' } },
+      preview:{ type:"image", src:"assets/previews/kasa-sistemi.jpg" } },
     { name:"Marvel Web", repo:"Marvel_Web", lang:"PHP", file:"marvel_web.php",
       desc:"Marvel evrenindeki karakterleri listeleyen ve detaylarını sunan, PHP tabanlı dinamik bir web uygulaması.",
       tags:["PHP","MySQL","CRUD"],
@@ -751,32 +727,12 @@
       desc:"Kişisel çalışmaları sergilemek amacıyla HTML5 ve CSS3 ile sıfırdan tasarlanmış ilk portfolyo denemem.",
       tags:["HTML5","CSS3","UI/UX"],
       langs:[{n:"CSS",p:55.1,c:"#563d7c"},{n:"HTML",p:43.9,c:"#e34c26"},{n:"JavaScript",p:0.9,c:"#f1e05a"}],
-      preview:{ type:"code", file:"style.css", html:
-        '<div><span class="mp-key">body</span> {</div>' +
-        '<div>&nbsp;&nbsp;<span class="mp-kw">font-family</span>: Arial, sans-serif;</div>' +
-        '<div>&nbsp;&nbsp;<span class="mp-kw">margin</span>: 0;</div>' +
-        '<div>&nbsp;&nbsp;<span class="mp-kw">padding</span>: 0;</div>' +
-        '<div>&nbsp;&nbsp;<span class="mp-kw">color</span>: <span class="mp-str">#ffffff</span>;</div>' +
-        '<div>&nbsp;&nbsp;<span class="mp-kw">background-color</span>: <span class="mp-str">#111</span>;</div>' +
-        '<div>}</div>' +
-        '<div>&nbsp;</div>' +
-        '<div><span class="mp-key">.header-container</span> {</div>' +
-        '<div>&nbsp;&nbsp;<span class="mp-kw">max-width</span>: <span class="mp-str">1200px</span>;</div>' +
-        '<div>&nbsp;&nbsp;<span class="mp-kw">margin</span>: auto;</div>' +
-        '<div>&nbsp;&nbsp;<span class="mp-kw">display</span>: <span class="mp-str">flex</span>;</div>' +
-        '<div>}</div>' } },
+      preview:{ type:"image", src:"assets/previews/portfolyo-projeler.jpg" } },
     { name:"EkoFit Veritabanı", repo:"ekofit-database", lang:"Java", file:"VeriTabani.java",
       desc:"Java ile geliştirilen, ilişkisel veritabanı tasarımı üzerine kurulu; veri bütünlüğünü gözeten bir sistem.",
       tags:["Java","SQL","Veritabanı Tasarımı"],
       langs:[{n:"Java",p:100,c:"#b07219"}],
-      preview:{ type:"code", file:"DBConnection.java", html:
-        '<div><span class="mp-kw">public class</span> <span class="mp-key">DBConnection</span> {</div>' +
-        '<div>&nbsp;&nbsp;<span class="mp-kw">private static final</span> String URL =</div>' +
-        '<div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="mp-str">"jdbc:mysql://localhost:3306/ekofit"</span>;</div>' +
-        '<div>&nbsp;</div>' +
-        '<div>&nbsp;&nbsp;<span class="mp-kw">public static</span> Connection <span class="mp-key">connect</span>() {</div>' +
-        '<div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="mp-kw">return</span> DriverManager.getConnection(URL, ...);</div>' +
-        '<div>&nbsp;&nbsp;}</div><div>}</div>' } },
+      preview:{ type:"image", src:"assets/previews/ekofit-terminal.jpg" } },
     { name:"Kafe Web Sitesi", repo:"cafe-web-sitesi", lang:"CSS", file:"cafe.css",
       desc:"HTML5 ve CSS3 ile hazırlanmış, menü ve iletişim bölümleriyle duyarlı (responsive) bir kafe tanıtım sitesi.",
       tags:["HTML5","CSS3","Responsive"],
@@ -831,17 +787,9 @@
     lastFocused = document.activeElement;
 
     const dots = `<span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>`;
-    if(p.preview.type === 'image'){
-      modalPreview.className = 'modal-preview is-image';
-      modalPreview.innerHTML = `
-        <div class="mp-browser">${dots}<span class="mp-url">github.com/nilaybalci/${p.repo}</span></div>
-        <div class="mp-image-area"><img src="${p.preview.src}" alt="${p.name} önizlemesi" loading="lazy"></div>`;
-    } else {
-      modalPreview.className = 'modal-preview';
-      modalPreview.innerHTML = `
-        <div class="mp-browser">${dots}<span class="mp-url">${p.preview.file}</span></div>
-        <div class="modal-preview-code">${p.preview.html}</div>`;
-    }
+    modalPreview.innerHTML = `
+      <div class="mp-browser">${dots}<span class="mp-url">github.com/nilaybalci/${p.repo}</span></div>
+      <div class="mp-image-area"><img src="${p.preview.src}" alt="${p.name} önizlemesi" loading="lazy"></div>`;
 
     modalTitle.textContent = p.name;
     modalDesc.textContent = p.desc;
