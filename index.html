@@ -72,8 +72,8 @@
   .eyebrow{
     font-family:'Fira Code',monospace;
     font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
-    color:#4648d4;display:inline-flex;align-items:center;gap:.6em;
-    margin-bottom:.9rem;
+    color:#4648d4;display:flex;align-items:center;gap:.6em;
+    margin-bottom:1.1rem;
   }
   .eyebrow::before{
     content:"";width:7px;height:7px;border-radius:50%;background:#6366f1;display:inline-block;
@@ -250,7 +250,7 @@
     <div class="grid lg:grid-cols-2 gap-12 items-center">
       <div>
         <span class="eyebrow">// hakkımda</span>
-        <h2 class="font-headline text-headline-lg text-on-background mb-8 relative inline-block block">
+        <h2 class="font-headline text-headline-lg text-on-background mb-8 relative inline-block">
           Profesyonel Yaklaşım
           <span class="absolute bottom-0 left-0 w-1/2 h-1 bg-indigo-electric rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]"></span>
         </h2>
@@ -286,7 +286,7 @@
   <section class="reveal relative" id="activity">
     <div class="text-center mb-16">
       <span class="eyebrow justify-center">// commit geçmişi</span>
-      <h2 class="font-headline text-headline-lg text-on-background inline-block relative block">
+      <h2 class="font-headline text-headline-lg text-on-background inline-block relative">
         Düzenli üretmeye özen gösteriyorum.
         <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-24 h-1 bg-indigo-electric rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]"></span>
       </h2>
@@ -308,7 +308,7 @@
     <div class="code-float hidden lg:block text-[11px]" style="top:-1rem;left:2rem;">git commit -m "feat: JWT auth eklendi"</div>
     <div class="text-center mb-16 relative">
       <span class="eyebrow justify-center">// deneyim</span>
-      <h2 class="font-headline text-headline-lg text-on-background inline-block relative bg-surface px-4 block">
+      <h2 class="font-headline text-headline-lg text-on-background inline-block relative bg-surface px-4">
         Deneyim
         <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-indigo-electric rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]"></span>
       </h2>
@@ -350,7 +350,7 @@
   <section class="reveal relative" id="skills">
     <div class="text-center mb-16">
       <span class="eyebrow justify-center">// yetenekler</span>
-      <h2 class="font-headline text-headline-lg text-on-background inline-block relative block">
+      <h2 class="font-headline text-headline-lg text-on-background inline-block relative">
         Yetenekler
         <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-indigo-electric rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]"></span>
       </h2>
@@ -446,7 +446,7 @@
     <div class="code-float hidden lg:block text-[11px]" style="top:-1rem;right:2rem;">$db-&gt;query("SELECT * FROM heroes");</div>
     <div class="text-center mb-16 relative">
       <span class="eyebrow justify-center">// projeler</span>
-      <h2 class="font-headline text-headline-lg text-on-background inline-block relative bg-surface px-4 block">
+      <h2 class="font-headline text-headline-lg text-on-background inline-block relative bg-surface px-4">
         Projeler
         <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-indigo-electric rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]"></span>
       </h2>
@@ -501,6 +501,15 @@
     <span class="eyebrow" id="modalEyebrow">// proje</span>
     <h3 id="modalTitle" class="font-headline text-headline-md text-on-background mb-4"></h3>
     <p id="modalDesc" class="font-body text-body-md text-on-surface-variant mb-6"></p>
+
+    <div class="mb-6">
+      <p class="font-code text-xs text-on-surface-variant mb-2 flex items-center gap-2">
+        <span class="material-symbols-outlined text-sm">bar_chart</span> Dil dağılımı (GitHub)
+      </p>
+      <div class="flex w-full h-2.5 rounded-full overflow-hidden bg-surface-container" id="modalLangBar"></div>
+      <div class="flex flex-wrap gap-x-4 gap-y-1 mt-3" id="modalLangLegend"></div>
+    </div>
+
     <div class="flex flex-wrap gap-2 mb-8" id="modalTags"></div>
     <a class="inline-flex w-full items-center justify-center gap-2 px-8 py-4 bg-indigo-electric text-white rounded-full font-code text-sm hover:bg-indigo-deep transition-all shadow-lg shadow-indigo-electric/30" id="modalGh" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.43-2.7 5.41-5.27 5.69.42.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .3.21.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
@@ -603,25 +612,32 @@
   })();
 
   // ---------- projects + modal ----------
+  // dil dağılımları github.com/nilaybalci/{repo}/languages API'sinden alınmıştır
   const projects = [
     { name:"Kasa Sistemi", repo:"Kasa_Sistemi", lang:"Python", file:"kasa_sistemi.py",
       desc:"Masaüstü uygulaması olarak geliştirilmiş, satış ve stok yönetimi sağlayan bir kasa / POS sistemi simülasyonu.",
-      tags:["Python","Sistem Tasarımı"] },
+      tags:["Python","Sistem Tasarımı"],
+      langs:[{n:"Python",p:100,c:"#3572A5"}] },
     { name:"Marvel Web", repo:"Marvel_Web", lang:"PHP", file:"marvel_web.php",
       desc:"Marvel evrenindeki karakterleri listeleyen ve detaylarını sunan, PHP tabanlı dinamik bir web uygulaması.",
-      tags:["PHP","MySQL","CRUD"] },
+      tags:["PHP","MySQL","CRUD"],
+      langs:[{n:"PHP",p:50.9,c:"#4F5D95"},{n:"CSS",p:23.5,c:"#563d7c"},{n:"HTML",p:22.3,c:"#e34c26"},{n:"JavaScript",p:3.3,c:"#f1e05a"}] },
     { name:"Seyahat Takip", repo:"Seyahat_Takip", lang:"JavaScript", file:"seyahat_takip.js",
       desc:"Kullanıcıların gezi planlarını ve ziyaret ettikleri yerleri kaydedebildiği, JavaScript ile geliştirilmiş bir takip uygulaması.",
-      tags:["JavaScript","HTML","CSS"] },
+      tags:["JavaScript","HTML","CSS"],
+      langs:[{n:"JavaScript",p:38.2,c:"#f1e05a"},{n:"CSS",p:37.0,c:"#563d7c"},{n:"HTML",p:24.8,c:"#e34c26"}] },
     { name:"Portfolyo Web Sitesi", repo:"portfolyowebsitesi", lang:"CSS", file:"style.css",
       desc:"Kişisel çalışmaları sergilemek amacıyla HTML5 ve CSS3 ile sıfırdan tasarlanmış ilk portfolyo denemem.",
-      tags:["HTML5","CSS3","UI/UX"] },
+      tags:["HTML5","CSS3","UI/UX"],
+      langs:[{n:"CSS",p:55.1,c:"#563d7c"},{n:"HTML",p:43.9,c:"#e34c26"},{n:"JavaScript",p:0.9,c:"#f1e05a"}] },
     { name:"EkoFit Veritabanı", repo:"ekofit-database", lang:"Java", file:"VeriTabani.java",
       desc:"Java ile geliştirilen, ilişkisel veritabanı tasarımı üzerine kurulu; veri bütünlüğünü gözeten bir sistem.",
-      tags:["Java","SQL","Veritabanı Tasarımı"] },
+      tags:["Java","SQL","Veritabanı Tasarımı"],
+      langs:[{n:"Java",p:100,c:"#b07219"}] },
     { name:"Kafe Web Sitesi", repo:"cafe-web-sitesi", lang:"CSS", file:"cafe.css",
       desc:"HTML5 ve CSS3 ile hazırlanmış, menü ve iletişim bölümleriyle duyarlı (responsive) bir kafe tanıtım sitesi.",
-      tags:["HTML5","CSS3","Responsive"] },
+      tags:["HTML5","CSS3","Responsive"],
+      langs:[{n:"CSS",p:52.7,c:"#563d7c"},{n:"HTML",p:43.6,c:"#e34c26"},{n:"JavaScript",p:3.6,c:"#f1e05a"}] },
   ];
 
   const grid2 = document.getElementById('projectsGrid');
@@ -666,6 +682,8 @@
   const modalTags = document.getElementById('modalTags');
   const modalGh = document.getElementById('modalGh');
   const modalClose = document.getElementById('modalClose');
+  const modalLangBar = document.getElementById('modalLangBar');
+  const modalLangLegend = document.getElementById('modalLangLegend');
   let lastFocused = null;
 
   function openModal(p){
@@ -674,6 +692,13 @@
     modalDesc.textContent = p.desc;
     modalTags.innerHTML = p.tags.map(t => `<span class="px-3 py-1.5 rounded-md bg-indigo-electric/10 text-indigo-electric font-code text-xs border border-indigo-electric/20">${t}</span>`).join("");
     modalGh.href = `https://github.com/nilaybalci/${p.repo}`;
+
+    modalLangBar.innerHTML = p.langs.map(l => `<span style="width:${l.p}%;background:${l.c};" title="${l.n} ${l.p}%"></span>`).join("");
+    modalLangLegend.innerHTML = p.langs.map(l => `
+      <span class="inline-flex items-center gap-1.5 font-code text-xs text-on-surface-variant">
+        <span class="w-2.5 h-2.5 rounded-full inline-block" style="background:${l.c}"></span>${l.n} <span class="text-on-surface-variant/60">${l.p}%</span>
+      </span>`).join("");
+
     backdrop.classList.add('open');
     document.body.style.overflow = 'hidden';
     modalClose.focus();
