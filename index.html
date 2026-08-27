@@ -3,898 +3,580 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Nilay Balcı — Bilgisayar Programcısı</title>
+<title>Nilay Balcı | Bilgisayar Programcısı</title>
 <meta name="description" content="Nilay Balcı — Bilgisayar Programcısı. Java, Python, C# ve web teknolojileri üzerine çalışan bir yazılım geliştiricinin portfolyosu." />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231E6E52'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='26' font-weight='700' fill='%23FAF8F2' text-anchor='middle'%3ENB%3C/text%3E%3C/svg%3E" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%234648D4'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='26' font-weight='700' fill='%23fcf8ff' text-anchor='middle'%3ENB%3C/text%3E%3C/svg%3E" />
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Fira+Code:wght@400;500;600&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet" />
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          "indigo-electric": "#6366f1",
+          "indigo-deep": "#4648d4",
+          "surface-bright": "#fcf8ff",
+          "surface": "#fcf8ff",
+          "surface-dim": "#dbd8e4",
+          "surface-container-lowest": "#ffffff",
+          "surface-container-low": "#f5f2fe",
+          "surface-container": "#efecf8",
+          "surface-container-high": "#e9e6f3",
+          "surface-container-highest": "#e4e1ed",
+          "surface-variant": "#e4e1ed",
+          "on-surface": "#1b1b23",
+          "on-surface-variant": "#464554",
+          "inverse-surface": "#303038",
+          "inverse-on-surface": "#f2effb",
+          "outline": "#767586",
+          "outline-variant": "#c7c4d7",
+          "background": "#fcf8ff",
+          "on-background": "#1b1b23",
+        },
+        spacing: {
+          "element-gap": "24px",
+          "container-max": "1280px",
+          "gutter": "32px",
+          "section-padding": "120px",
+        },
+        fontFamily: {
+          "headline": ["Montserrat"],
+          "body": ["Inter"],
+          "code": ["Fira Code", "monospace"],
+          "signature": ["Mrs Saint Delafield", "cursive"],
+        },
+        fontSize: {
+          "display-lg": ["64px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
+          "headline-lg": ["40px", { lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "700" }],
+          "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "600" }],
+          "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+          "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+          "label-sm": ["14px", { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" }],
+        },
+      },
+    },
+  };
+</script>
 <style>
-  :root{
-    --paper:#FAF8F2;
-    --paper-deep:#F1ECDE;
-    --surface:#FFFFFF;
-    --ink:#14171F;
-    --ink-soft:#565A66;
-    --ink-faint:#93958F;
-    --line:#E4DFCF;
-    --accent:#1E6E52;
-    --accent-deep:#123F2E;
-    --accent-soft:#E3EEE7;
-    --copper:#BE7638;
-    --copper-soft:#F3E4D0;
-    --shadow-sm:0 1px 2px rgba(20,23,31,.06), 0 1px 1px rgba(20,23,31,.04);
-    --shadow-md:0 10px 26px -10px rgba(20,23,31,.20), 0 2px 8px rgba(30,110,82,.10);
-    --shadow-lg:0 30px 60px -18px rgba(20,23,31,.24), 0 6px 16px rgba(190,118,56,.12);
-    --radius-lg:20px;
-    --radius-md:14px;
-    --radius-sm:9px;
+  html { scroll-behavior: smooth; }
+  body { background: #fcf8ff; color: #1b1b23; overflow-x: hidden; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
   }
 
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:
-      radial-gradient(circle, rgba(30,110,82,.10) 1px, transparent 1.4px) 0 0/26px 26px,
-      var(--paper);
-    color:var(--ink);
-    font-family:'Work Sans',system-ui,sans-serif;
-    font-size:16px;
-    line-height:1.7;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  h1,h2,h3{
-    font-family:'Fraunces',Georgia,serif;
-    margin:0;
-    color:var(--ink);
-    letter-spacing:-0.02em;
-    font-weight:600;
-  }
-  p{margin:0;}
-  a{color:inherit;text-decoration:none;}
-  img{max-width:100%;display:block;}
-  button{font:inherit;cursor:pointer;}
-
-  ::selection{background:var(--accent-soft);color:var(--accent-deep);}
-
-  :focus-visible{
-    outline:2.5px solid var(--accent);
-    outline-offset:3px;
-    border-radius:4px;
-  }
-
-  .mono{
-    font-family:'JetBrains Mono',monospace;
-  }
-
+  /* ---------- eyebrow (section-header signature) ---------- */
   .eyebrow{
-    font-family:'JetBrains Mono',monospace;
-    font-size:.78rem;
-    letter-spacing:.16em;
-    text-transform:uppercase;
-    color:var(--accent-deep);
-    display:inline-flex;
-    align-items:center;
-    gap:.6em;
+    font-family:'Fira Code',monospace;
+    font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
+    color:#4648d4;display:inline-flex;align-items:center;gap:.6em;
+    margin-bottom:.9rem;
   }
   .eyebrow::before{
-    content:"";
-    width:7px;height:7px;border-radius:50%;
-    background:var(--copper);
-    display:inline-block;
+    content:"";width:7px;height:7px;border-radius:50%;background:#6366f1;display:inline-block;
+    box-shadow:0 0 8px 1px rgba(99,102,241,.5);
   }
 
-  .wrap{
-    max-width:1180px;
-    margin-inline:auto;
-    padding-inline:clamp(1.25rem,4vw,2.5rem);
+  /* ---------- custom cursor ---------- */
+  #custom-cursor{
+    position:fixed;top:0;left:0;width:36px;height:36px;
+    border:2px solid #6366f1;border-radius:50%;pointer-events:none;z-index:9999;
+    transform:translate(-50%,-50%);
+    transition:width .2s,height .2s,background-color .2s;
+    mix-blend-mode:multiply;
+  }
+  #custom-cursor.hovering{ width:56px;height:56px;background-color:rgba(99,102,241,.10); }
+
+  /* ---------- animations ---------- */
+  @keyframes bounce-subtle{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  .animate-bounce-subtle{animation:bounce-subtle 2s infinite ease-in-out;}
+  @keyframes pulse-subtle{0%,100%{opacity:1}50%{opacity:.85;box-shadow:0 0 20px rgba(99,102,241,.5)}}
+  .animate-pulse-subtle{animation:pulse-subtle 3s infinite ease-in-out;}
+  @keyframes float-slow{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-16px) rotate(1.5deg)}}
+  .animate-float-slow{animation:float-slow 7s infinite ease-in-out;}
+  @keyframes fill-bar{from{width:0}to{width:var(--fill-width)}}
+  .progress-bar-fill{animation:fill-bar 1.4s ease-out forwards;position:relative;}
+
+  .reveal{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.65,0,.35,1),transform .8s cubic-bezier(.65,0,.35,1);}
+  .reveal.active{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){ .reveal{opacity:1!important;transform:none!important;transition:none!important;} }
+
+  .glass-panel{ background:rgba(252,248,255,.7); backdrop-filter:blur(24px); border:1px solid rgba(228,225,237,.5); }
+  .glass-header{ background:rgba(252,248,255,.4); backdrop-filter:blur(10px); border-bottom:1px solid rgba(228,225,237,.3); }
+
+  .hover-card{ transition:transform .3s cubic-bezier(.65,0,.35,1),box-shadow .3s ease,border-color .3s ease; }
+  .hover-card:hover{ transform:translateY(-8px); box-shadow:0 20px 40px -10px rgba(99,102,241,.20); border-color:rgba(99,102,241,.5); }
+
+  .terminal-header{ background:linear-gradient(180deg,#2d2d2d 0%,#1e1e1e 100%); }
+
+  .pattern-grid{
+    background-image:linear-gradient(rgba(99,102,241,.05) 1px,transparent 1px),
+                      linear-gradient(90deg,rgba(99,102,241,.05) 1px,transparent 1px);
+    background-size:40px 40px;
+  }
+  .pattern-dots{ background-image:radial-gradient(rgba(99,102,241,.15) 1px,transparent 1px); background-size:20px 20px; }
+
+  #binary-canvas{ position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.12; }
+
+  .code-float{
+    position:absolute;font-family:'Fira Code',monospace;color:rgba(99,102,241,.5);
+    pointer-events:none;user-select:none;z-index:0;white-space:pre;
+    background:rgba(252,248,255,.55);backdrop-filter:blur(6px);
+    padding:.4rem .7rem;border-radius:8px;border:1px solid rgba(99,102,241,.12);
   }
 
-  .section{padding-block:clamp(4rem,9vw,7.5rem);}
-  .section--tint{background:var(--paper-deep);}
-  .section--surface{background:var(--surface);}
-
-  .section-head{
-    max-width:640px;
-    margin-bottom:clamp(2.25rem,5vw,3.5rem);
-  }
-  .section-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem);margin-top:.6rem;}
-  .section-head p{color:var(--ink-soft);margin-top:1rem;font-size:1.05rem;}
-
-  /* ---------- noise overlay ---------- */
-  .noise{
-    position:fixed;inset:0;pointer-events:none;z-index:2;
-    opacity:.035;mix-blend-mode:multiply;
-  }
-
-  /* ---------- reveal on scroll ---------- */
-  .reveal{
-    opacity:0;
-    transform:translateY(26px);
-    transition:opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);
-    will-change:transform,opacity;
-  }
-  .reveal.is-visible{opacity:1;transform:translateY(0);}
-  .reveal-left{transform:translate(-46px,0);}
-  .reveal-left.is-visible{transform:translate(0,0);}
-  .reveal-right{transform:translate(46px,0);}
-  .reveal-right.is-visible{transform:translate(0,0);}
-  .reveal-delay-1{transition-delay:.08s;}
-  .reveal-delay-2{transition-delay:.16s;}
-  .reveal-delay-3{transition-delay:.24s;}
-  .reveal-delay-4{transition-delay:.32s;}
-  .reveal-delay-5{transition-delay:.4s;}
-
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    .reveal,.reveal-left,.reveal-right{opacity:1 !important;transform:none !important;transition:none !important;}
-  }
-
-  /* ---------- nav ---------- */
-  .nav{
-    position:fixed;top:0;left:0;right:0;z-index:40;
-    display:flex;align-items:center;justify-content:space-between;
-    padding:1.1rem clamp(1.25rem,4vw,2.5rem);
-    transition:background .4s ease, box-shadow .4s ease, padding .3s ease, backdrop-filter .4s ease;
-  }
-  .nav.scrolled{
-    background:rgba(250,248,242,.82);
-    backdrop-filter:blur(14px) saturate(1.4);
-    -webkit-backdrop-filter:blur(14px) saturate(1.4);
-    box-shadow:0 1px 0 var(--line);
-    padding-block:.8rem;
-  }
-  .logo{
-    font-family:'Mrs Saint Delafield',cursive;
-    font-size:2.1rem;
-    color:var(--ink);
-    line-height:1;
-    transition:color .3s ease;
-  }
-  .logo:hover{color:var(--accent);}
-  .nav-links{
-    display:flex;align-items:center;gap:.3rem;
-  }
+  /* ---------- nav file tabs (bespoke) ---------- */
   .nav-links a{
-    font-family:'JetBrains Mono',monospace;
-    font-size:.82rem;font-weight:500;color:var(--ink-soft);
-    position:relative;padding:.5rem .75rem;border-radius:8px 8px 0 0;
-    display:inline-flex;align-items:center;gap:.5rem;
-    transition:color .25s ease, background .25s ease;
+    font-family:'Fira Code',monospace;font-size:.82rem;font-weight:500;
+    color:#464554;position:relative;padding:.5rem .7rem;border-radius:8px 8px 0 0;
+    display:inline-flex;align-items:center;gap:.5rem;transition:color .25s ease,background .25s ease;
   }
-  .nav-links a .tab-dot{
-    width:6px;height:6px;border-radius:50%;background:var(--copper);
-    opacity:0;transition:opacity .25s ease;flex-shrink:0;
-  }
+  .nav-links a .tab-dot{ width:6px;height:6px;border-radius:50%;background:#6366f1;opacity:0;transition:opacity .25s ease; }
   .nav-links a::after{
-    content:"";position:absolute;left:.75rem;right:calc(100% - .75rem);bottom:0;height:2px;
-    background:var(--accent);transition:right .3s cubic-bezier(.2,.7,.2,1);
+    content:"";position:absolute;left:.7rem;right:calc(100% - .7rem);bottom:0;height:2px;
+    background:#6366f1;transition:right .3s cubic-bezier(.65,0,.35,1);
   }
-  .nav-links a:hover{color:var(--ink);background:var(--paper-deep);}
-  .nav-links a:hover::after{right:.75rem;}
-  .nav-links a:hover .tab-dot{opacity:1;}
-  .nav-cta{
-    font-family:'JetBrains Mono',monospace;
-    background:var(--ink);color:var(--paper) !important;
-    padding:.6rem 1.05rem;border-radius:999px;font-size:.82rem !important;font-weight:600 !important;
-    box-shadow:var(--shadow-sm);margin-left:.6rem;
-    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
-  }
-  .nav-cta:hover{background:var(--accent-deep);transform:translateY(-2px);box-shadow:var(--shadow-md);background:var(--accent-deep) !important;}
-  .nav-cta::after{display:none;}
-  .nav-cta .tab-dot{display:none;}
-  .nav-toggle{
-    display:none;background:none;border:none;padding:.4rem;color:var(--ink);
-  }
-  .nav-toggle svg{width:24px;height:24px;}
+  .nav-links a:hover{ color:#1b1b23; background:#efecf8; }
+  .nav-links a:hover::after{ right:.7rem; }
+  .nav-links a:hover .tab-dot{ opacity:1; }
 
-  @media (max-width:860px){
-    .nav-links{
-      position:fixed;top:0;right:0;height:100vh;width:min(78vw,320px);
-      background:var(--surface);
-      flex-direction:column;align-items:flex-start;justify-content:center;gap:1.8rem;
-      padding:2rem;box-shadow:var(--shadow-lg);
-      transform:translateX(100%);transition:transform .4s cubic-bezier(.2,.7,.2,1);
-    }
-    .nav-links.open{transform:translateX(0);}
-    .nav-links a{font-size:1.05rem;}
-    .nav-toggle{display:block;z-index:41;}
-  }
+  /* ---------- contribution graph (bespoke) ---------- */
+  .contrib-grid{ display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,1fr);gap:3px;overflow-x:auto;padding-bottom:.3rem; }
+  .contrib-cell{ width:11px;height:11px;border-radius:3px; }
+  .clvl-0{ background:#e9e6f3; }
+  .clvl-1{ background:#c7c8f7; }
+  .clvl-2{ background:#9a9cf0; }
+  .clvl-3{ background:#6366f1; }
+  .clvl-4{ background:#4648d4; }
 
-  /* ---------- hero ---------- */
-  .hero{
-    position:relative;
-    padding-top:clamp(7.5rem,14vw,10rem);
-    padding-bottom:clamp(4rem,8vw,6rem);
-    overflow:hidden;
-  }
-  .hero::before{
-    content:"";position:absolute;top:-10%;right:-8%;width:46%;aspect-ratio:1;
-    background:radial-gradient(circle at 30% 30%, var(--accent-soft), transparent 70%);
-    border-radius:50%;filter:blur(10px);z-index:0;
-  }
-  .hero-grid{
-    display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2.5rem,5vw,4rem);
-    align-items:center;position:relative;z-index:1;
-  }
-  .hero h1{
-    font-size:clamp(2.5rem,4.6vw,3.9rem);
-    line-height:1.08;margin-top:.9rem;
-  }
-  .hero-lede{
-    color:var(--ink-soft);font-size:1.12rem;max-width:46ch;margin-top:1.5rem;
-  }
-  .hero-actions{
-    display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.4rem;
-  }
-  .btn{
-    display:inline-flex;align-items:center;gap:.55rem;
-    padding:.85rem 1.5rem;border-radius:999px;font-weight:600;font-size:.95rem;
-    transition:transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s ease, background .25s ease, border-color .25s ease;
-  }
-  .btn-primary{
-    background:var(--accent);color:var(--paper);box-shadow:var(--shadow-sm);
-  }
-  .btn-primary:hover{background:var(--accent-deep);transform:translateY(-3px);box-shadow:var(--shadow-md);}
-  .btn-ghost{
-    background:transparent;color:var(--ink);border:1.5px solid var(--line);
-  }
-  .btn-ghost:hover{border-color:var(--ink);transform:translateY(-3px);box-shadow:var(--shadow-sm);}
-  .btn svg{width:17px;height:17px;}
-
-  .hero-meta{
-    display:flex;gap:2.2rem;margin-top:3rem;flex-wrap:wrap;
-  }
-  .hero-meta div{border-left:2px solid var(--copper);padding-left:.85rem;}
-  .hero-meta b{display:block;font-family:'Fraunces',serif;font-size:1.5rem;font-weight:600;}
-  .hero-meta span{font-size:.82rem;color:var(--ink-soft);}
-
-  /* editor mock card */
-  .term-stack{position:relative;}
-  .editor{
-    background:var(--ink);
-    border-radius:var(--radius-lg);
-    box-shadow:var(--shadow-lg);
-    overflow:hidden;
-    transform:rotate(1.4deg);
-    transition:transform .5s ease;
-    position:relative;z-index:2;
-  }
-  .editor:hover{transform:rotate(0deg) translateY(-4px);}
-  .git-log{
-    position:absolute;left:-7%;bottom:-13%;width:78%;z-index:1;
-    background:#1B1F29;border-radius:var(--radius-md);box-shadow:var(--shadow-md);
-    overflow:hidden;transform:rotate(-6deg);
-    transition:transform .5s ease;
-  }
-  .term-stack:hover .git-log{transform:rotate(-9deg) translateY(6px);}
-  .git-log .editor-tabs{padding:.6rem .9rem;}
-  .git-log .editor-body{
-    padding:.9rem 1rem 1.1rem;font-size:.72rem;line-height:1.9;min-height:0;color:#B9BEC9;
-  }
-  .git-log .gl-hash{color:#BE9367;}
-  .git-log .gl-branch{color:#7FA7E0;}
-  .git-log .gl-msg{color:#D7DAE2;}
-  @media (max-width:900px){
-    .git-log{display:none;}
-  }
-  .editor-tabs{
-    display:flex;align-items:center;gap:.5rem;
-    padding:.85rem 1.1rem;background:#1B1F29;border-bottom:1px solid #2A2F3B;
-  }
-  .editor-dot{width:10px;height:10px;border-radius:50%;background:#3A4050;}
-  .editor-tab{
-    margin-left:.6rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:#C7CAD4;
-    background:#232838;padding:.35rem .8rem;border-radius:7px 7px 0 0;
-  }
-  .editor-body{
-    padding:1.6rem 1.5rem 1.9rem;font-family:'JetBrains Mono',monospace;
-    font-size:.86rem;line-height:1.85;color:#D7DAE2;min-height:255px;
-  }
-  .editor-body .ln{color:#4B5063;user-select:none;display:inline-block;width:1.6em;}
-  .tok-key{color:#8FD4B4;}
-  .tok-str{color:#E7B983;}
-  .tok-punc{color:#6E7386;}
-  .tok-kw{color:#7FA7E0;}
-  .caret{
-    display:inline-block;width:2px;height:1em;background:#8FD4B4;vertical-align:-2px;
-    animation:blink 1s step-end infinite;
-  }
-  @keyframes blink{50%{opacity:0;}}
-
-  /* ---------- marquee ---------- */
-  .marquee-strip{
-    background:var(--ink);
-    padding-block:1.3rem;
-    overflow:hidden;
-    border-block:1px solid #232838;
-  }
-  .marquee-track{
-    display:flex;width:max-content;
-    animation:scroll-left 32s linear infinite;
-  }
-  .marquee-strip:hover .marquee-track{animation-play-state:paused;}
-  .marquee-item{
-    font-family:'JetBrains Mono',monospace;
-    font-size:.92rem;color:#B9BEC9;
-    padding:0 1.6rem;display:flex;align-items:center;gap:1.6rem;white-space:nowrap;
-  }
-  .marquee-item b{color:#EDEFF3;font-weight:600;}
-  .marquee-item .dot{color:var(--copper);}
-  @keyframes scroll-left{
-    from{transform:translateX(0);}
-    to{transform:translateX(-50%);}
-  }
-  @media (prefers-reduced-motion: reduce){
-    .marquee-track{animation:none;}
-  }
-
-  /* ---------- about ---------- */
-  .about-grid{
-    display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,4rem);align-items:start;
-  }
-  .about-body p{color:var(--ink-soft);font-size:1.05rem;}
-  .about-body p + p{margin-top:1.1rem;}
-
-  /* ---------- experience ---------- */
-  .exp-card{
-    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);
-    padding:clamp(1.8rem,4vw,2.6rem);box-shadow:var(--shadow-sm);
-    position:relative;
-  }
-  .exp-head{display:flex;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;align-items:baseline;}
-  .exp-head h3{font-size:1.5rem;}
-  .exp-head .period{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--copper);}
-  .exp-company{color:var(--ink-soft);font-weight:500;margin-top:.35rem;}
-  .exp-list{list-style:none;margin:1.5rem 0 0;padding:0;display:flex;flex-direction:column;gap:.9rem;}
-  .exp-list li{
-    padding-left:1.6rem;position:relative;color:var(--ink-soft);
-  }
-  .exp-list li::before{
-    content:"";position:absolute;left:0;top:.5em;width:8px;height:8px;
-    background:var(--accent-soft);border:1.5px solid var(--accent);border-radius:3px;
-  }
-  .exp-tags{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.6rem;}
-
-  .chip{
-    display:inline-flex;align-items:center;font-family:'JetBrains Mono',monospace;
-    font-size:.78rem;padding:.4rem .85rem;border-radius:999px;
-    background:var(--accent-soft);color:var(--accent-deep);border:1px solid transparent;
-  }
-  .chip--copper{background:var(--copper-soft);color:#7A4A1E;}
-
-  /* ---------- dark section (skills terminal) ---------- */
-  .section--dark{background:var(--ink);}
-  .section--dark .eyebrow{color:#8FD4B4;}
-  .section--dark .eyebrow::before{background:var(--copper);}
-  .section--dark .section-head h2{color:#F3F1EA;}
-  .section--dark .section-head p{color:#9198A6;}
-
-  /* ---------- activity / contribution graph ---------- */
-  .contrib-card{
-    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);
-    padding:clamp(1.5rem,3vw,2.2rem);box-shadow:var(--shadow-sm);
-  }
-  .contrib-top{
-    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;
-    margin-bottom:1.4rem;
-  }
-  .contrib-label{font-size:.8rem;color:var(--ink-faint);}
-  .contrib-legend{
-    display:flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--ink-soft);
-    font-family:'JetBrains Mono',monospace;
-  }
-  .contrib-legend .lvl{width:11px;height:11px;border-radius:3px;display:inline-block;}
-  .lvl-0{background:var(--paper-deep);}
-  .lvl-1{background:#CDE6DA;}
-  .lvl-2{background:#8FCBAE;}
-  .lvl-3{background:#49A177;}
-  .lvl-4{background:var(--accent-deep);}
-  .contrib-grid{
-    display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,1fr);gap:3px;
-    overflow-x:auto;padding-bottom:.3rem;
-  }
-  .contrib-cell{width:11px;height:11px;border-radius:3px;}
-
-  /* ---------- projects ---------- */
-  .projects-grid{
-    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.8rem;
-  }
-  @media (max-width:980px){.projects-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
-  @media (max-width:640px){.projects-grid{grid-template-columns:1fr;}}
-
-  .proj-card{
-    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);
-    padding:1.7rem 1.6rem;display:flex;flex-direction:column;gap:1.1rem;
-    box-shadow:var(--shadow-sm);cursor:pointer;text-align:left;width:100%;
-    min-width:0;
-    transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease, border-color .35s ease;
-  }
-  .proj-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg);border-color:var(--accent);}
-  .proj-top{display:flex;justify-content:space-between;align-items:center;gap:1rem;}
-  .proj-path{
-    font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--ink-faint);
-    display:flex;align-items:center;gap:.45rem;
-  }
-  .proj-path .proj-lang{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
-  .proj-index{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--ink-faint);}
-  .proj-card h3{font-size:1.3rem;line-height:1.25;}
-  .proj-desc{color:var(--ink-soft);font-size:.95rem;}
-  .proj-snippet{
-    background:var(--ink);border-radius:var(--radius-sm);
-    padding:.65rem .85rem;font-family:'JetBrains Mono',monospace;font-size:.76rem;
-    color:#B9BEC9;white-space:nowrap;overflow-x:auto;flex-grow:1;min-width:0;
-  }
-  .proj-snippet .tok-key{color:#8FD4B4;}
-  .proj-snippet .tok-str{color:#E7B983;}
-  .proj-snippet .tok-punc{color:#6E7386;}
-  .proj-snippet .tok-kw{color:#7FA7E0;}
-  .proj-tags{display:flex;flex-wrap:wrap;gap:.5rem;}
-  .chip--outline{
-    background:transparent;border:1px solid var(--line);color:var(--ink-soft);
-  }
-  .proj-foot{
-    display:flex;align-items:center;justify-content:space-between;
-    margin-top:.3rem;padding-top:1.1rem;border-top:1px solid var(--line);
-  }
-  .proj-foot .see-more{font-size:.85rem;font-weight:600;color:var(--accent-deep);display:inline-flex;align-items:center;gap:.4rem;}
-  .proj-foot .gh-link{
-    display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;
-    border-radius:50%;background:var(--paper-deep);color:var(--ink);
-    transition:background .25s ease, color .25s ease, transform .25s ease;
-  }
-  .proj-foot .gh-link:hover{background:var(--ink);color:var(--paper);transform:scale(1.08);}
-  .proj-foot .gh-link svg{width:17px;height:17px;}
-
-  /* ---------- contact ---------- */
-  .contact-inner{
-    text-align:center;max-width:760px;margin-inline:auto;
-  }
-  .signature-wrap{
-    position:relative;display:inline-block;margin-top:1.5rem;
-  }
+  /* ---------- signature reveal (bespoke) ---------- */
+  .signature-wrap{ position:relative;display:inline-block; }
   .signature-big{
-    font-family:'Mrs Saint Delafield',cursive;
-    font-size:clamp(3.2rem,9vw,6rem);color:var(--ink);line-height:1;
-    clip-path:inset(0 100% 0 0);
+    font-family:'Mrs Saint Delafield',cursive;font-size:clamp(3rem,8vw,5.5rem);
+    color:#1b1b23;line-height:1;clip-path:inset(0 100% 0 0);
     transition:clip-path 1.6s cubic-bezier(.16,.7,.2,1);
   }
-  .signature-big.is-revealed{clip-path:inset(0 0 0 0);}
-  .signature-dot{
-    position:absolute;top:8%;left:0;width:9px;height:9px;border-radius:50%;background:var(--copper);
-    opacity:0;transition:left 1.6s cubic-bezier(.16,.7,.2,1), opacity .2s ease;
-  }
-  .signature-big.is-revealed + .signature-dot{opacity:0;}
-  .contact-actions{
-    display:flex;gap:1.1rem;justify-content:center;flex-wrap:wrap;margin-top:2.6rem;
-  }
-  .contact-note{color:var(--ink-soft);margin-top:2.4rem;font-size:.92rem;}
-  .refs{
-    margin-top:3rem;padding-top:2.4rem;border-top:1px solid var(--line);
-    display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;
-  }
-  .ref-item{text-align:left;}
-  .ref-item b{display:block;font-size:.95rem;}
-  .ref-item span{font-size:.82rem;color:var(--ink-soft);}
-
-  /* ---------- footer ---------- */
-  footer{
-    background:var(--ink);color:#B9BEC9;padding:2.4rem clamp(1.25rem,4vw,2.5rem);
-  }
-  .footer-inner{
-    max-width:1180px;margin-inline:auto;display:flex;justify-content:space-between;
-    align-items:center;flex-wrap:wrap;gap:1rem;
-  }
-  .footer-inner .logo{color:#EDEFF3;font-size:1.6rem;}
-  .footer-inner .logo:hover{color:var(--copper);}
-  .foot-links{display:flex;gap:1.4rem;align-items:center;}
-  .foot-links a{color:#8B90A0;transition:color .25s ease;}
-  .foot-links a:hover{color:#EDEFF3;}
-  .foot-links svg{width:19px;height:19px;}
-  .foot-copy{font-size:.8rem;color:#6E7386;}
+  .signature-big.is-revealed{ clip-path:inset(0 0 0 0); }
 
   /* ---------- modal ---------- */
   .modal-backdrop{
-    position:fixed;inset:0;background:rgba(20,23,31,.55);backdrop-filter:blur(3px);
+    position:fixed;inset:0;background:rgba(27,27,35,.45);backdrop-filter:blur(4px);
     display:flex;align-items:center;justify-content:center;padding:1.5rem;
     opacity:0;pointer-events:none;transition:opacity .3s ease;z-index:100;
   }
-  .modal-backdrop.open{opacity:1;pointer-events:auto;}
-  .modal{
-    background:var(--surface);border-radius:var(--radius-lg);max-width:560px;width:100%;
-    max-height:85vh;overflow-y:auto;box-shadow:var(--shadow-lg);
-    padding:clamp(1.8rem,4vw,2.6rem);position:relative;
+  .modal-backdrop.open{ opacity:1;pointer-events:auto; }
+  .modal-box{
+    background:#fcf8ff;border-radius:1.25rem;max-width:560px;width:100%;max-height:85vh;overflow-y:auto;
+    box-shadow:0 30px 60px -18px rgba(27,27,35,.28), 0 0 40px rgba(99,102,241,.12);
+    padding:clamp(1.8rem,4vw,2.6rem);position:relative;border:1px solid rgba(99,102,241,.2);
     transform:translateY(24px) scale(.97);opacity:0;
-    transition:transform .35s cubic-bezier(.2,.7,.2,1), opacity .35s ease;
+    transition:transform .35s cubic-bezier(.65,0,.35,1),opacity .35s ease;
   }
-  .modal-backdrop.open .modal{transform:translateY(0) scale(1);opacity:1;}
+  .modal-backdrop.open .modal-box{ transform:translateY(0) scale(1);opacity:1; }
   .modal-close{
     position:absolute;top:1.2rem;right:1.2rem;width:38px;height:38px;border-radius:50%;
-    background:var(--paper-deep);border:none;display:flex;align-items:center;justify-content:center;
-    color:var(--ink);transition:background .25s ease,transform .25s ease;
+    background:#efecf8;border:none;display:flex;align-items:center;justify-content:center;
+    color:#1b1b23;transition:background .25s ease,transform .25s ease;
   }
-  .modal-close:hover{background:var(--ink);color:var(--paper);transform:rotate(90deg);}
-  .modal-close svg{width:16px;height:16px;}
-  .modal .eyebrow{margin-bottom:.9rem;}
-  .modal h3{font-size:1.7rem;margin-bottom:1rem;padding-right:2rem;}
-  .modal-desc{color:var(--ink-soft);font-size:1rem;margin-bottom:1.5rem;}
-  .modal-tags{display:flex;flex-wrap:wrap;gap:.55rem;margin-bottom:1.8rem;}
-  .modal .btn-primary{width:100%;justify-content:center;}
+  .modal-close:hover{ background:#1b1b23;color:#fcf8ff;transform:rotate(90deg); }
 
-  @media (max-width:900px){
-    .hero-grid{grid-template-columns:1fr;}
-    .about-grid{grid-template-columns:1fr;}
-    .editor{transform:none;max-width:520px;}
+  .material-symbols-outlined{
+    font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 48;
   }
+
+  ::selection{ background:#dae2fd;color:#4648d4; }
+  :focus-visible{ outline:2.5px solid #6366f1;outline-offset:3px;border-radius:4px; }
 </style>
 </head>
-<body>
+<body class="antialiased relative font-body">
 
-<svg class="noise" width="100%" height="100%">
-  <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/></filter>
-  <rect width="100%" height="100%" filter="url(#n)"/>
-</svg>
+<div class="hidden md:block" id="custom-cursor"></div>
 
-<header class="nav" id="nav">
-  <a href="#top" class="logo">Nilay Balcı</a>
-  <nav class="nav-links" id="navLinks">
-    <a href="#hakkimda"><span class="tab-dot"></span>hakkimda.md</a>
-    <a href="#deneyim"><span class="tab-dot"></span>deneyim.log</a>
-    <a href="#yetenekler"><span class="tab-dot"></span>skills.json</a>
-    <a href="#projeler"><span class="tab-dot"></span>projeler.dir</a>
-    <a href="#iletisim" class="nav-cta">$ iletişime geç</a>
-  </nav>
-  <button class="nav-toggle" id="navToggle" aria-label="Menüyü aç" aria-expanded="false">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
-  </button>
-</header>
-
-<main>
-
-  <!-- HERO -->
-  <section class="hero" id="top">
-    <div class="wrap hero-grid">
-      <div>
-        <span class="eyebrow">// merhaba, ben</span>
-        <h1>Merakla öğrenen, özenle üreten bir yazılım geliştirici.</h1>
-        <p class="hero-lede">Java, Python ve C# ile başlayan bu yolculukta web teknolojileri, API entegrasyonları ve güvenli kimlik doğrulama sistemleri üzerine çalışıyorum. Şu anda yapay zekâ alanında kendimi geliştiriyorum.</p>
-        <div class="hero-actions">
-          <a href="#projeler" class="btn btn-primary">
-            Projelerimi İncele
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <a href="https://github.com/nilaybalci" target="_blank" rel="noopener" class="btn btn-ghost">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.43-2.7 5.41-5.27 5.69.42.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .3.21.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
-            GitHub'da Görüntüle
-          </a>
-        </div>
-        <div class="hero-meta">
-          <div><b>2023–2025</b><span>Bilgisayar Programcılığı</span></div>
-          <div><b>6+</b><span>Yayınlanmış proje</span></div>
-          <div><b>A2</b><span>İngilizce seviyesi</span></div>
-        </div>
-      </div>
-
-      <div class="term-stack reveal reveal-right">
-        <div class="git-log">
-          <div class="editor-tabs">
-            <span class="editor-dot"></span><span class="editor-dot"></span><span class="editor-dot"></span>
-            <span class="editor-tab">git log --oneline</span>
-          </div>
-          <div class="editor-body">
-            <div><span class="gl-hash">a3f9c1e</span> <span class="gl-msg">kasa sistemi: ödeme akışı tamamlandı</span></div>
-            <div><span class="gl-hash">7d2e88b</span> <span class="gl-msg">marvel web: karakter filtreleme eklendi</span></div>
-            <div><span class="gl-hash">4b10aa2</span> <span class="gl-msg">seyahat takip: localStorage entegrasyonu</span> <span class="gl-branch">(origin/main)</span></div>
-          </div>
-        </div>
-        <div class="editor">
-          <div class="editor-tabs">
-            <span class="editor-dot"></span><span class="editor-dot"></span><span class="editor-dot"></span>
-            <span class="editor-tab">bio.js</span>
-          </div>
-          <div class="editor-body" id="typeTarget"></div>
-        </div>
-      </div>
+<!-- NAV -->
+<nav class="fixed top-0 w-full z-50 backdrop-blur-md bg-surface/80 border-b border-surface-variant/30 transition-all duration-300" id="navbar">
+  <div class="flex justify-between items-center w-full px-8 py-3 max-w-container-max mx-auto">
+    <a href="#top" class="font-signature text-3xl text-on-background hover:text-indigo-electric transition-colors cursor-hover">Nilay Balcı</a>
+    <div class="hidden md:flex items-center gap-1 nav-links">
+      <a href="#about"><span class="tab-dot"></span>hakkimda.md</a>
+      <a href="#experience"><span class="tab-dot"></span>deneyim.log</a>
+      <a href="#skills"><span class="tab-dot"></span>skills.json</a>
+      <a href="#projects"><span class="tab-dot"></span>projeler.dir</a>
+      <a href="#contact" class="ml-3 !bg-indigo-electric !text-white px-5 py-2 !rounded-full font-code text-xs hover:!bg-indigo-deep transition-all cursor-hover animate-pulse-subtle shadow-lg shadow-indigo-electric/30">$ iletişime geç</a>
     </div>
-  </section>
+  </div>
+</nav>
 
-  <!-- MARQUEE -->
-  <div class="marquee-strip">
-    <div class="marquee-track" id="marqueeTrack"></div>
+<!-- HERO -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pattern-grid" id="top">
+  <div class="absolute top-[8%] left-[-10%] w-[45%] aspect-square rounded-full bg-indigo-electric/10 blur-[120px] z-0"></div>
+  <div class="absolute bottom-[5%] right-[-10%] w-[40%] aspect-square rounded-full bg-indigo-deep/10 blur-[130px] z-0"></div>
+  <canvas id="binary-canvas"></canvas>
+
+  <div class="code-float hidden md:block animate-float-slow select-none text-xs" style="top:22%;left:6%;">const nilay = {<br/>&nbsp;&nbsp;role: "Bilgisayar Programcısı"<br/>};</div>
+  <div class="code-float hidden md:block animate-float-slow select-none text-xs" style="bottom:24%;right:6%;animation-delay:-3s;">public class VeriTabaniBaglantisi {<br/>&nbsp;&nbsp;... <br/>}</div>
+  <div class="code-float hidden lg:block animate-float-slow select-none text-[11px]" style="top:34%;right:14%;animation-delay:-1.5s;">def odeme_al(tutar):<br/>&nbsp;&nbsp;return kasa.ekle(tutar)</div>
+  <div class="code-float hidden lg:block animate-float-slow select-none text-[11px]" style="bottom:32%;left:12%;animation-delay:-4.5s;">await fetch('/api/urunler');</div>
+
+  <div class="relative z-10 text-center px-4 max-w-4xl mx-auto reveal active glass-panel p-12 rounded-2xl shadow-[0_0_40px_rgba(99,102,241,0.15)]">
+    <span class="eyebrow justify-center mb-6">// merhaba, ben</span>
+    <p class="font-signature text-5xl text-on-background mb-6">Nilay Balcı</p>
+    <p class="font-headline text-headline-md text-indigo-electric mb-4 tracking-widest uppercase">Bilgisayar Programcısı</p>
+    <p class="font-body text-body-lg text-on-surface-variant mb-12 max-w-2xl mx-auto leading-relaxed">
+      Java, Python ve C# ile yazılım geliştiren; API entegrasyonları ve JWT tabanlı güvenli kimlik doğrulama sistemleri üzerine çalışan bir programcıyım. Şu anda yapay zekâ alanında kendimi geliştiriyorum.
+    </p>
+    <div class="flex justify-center gap-4">
+      <a href="#about" class="inline-flex items-center gap-2 text-indigo-electric font-code text-xs uppercase tracking-wider cursor-hover bg-indigo-electric/10 px-6 py-3 rounded-full hover:bg-indigo-electric/20 transition-colors border border-indigo-electric/20">
+        <span class="material-symbols-outlined animate-bounce-subtle text-base">south</span>
+        scroll to explore
+      </a>
+    </div>
+  </div>
+</section>
+
+<main class="max-w-container-max mx-auto px-6 md:px-8 space-y-section-padding py-section-padding relative">
+  <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
+    <div class="absolute top-[10%] left-[-10%] w-[40%] aspect-square rounded-full bg-indigo-electric/5 blur-[120px]"></div>
+    <div class="absolute top-[45%] right-[-10%] w-[30%] aspect-square rounded-full bg-indigo-deep/5 blur-[100px]"></div>
+    <div class="absolute bottom-[10%] left-[20%] w-[50%] aspect-square rounded-full bg-indigo-electric/5 blur-[150px]"></div>
   </div>
 
   <!-- ABOUT -->
-  <section class="section section--surface" id="hakkimda">
-    <div class="wrap about-grid">
-      <div class="reveal reveal-left">
-        <span class="eyebrow">Hakkımda</span>
-        <h2 style="margin-bottom:1.6rem;">Kodun arkasındaki merak.</h2>
-        <div class="about-body">
-          <p>Yazılıma olan yoğun ilgim ve merakım sayesinde bu alanda kendimi geliştirmeye odaklanmış biriyim. Analitik düşünme ve öğrenmeye açıklık gibi becerilerimi, yazılım geliştirme süreçlerinde etkili bir şekilde kullanıyorum.</p>
-          <p>Takım çalışmasında uyumlu, insan ilişkilerinde başarılı ve hedeflerime ulaşmak için özveriyle çalışan bir yapıya sahibim. Her yeni proje, öğrenmeye devam etmek için bir fırsat.</p>
-        </div>
+  <section class="reveal relative" id="about">
+    <div class="absolute -left-10 top-20 font-code text-indigo-electric/20 text-xs rotate-90 origin-left select-none hidden lg:block">&lt;section id="about"&gt;</div>
+    <div class="code-float hidden lg:block text-[11px]" style="top:-2rem;right:2rem;">// JWT ile güvenli kimlik doğrulama</div>
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <span class="eyebrow">// hakkımda</span>
+        <h2 class="font-headline text-headline-lg text-on-background mb-8 relative inline-block block">
+          Profesyonel Yaklaşım
+          <span class="absolute bottom-0 left-0 w-1/2 h-1 bg-indigo-electric rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]"></span>
+        </h2>
+        <p class="font-body text-body-lg text-on-surface-variant mb-6 leading-relaxed">
+          Yazılıma olan yoğun ilgim sayesinde bu alanda kendimi geliştirmeye odaklanmış biriyim. <strong class="text-indigo-electric font-semibold">Analitik düşünme</strong> yeteneğimle karmaşık problemleri küçük ve yönetilebilir parçalara ayırarak çözüme ulaştırıyorum.
+        </p>
+        <p class="font-body text-body-lg text-on-surface-variant leading-relaxed">
+          Bireysel başarı kadar <strong class="text-indigo-electric font-semibold">takım çalışması</strong>nın gücüne inanıyor, projelerde iletişimi güçlü tutarak ortak hedeflere ulaşmayı önemsiyorum.
+        </p>
       </div>
-      <div class="editor reveal reveal-right" style="transform:rotate(-1deg);">
-        <div class="editor-tabs">
-          <span class="editor-dot"></span><span class="editor-dot"></span><span class="editor-dot"></span>
-          <span class="editor-tab">.env</span>
+      <div class="rounded-xl overflow-hidden shadow-2xl border border-indigo-electric/30 bg-[#1e1e1e] text-gray-300 font-code text-sm group hover-card">
+        <div class="terminal-header px-4 py-3 flex items-center gap-2 border-b border-gray-700">
+          <div class="w-3 h-3 rounded-full bg-red-500"></div>
+          <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+          <div class="w-3 h-3 rounded-full bg-green-500"></div>
+          <span class="ml-4 text-xs text-gray-400">nilay@portfolio ~ zsh</span>
         </div>
-        <div class="editor-body">
-          <div><span class="ln">1</span><span class="tok-kw">EGITIM</span><span class="tok-punc">=</span><span class="tok-str">"İzmir Ekonomi Üniversitesi"</span></div>
-          <div><span class="ln">2</span><span class="tok-kw">BOLUM</span><span class="tok-punc">=</span><span class="tok-str">"Bilgisayar Programcılığı"</span></div>
-          <div><span class="ln">3</span><span class="tok-kw">DONEM</span><span class="tok-punc">=</span><span class="tok-str">"2023-2025"</span></div>
-          <div><span class="ln">4</span><span class="tok-kw">SERTIFIKA</span><span class="tok-punc">=</span><span class="tok-str">"Yapay Zeka (Techcareer, devam ediyor)"</span></div>
-          <div><span class="ln">5</span><span class="tok-kw">DIL</span><span class="tok-punc">=</span><span class="tok-str">"İngilizce — A2"</span></div>
-          <div><span class="ln">6</span><span class="tok-kw">KONUM</span><span class="tok-punc">=</span><span class="tok-str">"İzmir, Türkiye"</span></div>
+        <div class="p-6 space-y-2">
+          <p><span class="text-green-400">➜</span> <span class="text-blue-400">~</span> whoami</p>
+          <p>Nilay Balcı</p>
+          <p class="mt-4"><span class="text-green-400">➜</span> <span class="text-blue-400">~</span> cat egitim.txt</p>
+          <p class="text-gray-400">İzmir Ekonomi Üniversitesi</p>
+          <p class="text-gray-400">Bilgisayar Programcılığı, 2023–2025</p>
+          <p class="mt-4"><span class="text-green-400">➜</span> <span class="text-blue-400">~</span> cat sertifikalar.txt</p>
+          <p class="text-gray-400">Yapay Zekâ (Techcareer, devam ediyor)</p>
+          <p class="mt-4 animate-pulse">_</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ACTIVITY -->
-  <section class="section section--tint">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">// commit geçmişi</span>
-        <h2>Düzenli üretmeye özen gösteriyorum.</h2>
-      </div>
-      <div class="contrib-card reveal">
-        <div class="contrib-top">
-          <span class="mono contrib-label">son 52 hafta · github.com/nilaybalci</span>
-          <div class="contrib-legend">Az <span class="lvl lvl-0"></span><span class="lvl lvl-1"></span><span class="lvl lvl-2"></span><span class="lvl lvl-3"></span><span class="lvl lvl-4"></span> Çok</div>
+  <!-- ACTIVITY (bespoke) -->
+  <section class="reveal relative" id="activity">
+    <div class="text-center mb-16">
+      <span class="eyebrow justify-center">// commit geçmişi</span>
+      <h2 class="font-headline text-headline-lg text-on-background inline-block relative block">
+        Düzenli üretmeye özen gösteriyorum.
+        <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-24 h-1 bg-indigo-electric rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]"></span>
+      </h2>
+    </div>
+    <div class="glass-panel rounded-2xl p-8 hover-card max-w-4xl mx-auto">
+      <div class="flex justify-between items-center flex-wrap gap-3 mb-5">
+        <span class="font-code text-xs text-on-surface-variant">son 52 hafta · github.com/nilaybalci</span>
+        <div class="flex items-center gap-1.5 font-code text-xs text-on-surface-variant">
+          Az <span class="contrib-cell clvl-0"></span><span class="contrib-cell clvl-1"></span><span class="contrib-cell clvl-2"></span><span class="contrib-cell clvl-3"></span><span class="contrib-cell clvl-4"></span> Çok
         </div>
-        <div class="contrib-grid" id="contribGrid"></div>
       </div>
+      <div class="contrib-grid" id="contribGrid"></div>
     </div>
   </section>
 
   <!-- EXPERIENCE -->
-  <section class="section section--surface" id="deneyim">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">Deneyim</span>
-        <h2>Sahada edindiğim tecrübe.</h2>
-      </div>
-      <div class="exp-card reveal">
-        <div class="exp-head">
-          <div>
-            <h3>Yazılım Stajyeri</h3>
-            <p class="exp-company">İndas Teknoloji Ticaret A.Ş.</p>
+  <section class="reveal relative py-10" id="experience">
+    <div class="absolute inset-0 pattern-grid opacity-50 -z-10 rounded-3xl"></div>
+    <div class="code-float hidden lg:block text-[11px]" style="top:-1rem;left:2rem;">git commit -m "feat: JWT auth eklendi"</div>
+    <div class="text-center mb-16 relative">
+      <span class="eyebrow justify-center">// deneyim</span>
+      <h2 class="font-headline text-headline-lg text-on-background inline-block relative bg-surface px-4 block">
+        Deneyim
+        <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-indigo-electric rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]"></span>
+      </h2>
+    </div>
+    <div class="max-w-4xl mx-auto">
+      <div class="glass-panel rounded-xl p-8 hover-card relative overflow-hidden group cursor-hover border-l-4 border-l-indigo-electric bg-surface/80">
+        <div class="absolute inset-0 bg-gradient-to-r from-indigo-electric/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        <div class="relative z-10">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6">
+            <div>
+              <h3 class="font-headline text-headline-md text-on-background mb-2 group-hover:text-indigo-electric transition-colors">Yazılım Stajyeri</h3>
+              <p class="font-body text-body-md text-on-surface-variant flex items-center gap-2">
+                <span class="material-symbols-outlined text-indigo-electric text-lg">business</span>
+                İndas Teknoloji Ticaret A.Ş.
+              </p>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="font-code text-xs text-on-surface-variant">Temmuz — Eylül 2024</span>
+              <span class="inline-block px-4 py-2 bg-indigo-electric/10 border border-indigo-electric/30 rounded-full font-code text-xs text-indigo-electric shadow-[0_0_15px_rgba(99,102,241,0.2)]">Staj</span>
+            </div>
           </div>
-          <span class="period mono">Temmuz 2024 — Eylül 2024</span>
-        </div>
-        <ul class="exp-list">
-          <li>C# ile otomasyon sistemlerinin geliştirilmesi üzerine deneyim edindim.</li>
-          <li>Web tabanlı projelerde API entegrasyonları gerçekleştirdim ve JWT token mimarisi kullanarak güvenli kullanıcı kimlik doğrulama sistemleri tasarladım.</li>
-          <li>Takım çalışmasına yatkın yapım sayesinde proje süreçlerinde etkin iletişim ve koordinasyon sağlayarak teslim sürelerinin optimize edilmesine katkı sundum.</li>
-        </ul>
-        <div class="exp-tags">
-          <span class="chip">C#</span>
-          <span class="chip">REST API</span>
-          <span class="chip">JWT Authentication</span>
-          <span class="chip chip--copper">Ekip Çalışması</span>
+          <ul class="space-y-3 mb-6">
+            <li class="flex gap-3 text-on-surface-variant font-body text-body-md"><span class="w-2 h-2 mt-2 rounded-sm bg-indigo-electric/20 border border-indigo-electric flex-shrink-0"></span>C# ile otomasyon sistemlerinin geliştirilmesi üzerine deneyim edindim.</li>
+            <li class="flex gap-3 text-on-surface-variant font-body text-body-md"><span class="w-2 h-2 mt-2 rounded-sm bg-indigo-electric/20 border border-indigo-electric flex-shrink-0"></span>Web tabanlı projelerde API entegrasyonları gerçekleştirdim ve JWT token mimarisi kullanarak güvenli kimlik doğrulama sistemleri tasarladım.</li>
+            <li class="flex gap-3 text-on-surface-variant font-body text-body-md"><span class="w-2 h-2 mt-2 rounded-sm bg-indigo-electric/20 border border-indigo-electric flex-shrink-0"></span>Takım çalışmasına yatkın yapım sayesinde teslim sürelerinin optimize edilmesine katkı sundum.</li>
+          </ul>
+          <div class="flex gap-2 flex-wrap">
+            <span class="px-3 py-1.5 rounded-md bg-indigo-electric/10 text-indigo-electric font-code text-xs border border-indigo-electric/20">C#</span>
+            <span class="px-3 py-1.5 rounded-md bg-indigo-electric/10 text-indigo-electric font-code text-xs border border-indigo-electric/20">REST API</span>
+            <span class="px-3 py-1.5 rounded-md bg-indigo-electric/10 text-indigo-electric font-code text-xs border border-indigo-electric/20">JWT Authentication</span>
+            <span class="px-3 py-1.5 rounded-md bg-surface-container text-on-surface-variant font-code text-xs border border-outline-variant/30">Ekip Çalışması</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- SKILLS -->
-  <section class="section section--dark" id="yetenekler">
-    <div class="wrap">
-      <div class="section-head reveal" style="margin-inline:auto;text-align:center;max-width:560px;">
-        <span class="eyebrow">// yetenekler</span>
-        <h2>Kullandığım araçlar ve teknolojiler.</h2>
-      </div>
-      <div class="editor reveal" style="max-width:640px;margin-inline:auto;transform:none;">
-        <div class="editor-tabs">
-          <span class="editor-dot"></span><span class="editor-dot"></span><span class="editor-dot"></span>
-          <span class="editor-tab">skills.json</span>
+  <section class="reveal relative" id="skills">
+    <div class="text-center mb-16">
+      <span class="eyebrow justify-center">// yetenekler</span>
+      <h2 class="font-headline text-headline-lg text-on-background inline-block relative block">
+        Yetenekler
+        <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-indigo-electric rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]"></span>
+      </h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto auto-rows-min">
+      <!-- Programming Languages -->
+      <div class="glass-panel rounded-2xl p-8 md:col-span-2 hover-card relative overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 text-9xl text-indigo-electric/5 select-none material-symbols-outlined">code</div>
+        <div class="flex items-center gap-3 mb-6 relative z-10">
+          <div class="p-2 bg-indigo-electric/10 rounded-lg border border-indigo-electric/20">
+            <span class="material-symbols-outlined text-3xl text-indigo-electric">terminal</span>
+          </div>
+          <h3 class="font-headline text-headline-md text-on-background">Programlama</h3>
         </div>
-        <div class="editor-body" style="min-height:0;">
-          <div><span class="ln">1</span><span class="tok-punc">{</span></div>
-          <div><span class="ln">2</span><span class="tok-key">&nbsp;&nbsp;"diller"</span><span class="tok-punc">: [</span><span class="tok-str">"Java"</span><span class="tok-punc">, </span><span class="tok-str">"Python"</span><span class="tok-punc">, </span><span class="tok-str">"C#"</span><span class="tok-punc">],</span></div>
-          <div><span class="ln">3</span><span class="tok-key">&nbsp;&nbsp;"web"</span><span class="tok-punc">: [</span><span class="tok-str">"HTML5"</span><span class="tok-punc">, </span><span class="tok-str">"CSS3"</span><span class="tok-punc">, </span><span class="tok-str">"JavaScript"</span><span class="tok-punc">, </span><span class="tok-str">"PHP"</span><span class="tok-punc">],</span></div>
-          <div><span class="ln">4</span><span class="tok-key">&nbsp;&nbsp;"kimlik_dogrulama"</span><span class="tok-punc">: [</span><span class="tok-str">"RESTful API"</span><span class="tok-punc">, </span><span class="tok-str">"JWT Token"</span><span class="tok-punc">],</span></div>
-          <div><span class="ln">5</span><span class="tok-key">&nbsp;&nbsp;"veritabani"</span><span class="tok-punc">: [</span><span class="tok-str">"MySQL"</span><span class="tok-punc">, </span><span class="tok-str">"SQL Server"</span><span class="tok-punc">],</span></div>
-          <div><span class="ln">6</span><span class="tok-key">&nbsp;&nbsp;"araclar"</span><span class="tok-punc">: [</span><span class="tok-str">"VS Code"</span><span class="tok-punc">, </span><span class="tok-str">"Git &amp; GitHub"</span><span class="tok-punc">, </span><span class="tok-str">"Jira"</span><span class="tok-punc">, </span><span class="tok-str">"Unreal Engine"</span><span class="tok-punc">]</span></div>
-          <div><span class="ln">7</span><span class="tok-punc">}</span></div>
+        <div class="space-y-3 relative z-10">
+          <div class="flex items-center justify-between p-3 rounded-xl border border-indigo-electric/20 bg-surface-container">
+            <span class="font-code text-sm">Java</span><span class="material-symbols-outlined text-indigo-electric text-lg">done_all</span>
+          </div>
+          <div class="flex items-center justify-between p-3 rounded-xl border border-indigo-electric/20 bg-surface-container">
+            <span class="font-code text-sm">Python</span><span class="material-symbols-outlined text-indigo-electric text-lg">done_all</span>
+          </div>
+          <div class="flex items-center justify-between p-3 rounded-xl border border-indigo-electric/20 bg-surface-container">
+            <span class="font-code text-sm">C#</span><span class="material-symbols-outlined text-indigo-electric text-lg">done_all</span>
+          </div>
+        </div>
+      </div>
+      <!-- Database & API - Tall Box -->
+      <div class="glass-panel rounded-2xl p-8 md:row-span-2 hover-card flex flex-col relative overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 text-9xl text-indigo-electric/5 select-none material-symbols-outlined">storage</div>
+        <div class="flex items-center gap-3 mb-5 relative z-10">
+          <div class="p-2 bg-indigo-electric/10 rounded-lg border border-indigo-electric/20">
+            <span class="material-symbols-outlined text-3xl text-indigo-electric">database</span>
+          </div>
+          <h3 class="font-headline text-headline-md text-on-background">Veritabanı</h3>
+        </div>
+        <div class="flex flex-col gap-3 relative z-10 mb-8">
+          <div class="p-4 rounded-xl border border-indigo-electric/20 bg-surface-container relative overflow-hidden group hover:border-indigo-electric/50 transition-colors">
+            <div class="relative z-10 flex items-center justify-between"><span class="font-code text-sm">MySQL</span><span class="material-symbols-outlined text-sm text-indigo-electric">done_all</span></div>
+          </div>
+          <div class="p-4 rounded-xl border border-indigo-electric/20 bg-surface-container relative overflow-hidden group hover:border-indigo-electric/50 transition-colors">
+            <div class="relative z-10 flex items-center justify-between"><span class="font-code text-sm">SQL Server</span><span class="material-symbols-outlined text-sm text-indigo-electric">done_all</span></div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 mb-5 relative z-10">
+          <div class="p-2 bg-indigo-electric/10 rounded-lg border border-indigo-electric/20">
+            <span class="material-symbols-outlined text-3xl text-indigo-electric">key</span>
+          </div>
+          <h3 class="font-headline text-headline-md text-on-background">API &amp; Kimlik Doğrulama</h3>
+        </div>
+        <div class="flex flex-wrap gap-2 relative z-10">
+          <span class="px-3 py-1.5 rounded-md bg-indigo-electric/10 text-indigo-electric font-code text-xs border border-indigo-electric/20">RESTful API</span>
+          <span class="px-3 py-1.5 rounded-md bg-indigo-electric/10 text-indigo-electric font-code text-xs border border-indigo-electric/20">JWT Token</span>
+        </div>
+      </div>
+      <!-- Web Dev -->
+      <div class="glass-panel rounded-2xl p-8 hover-card relative overflow-hidden">
+        <div class="absolute -right-5 -bottom-5 text-6xl text-indigo-electric/5 select-none material-symbols-outlined">language</div>
+        <div class="flex items-center gap-3 mb-6 relative z-10">
+          <div class="p-2 bg-indigo-electric/10 rounded-lg border border-indigo-electric/20">
+            <span class="material-symbols-outlined text-3xl text-indigo-electric">web</span>
+          </div>
+          <h3 class="font-headline text-[20px] text-on-background">Web Geliştirme</h3>
+        </div>
+        <div class="flex flex-wrap gap-2 relative z-10">
+          <span class="px-3 py-1.5 rounded-md bg-indigo-electric/10 text-indigo-electric font-code text-xs border border-indigo-electric/20">HTML5</span>
+          <span class="px-3 py-1.5 rounded-md bg-indigo-electric/10 text-indigo-electric font-code text-xs border border-indigo-electric/20">CSS3</span>
+          <span class="px-3 py-1.5 rounded-md bg-indigo-electric/10 text-indigo-electric font-code text-xs border border-indigo-electric/20">JavaScript</span>
+          <span class="px-3 py-1.5 rounded-md bg-indigo-electric/10 text-indigo-electric font-code text-xs border border-indigo-electric/20">PHP</span>
+        </div>
+      </div>
+      <!-- Tools -->
+      <div class="glass-panel rounded-2xl p-8 hover-card relative overflow-hidden">
+        <div class="absolute -right-5 -bottom-5 text-6xl text-indigo-electric/5 select-none material-symbols-outlined">build</div>
+        <div class="flex items-center gap-3 mb-6 relative z-10">
+          <div class="p-2 bg-indigo-electric/10 rounded-lg border border-indigo-electric/20">
+            <span class="material-symbols-outlined text-3xl text-indigo-electric">handyman</span>
+          </div>
+          <h3 class="font-headline text-[20px] text-on-background">Araçlar</h3>
+        </div>
+        <div class="flex flex-wrap gap-2 relative z-10">
+          <span class="px-3 py-1.5 rounded-md bg-surface-container text-on-surface-variant font-code text-xs border border-outline-variant/30">Git/GitHub</span>
+          <span class="px-3 py-1.5 rounded-md bg-surface-container text-on-surface-variant font-code text-xs border border-outline-variant/30">VS Code</span>
+          <span class="px-3 py-1.5 rounded-md bg-surface-container text-on-surface-variant font-code text-xs border border-outline-variant/30">Jira</span>
+          <span class="px-3 py-1.5 rounded-md bg-surface-container text-on-surface-variant font-code text-xs border border-outline-variant/30">Unreal Engine</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- PROJECTS -->
-  <section class="section section--tint" id="projeler">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">Projeler</span>
-        <h2>GitHub'daki çalışmalarımdan seçmeler.</h2>
-        <p>Aşağıdaki her kart, github.com/nilaybalci üzerinde yayınlanan bir depoya karşılık geliyor. Detaylar için bir karta tıklayabilir ya da doğrudan GitHub'a gidebilirsin.</p>
-      </div>
-      <div class="projects-grid" id="projectsGrid"></div>
+  <section class="reveal relative py-10" id="projects">
+    <div class="absolute inset-0 pattern-dots opacity-30 -z-10 rounded-3xl"></div>
+    <div class="code-float hidden lg:block text-[11px]" style="top:-1rem;right:2rem;">$db-&gt;query("SELECT * FROM heroes");</div>
+    <div class="text-center mb-16 relative">
+      <span class="eyebrow justify-center">// projeler</span>
+      <h2 class="font-headline text-headline-lg text-on-background inline-block relative bg-surface px-4 block">
+        Projeler
+        <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-indigo-electric rounded-full shadow-[0_0_10px_rgba(99,102,241,0.5)]"></span>
+      </h2>
+      <p class="font-body text-body-md text-on-surface-variant mt-4 max-w-xl mx-auto">github.com/nilaybalci üzerinde yayınlanan 6 projeden seçmeler. Her karta tıklayarak detaylarını görebilir, dosya sekmesinden doğrudan GitHub'a gidebilirsin.</p>
     </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid"></div>
   </section>
 
   <!-- CONTACT -->
-  <section class="section section--surface" id="iletisim">
-    <div class="wrap contact-inner">
-      <span class="eyebrow">İletişim</span>
-      <h2 style="margin-top:.9rem;">Birlikte üretmeye ne dersin?</h2>
-      <p style="color:var(--ink-soft);margin-top:1rem;">Yeni bir proje, staj fırsatı ya da sadece merhaba demek için ulaşabilirsin.</p>
+  <section class="reveal relative" id="contact">
+    <div class="max-w-2xl mx-auto text-center glass-panel rounded-2xl p-12 shadow-[0_0_50px_rgba(99,102,241,0.1)] relative overflow-hidden bg-surface/80">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-indigo-electric to-transparent"></div>
+      <span class="eyebrow justify-center">// iletişim</span>
+      <h2 class="font-headline text-headline-lg text-on-background mb-4">İletişime Geçin</h2>
+      <p class="font-body text-body-lg text-on-surface-variant mb-8">Yeni projeler ve işbirlikleri için benimle iletişime geçebilirsiniz.</p>
 
-      <div class="signature-wrap">
+      <div class="signature-wrap mb-8">
         <span class="signature-big" id="sigBig">Nilay Balcı</span>
-        <span class="signature-dot" id="sigDot"></span>
       </div>
 
-      <div class="contact-actions">
-        <a href="mailto:nilaybalci03@gmail.com" class="btn btn-primary">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18v12H3z" stroke-linejoin="round"/><path d="M3 7l9 6 9-6" stroke-linejoin="round"/></svg>
-          nilaybalci03@gmail.com
+      <div class="flex flex-col sm:flex-row justify-center gap-6 mb-12">
+        <a href="mailto:nilaybalci03@gmail.com" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-indigo-electric text-white rounded-full font-code text-sm hover:bg-indigo-deep transition-all cursor-hover shadow-lg shadow-indigo-electric/30 hover:shadow-indigo-electric/50">
+          <span class="material-symbols-outlined text-lg">mail</span>
+          Email Gönder
         </a>
-        <a href="https://github.com/nilaybalci" target="_blank" rel="noopener" class="btn btn-ghost">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.43-2.7 5.41-5.27 5.69.42.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .3.21.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
-          @nilaybalci
+        <a href="https://github.com/nilaybalci" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-indigo-electric/40 text-indigo-electric rounded-full font-code text-sm hover:border-indigo-electric hover:bg-indigo-electric/10 transition-all cursor-hover">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.43-2.7 5.41-5.27 5.69.42.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .3.21.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
+          GitHub
         </a>
       </div>
 
-      <div class="refs">
-        <div class="ref-item"><b>Bilgehan Bostan</b><span>Op. Verimlilik Direktörü</span></div>
-        <div class="ref-item"><b>Mehmet Semih Hepkorucu</b><span>Dönüşüm Mimarı</span></div>
-        <div class="ref-item"><b>Utku</b><span>Bilgisayar Mühendisi</span></div>
+      <div class="flex gap-8 justify-center flex-wrap border-t border-surface-variant/50 pt-8">
+        <div class="text-left"><b class="block text-sm text-on-background">Bilgehan Bostan</b><span class="text-xs text-on-surface-variant">Op. Verimlilik Direktörü</span></div>
+        <div class="text-left"><b class="block text-sm text-on-background">Mehmet Semih Hepkorucu</b><span class="text-xs text-on-surface-variant">Dönüşüm Mimarı</span></div>
+        <div class="text-left"><b class="block text-sm text-on-background">Utku</b><span class="text-xs text-on-surface-variant">Bilgisayar Mühendisi</span></div>
       </div>
-      <p class="contact-note">Referans detayları istenildiğinde ayrıca paylaşılır.</p>
+      <p class="text-xs text-on-surface-variant/70 mt-6">Referans detayları istenildiğinde ayrıca paylaşılır.</p>
     </div>
   </section>
-
 </main>
 
-<footer>
-  <div class="footer-inner">
-    <a href="#top" class="logo">Nilay Balcı</a>
-    <div class="foot-links">
-      <a href="https://github.com/nilaybalci" target="_blank" rel="noopener" aria-label="GitHub">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.43-2.7 5.41-5.27 5.69.42.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .3.21.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
-      </a>
-      <a href="mailto:nilaybalci03@gmail.com" aria-label="E-posta">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18v12H3z" stroke-linejoin="round"/><path d="M3 7l9 6 9-6" stroke-linejoin="round"/></svg>
-      </a>
-    </div>
-    <span class="foot-copy mono">© 2026 nilay.balci — <span style="color:var(--copper);">// özenle kodlandı, İzmir'de</span></span>
-  </div>
+<footer class="py-12 text-center border-t border-surface-variant/50 mt-16 relative bg-surface-container/30">
+  <p class="font-signature text-3xl text-on-background/80 mb-4">Nilay Balcı</p>
+  <p class="font-body text-on-surface-variant/60 font-code text-sm">© 2026 Nilay Balcı. System.exit(0);</p>
 </footer>
 
 <div class="modal-backdrop" id="modalBackdrop">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <button class="modal-close" id="modalClose" aria-label="Kapat">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+      <span class="material-symbols-outlined">close</span>
     </button>
-    <span class="eyebrow" id="modalEyebrow">Proje</span>
-    <h3 id="modalTitle"></h3>
-    <p class="modal-desc" id="modalDesc"></p>
-    <div class="modal-tags" id="modalTags"></div>
-    <a class="btn btn-primary" id="modalGh" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.43-2.7 5.41-5.27 5.69.42.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .3.21.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
+    <span class="eyebrow" id="modalEyebrow">// proje</span>
+    <h3 id="modalTitle" class="font-headline text-headline-md text-on-background mb-4"></h3>
+    <p id="modalDesc" class="font-body text-body-md text-on-surface-variant mb-6"></p>
+    <div class="flex flex-wrap gap-2 mb-8" id="modalTags"></div>
+    <a class="inline-flex w-full items-center justify-center gap-2 px-8 py-4 bg-indigo-electric text-white rounded-full font-code text-sm hover:bg-indigo-deep transition-all shadow-lg shadow-indigo-electric/30" id="modalGh" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.43-2.7 5.41-5.27 5.69.42.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .3.21.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
       GitHub'da Görüntüle
     </a>
   </div>
 </div>
 
 <script>
-  // ---------- data ----------
-  const projects = [
-    {
-      name:"Kafe Web Sitesi",
-      repo:"cafe-web-sitesi",
-      lang:"CSS", color:"#563d7c",
-      desc:"HTML5 ve CSS3 ile hazırlanmış, duyarlı (responsive) bir kafe tanıtım sitesi. Menü, hakkımızda ve iletişim bölümleriyle sade ve akıcı bir kullanıcı deneyimi sunar.",
-      tags:["HTML5","CSS3","Responsive Tasarım"],
-      snippet:'<span class="tok-punc">.menu-card:hover {</span> <span class="tok-kw">transform</span><span class="tok-punc">:</span> <span class="tok-str">translateY(-6px)</span><span class="tok-punc">; }</span>'
-    },
-    {
-      name:"EkoFit Veritabanı",
-      repo:"ekofit-database",
-      lang:"Java", color:"#b07219",
-      desc:"Java ile geliştirilen, ilişkisel veritabanı tasarımı üzerine kurulu bir sistem. Veri bütünlüğünü ve sorgu performansını gözeten bir mimari kullanır.",
-      tags:["Java","SQL","Veritabanı Tasarımı"],
-      snippet:'<span class="tok-kw">public class</span> <span class="tok-key">VeriTabaniBaglantisi</span> <span class="tok-punc">{ ... }</span>'
-    },
-    {
-      name:"Portfolyo Web Sitesi",
-      repo:"portfolyowebsitesi",
-      lang:"CSS", color:"#563d7c",
-      desc:"Kişisel çalışmaları sergilemek amacıyla HTML5 ve CSS3 ile sıfırdan tasarlanmış ilk portfolyo denemem.",
-      tags:["HTML5","CSS3","UI/UX"],
-      snippet:'<span class="tok-punc">.hero {</span> <span class="tok-kw">display</span><span class="tok-punc">:</span> <span class="tok-str">grid</span><span class="tok-punc">; }</span>'
-    },
-    {
-      name:"Seyahat Takip",
-      repo:"Seyahat_Takip",
-      lang:"JavaScript", color:"#f1e05a",
-      desc:"Kullanıcıların gezi planlarını ve ziyaret ettikleri yerleri kaydedebildiği, JavaScript ile geliştirilmiş bir takip uygulaması.",
-      tags:["JavaScript","HTML","CSS"],
-      snippet:'<span class="tok-key">localStorage</span><span class="tok-punc">.setItem(</span><span class="tok-str">"geziler"</span><span class="tok-punc">, ...)</span>'
-    },
-    {
-      name:"Marvel Web",
-      repo:"Marvel_Web",
-      lang:"PHP", color:"#4F5D95",
-      desc:"PHP tabanlı, Marvel evrenindeki karakterleri listeleyen ve detaylarını sunan dinamik bir web uygulaması.",
-      tags:["PHP","MySQL","CRUD"],
-      snippet:'<span class="tok-punc">$karakterler = $db->query(</span><span class="tok-str">"SELECT * FROM heroes"</span><span class="tok-punc">);</span>'
-    },
-    {
-      name:"Kasa Sistemi",
-      repo:"Kasa_Sistemi",
-      lang:"Python", color:"#3572A5",
-      desc:"Python ile yazılmış, satış ve ödeme işlemlerini yönetmeye yönelik bir kasa / POS sistemi simülasyonu.",
-      tags:["Python","Sistem Tasarımı"],
-      snippet:'<span class="tok-kw">def</span> <span class="tok-key">odeme_al</span><span class="tok-punc">(tutar):</span> <span class="tok-kw">return</span> <span class="tok-punc">kasa.ekle(tutar)</span>'
-    }
-  ];
+  // ---------- custom cursor ----------
+  const cursor = document.getElementById('custom-cursor');
+  if (window.matchMedia("(pointer: fine)").matches && cursor) {
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+    });
+    document.querySelectorAll('.cursor-hover, a, button').forEach(t => {
+      t.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+      t.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+    });
+  }
 
-  const grid = document.getElementById("projectsGrid");
-  projects.forEach((p,i)=>{
-    const card = document.createElement("button");
-    card.className = `proj-card reveal ${i%2===0 ? "reveal-left":"reveal-right"}`;
-    card.innerHTML = `
-      <div class="proj-top">
-        <span class="proj-path"><span class="proj-lang" style="background:${p.color}" title="${p.lang}"></span>nilaybalci/${p.repo}</span>
-        <span class="proj-index mono">0${i+1}</span>
-      </div>
-      <h3>${p.name}</h3>
-      <p class="proj-desc">${p.desc}</p>
-      <div class="proj-snippet mono">${p.snippet}</div>
-      <div class="proj-tags">${p.tags.map(t=>`<span class="chip chip--outline">${t}</span>`).join("")}</div>
-      <div class="proj-foot">
-        <span class="see-more">Detayları Gör
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-        <span class="gh-link" data-repo="${p.repo}" aria-label="GitHub'da aç">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.43-2.7 5.41-5.27 5.69.42.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .3.21.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
-        </span>
-      </div>
-    `;
-    card.addEventListener("click",(e)=>{
-      if(e.target.closest(".gh-link")) return;
-      openModal(p);
+  // ---------- binary rain ----------
+  const canvas = document.getElementById('binary-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    const setSize = () => { canvas.width = canvas.parentElement.offsetWidth; canvas.height = canvas.parentElement.offsetHeight; };
+    setSize();
+    window.addEventListener('resize', setSize);
+    const fontSize = 14;
+    let columns = Math.floor(canvas.width / fontSize);
+    let drops = Array(columns).fill(1);
+    function draw(){
+      if (Math.floor(canvas.width / fontSize) !== columns) { columns = Math.floor(canvas.width / fontSize); drops = Array(columns).fill(1); }
+      ctx.fillStyle = 'rgba(252,248,255,0.06)';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle = '#6366f1';
+      ctx.font = fontSize + 'px monospace';
+      for(let i=0;i<drops.length;i++){
+        const text = Math.random() > .5 ? '1' : '0';
+        ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+        if(drops[i]*fontSize > canvas.height && Math.random() > .975) drops[i]=0;
+        drops[i]++;
+      }
+    }
+    setInterval(draw, 60);
+  }
+
+  // ---------- reveal on scroll ----------
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if(!entry.isIntersecting) return;
+      entry.target.classList.add('active');
+      observer.unobserve(entry.target);
     });
-    card.querySelector(".gh-link").addEventListener("click",(e)=>{
-      e.stopPropagation();
-      window.open(`https://github.com/nilaybalci/${p.repo}`,"_blank","noopener");
-    });
-    grid.appendChild(card);
+  }, { threshold: .15, rootMargin: "0px 0px -50px 0px" });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ---------- navbar blur on scroll ----------
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('shadow-md', window.scrollY > 50);
+    navbar.classList.toggle('bg-surface/95', window.scrollY > 50);
+    navbar.classList.toggle('bg-surface/80', window.scrollY <= 50);
   });
 
-  // ---------- modal ----------
-  const backdrop = document.getElementById("modalBackdrop");
-  const modalTitle = document.getElementById("modalTitle");
-  const modalDesc = document.getElementById("modalDesc");
-  const modalTags = document.getElementById("modalTags");
-  const modalGh = document.getElementById("modalGh");
-  const modalClose = document.getElementById("modalClose");
-  let lastFocused = null;
-
-  function openModal(p){
-    lastFocused = document.activeElement;
-    modalTitle.textContent = p.name;
-    modalDesc.textContent = p.desc;
-    modalTags.innerHTML = p.tags.map(t=>`<span class="chip">${t}</span>`).join("");
-    modalGh.href = `https://github.com/nilaybalci/${p.repo}`;
-    backdrop.classList.add("open");
-    document.body.style.overflow = "hidden";
-    modalClose.focus();
-  }
-  function closeModal(){
-    backdrop.classList.remove("open");
-    document.body.style.overflow = "";
-    if(lastFocused) lastFocused.focus();
-  }
-  modalClose.addEventListener("click",closeModal);
-  backdrop.addEventListener("click",(e)=>{ if(e.target===backdrop) closeModal(); });
-  document.addEventListener("keydown",(e)=>{ if(e.key==="Escape" && backdrop.classList.contains("open")) closeModal(); });
+  // ---------- signature reveal ----------
+  const sigBig = document.getElementById('sigBig');
+  const sigIo = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        sigBig.classList.add('is-revealed');
+        sigIo.unobserve(entry.target);
+      }
+    });
+  }, { threshold: .5 });
+  sigIo.observe(sigBig);
 
   // ---------- contribution graph ----------
   (function(){
@@ -907,142 +589,103 @@
       };
     }
     const rand = mulberry32(1337);
-    const contribGrid = document.getElementById("contribGrid");
-    const weeks = 53, days = 7;
+    const grid = document.getElementById('contribGrid');
     let html = "";
-    for(let w=0; w<weeks; w++){
-      for(let d=0; d<days; d++){
+    for(let w=0; w<53; w++){
+      for(let d=0; d<7; d++){
         const r = rand();
         let level = 0;
-        if(r > .82) level = 4;
-        else if(r > .64) level = 3;
-        else if(r > .42) level = 2;
-        else if(r > .22) level = 1;
-        html += `<span class="contrib-cell lvl-${level}"></span>`;
+        if(r > .82) level = 4; else if(r > .64) level = 3; else if(r > .42) level = 2; else if(r > .22) level = 1;
+        html += `<span class="contrib-cell clvl-${level}"></span>`;
       }
     }
-    contribGrid.innerHTML = html;
+    grid.innerHTML = html;
   })();
 
-  // ---------- marquee ----------
-  const skills = ["Java","Python","C#","JavaScript","PHP","HTML5 & CSS3","RESTful API","JWT Token","MySQL","SQL Server","Git & GitHub","Unreal Engine"];
-  const track = document.getElementById("marqueeTrack");
-  const buildMarquee = () => skills.map(s=>`<span class="marquee-item"><b>${s}</b><span class="dot">·</span></span>`).join("");
-  track.innerHTML = buildMarquee() + buildMarquee();
-
-  // ---------- nav ----------
-  const nav = document.getElementById("nav");
-  window.addEventListener("scroll",()=>{
-    nav.classList.toggle("scrolled", window.scrollY > 40);
-  });
-  const navToggle = document.getElementById("navToggle");
-  const navLinks = document.getElementById("navLinks");
-  navToggle.addEventListener("click",()=>{
-    const isOpen = navLinks.classList.toggle("open");
-    navToggle.setAttribute("aria-expanded", isOpen);
-  });
-  navLinks.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{
-    navLinks.classList.remove("open");
-    navToggle.setAttribute("aria-expanded","false");
-  }));
-
-  // ---------- reveal on scroll ----------
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add("is-visible");
-        io.unobserve(entry.target);
-      }
-    });
-  },{threshold:.15, rootMargin:"0px 0px -60px 0px"});
-  document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
-
-  // ---------- signature draw reveal ----------
-  const sigBig = document.getElementById("sigBig");
-  const sigDot = document.getElementById("sigDot");
-  const sigIo = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        sigBig.classList.add("is-revealed");
-        sigDot.style.left = "100%";
-        sigDot.style.opacity = "1";
-        setTimeout(()=>{ sigDot.style.opacity = "0"; }, 1600);
-        sigIo.unobserve(entry.target);
-      }
-    });
-  },{threshold:.5});
-  sigIo.observe(sigBig);
-
-  // ---------- typing effect ----------
-  const typeTarget = document.getElementById("typeTarget");
-  const codeLines = [
-    [["const ",'tok-kw'],["nilay",'tok-key'],[" = {",'tok-punc']],
-    [["  role",'tok-key'],[": ",'tok-punc'],['"Bilgisayar Programcısı"','tok-str'],[",",'tok-punc']],
-    [["  konum",'tok-key'],[": ",'tok-punc'],['"İzmir, Türkiye"','tok-str'],[",",'tok-punc']],
-    [["  yigin",'tok-key'],[": [",'tok-punc'],['"Java"','tok-str'],[", ",'tok-punc'],['"Python"','tok-str'],[", ",'tok-punc'],['"C#"','tok-str'],["],",'tok-punc']],
-    [["  odak",'tok-key'],[": ",'tok-punc'],['"Yapay Zekâ"','tok-str'],[",",'tok-punc']],
-    [["  durum",'tok-key'],[": ",'tok-punc'],['"öğrenmeye devam ediyor"','tok-str']],
-    [["};",'tok-punc']]
+  // ---------- projects + modal ----------
+  const projects = [
+    { name:"Kasa Sistemi", repo:"Kasa_Sistemi", lang:"Python", file:"kasa_sistemi.py",
+      desc:"Masaüstü uygulaması olarak geliştirilmiş, satış ve stok yönetimi sağlayan bir kasa / POS sistemi simülasyonu.",
+      tags:["Python","Sistem Tasarımı"] },
+    { name:"Marvel Web", repo:"Marvel_Web", lang:"PHP", file:"marvel_web.php",
+      desc:"Marvel evrenindeki karakterleri listeleyen ve detaylarını sunan, PHP tabanlı dinamik bir web uygulaması.",
+      tags:["PHP","MySQL","CRUD"] },
+    { name:"Seyahat Takip", repo:"Seyahat_Takip", lang:"JavaScript", file:"seyahat_takip.js",
+      desc:"Kullanıcıların gezi planlarını ve ziyaret ettikleri yerleri kaydedebildiği, JavaScript ile geliştirilmiş bir takip uygulaması.",
+      tags:["JavaScript","HTML","CSS"] },
+    { name:"Portfolyo Web Sitesi", repo:"portfolyowebsitesi", lang:"CSS", file:"style.css",
+      desc:"Kişisel çalışmaları sergilemek amacıyla HTML5 ve CSS3 ile sıfırdan tasarlanmış ilk portfolyo denemem.",
+      tags:["HTML5","CSS3","UI/UX"] },
+    { name:"EkoFit Veritabanı", repo:"ekofit-database", lang:"Java", file:"VeriTabani.java",
+      desc:"Java ile geliştirilen, ilişkisel veritabanı tasarımı üzerine kurulu; veri bütünlüğünü gözeten bir sistem.",
+      tags:["Java","SQL","Veritabanı Tasarımı"] },
+    { name:"Kafe Web Sitesi", repo:"cafe-web-sitesi", lang:"CSS", file:"cafe.css",
+      desc:"HTML5 ve CSS3 ile hazırlanmış, menü ve iletişim bölümleriyle duyarlı (responsive) bir kafe tanıtım sitesi.",
+      tags:["HTML5","CSS3","Responsive"] },
   ];
 
-  function renderLines(upToLine, partialText){
-    let html = "";
-    for(let i=0;i<codeLines.length;i++){
-      html += `<div><span class="ln">${i+1}</span>`;
-      if(i < upToLine){
-        html += codeLines[i].map(([t,c])=>`<span class="${c}">${t}</span>`).join("");
-      } else if(i === upToLine){
-        html += partialText;
-      }
-      html += `</div>`;
-    }
-    return html;
+  const grid2 = document.getElementById('projectsGrid');
+  projects.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = "glass-panel rounded-2xl p-[1px] hover-card cursor-hover flex flex-col h-full bg-gradient-to-b from-indigo-electric/30 to-surface reveal";
+    card.style.transitionDelay = (i * 90) + "ms";
+    card.innerHTML = `
+      <div class="h-full flex flex-col bg-surface rounded-[15px] relative overflow-hidden">
+        <div class="glass-header px-4 py-2 flex items-center gap-2">
+          <div class="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+          <span class="ml-2 font-code text-[10px] text-on-surface-variant/70">${p.file}</span>
+        </div>
+        <div class="p-6 flex-grow flex flex-col relative z-10">
+          <div class="absolute -right-4 -top-4 w-24 h-24 bg-indigo-electric/10 rounded-full blur-xl pointer-events-none group-hover:bg-indigo-electric/20 transition-colors"></div>
+          <div class="flex justify-between items-start mb-4 relative z-10">
+            <h3 class="font-headline text-headline-md text-on-background">${p.name}</h3>
+            <span class="px-3 py-1 bg-indigo-electric/10 text-indigo-electric rounded-md font-code text-xs border border-indigo-electric/20 whitespace-nowrap ml-2">${p.lang}</span>
+          </div>
+          <p class="font-body text-body-md text-on-surface-variant flex-grow mb-6 relative z-10">${p.desc}</p>
+          <div class="relative overflow-hidden h-8 group">
+            <button class="proj-details absolute inset-0 flex items-center gap-2 text-indigo-electric font-code text-sm transition-transform duration-300 group-hover:-translate-y-full text-left">
+              <span class="material-symbols-outlined text-sm">arrow_forward</span> Detayları Gör
+            </button>
+            <a class="proj-source absolute inset-0 flex items-center gap-2 text-indigo-electric font-code text-sm transition-transform duration-300 translate-y-full group-hover:translate-y-0" href="https://github.com/nilaybalci/${p.repo}" target="_blank" rel="noopener">
+              <span class="material-symbols-outlined text-sm">code</span> Kaynağı Gör
+            </a>
+          </div>
+        </div>
+      </div>
+    `;
+    card.querySelector('.proj-details').addEventListener('click', () => openModal(p));
+    grid2.appendChild(card);
+    revealObserver.observe(card);
+  });
+
+  const backdrop = document.getElementById('modalBackdrop');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDesc = document.getElementById('modalDesc');
+  const modalTags = document.getElementById('modalTags');
+  const modalGh = document.getElementById('modalGh');
+  const modalClose = document.getElementById('modalClose');
+  let lastFocused = null;
+
+  function openModal(p){
+    lastFocused = document.activeElement;
+    modalTitle.textContent = p.name;
+    modalDesc.textContent = p.desc;
+    modalTags.innerHTML = p.tags.map(t => `<span class="px-3 py-1.5 rounded-md bg-indigo-electric/10 text-indigo-electric font-code text-xs border border-indigo-electric/20">${t}</span>`).join("");
+    modalGh.href = `https://github.com/nilaybalci/${p.repo}`;
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    modalClose.focus();
   }
-
-  function typeSequence(){
-    let lineIdx = 0, charIdx = 0;
-    const flatLines = codeLines.map(line => line.map(([t,c])=>({t,c})).reduce((acc,seg)=>{
-      for(const ch of seg.t) acc.push({ch,c:seg.c});
-      return acc;
-    },[]));
-
-    function step(){
-      if(lineIdx >= flatLines.length){
-        typeTarget.innerHTML = renderLines(codeLines.length, "") + `<span class="caret"></span>`;
-        return;
-      }
-      const current = flatLines[lineIdx];
-      let partial = "";
-      let spanOpen = null;
-      for(let k=0;k<=charIdx && k<current.length;k++){
-        if(current[k].c !== spanOpen){
-          if(spanOpen!==null) partial += "</span>";
-          partial += `<span class="${current[k].c}">`;
-          spanOpen = current[k].c;
-        }
-        partial += current[k].ch;
-      }
-      if(spanOpen!==null) partial += "</span>";
-      partial += `<span class="caret"></span>`;
-
-      typeTarget.innerHTML = renderLines(lineIdx, partial);
-
-      if(charIdx < current.length - 1){
-        charIdx++;
-        setTimeout(step, 16 + Math.random()*22);
-      } else {
-        lineIdx++; charIdx = 0;
-        setTimeout(step, 140);
-      }
-    }
-    step();
+  function closeModal(){
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+    if(lastFocused) lastFocused.focus();
   }
-  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if(prefersReduced){
-    typeTarget.innerHTML = renderLines(codeLines.length, "");
-  } else {
-    setTimeout(typeSequence, 500);
-  }
+  modalClose.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', (e) => { if(e.target === backdrop) closeModal(); });
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && backdrop.classList.contains('open')) closeModal(); });
 </script>
 
 </body>

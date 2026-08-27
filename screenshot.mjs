@@ -26,7 +26,7 @@ await new Promise((r) => setTimeout(r, 400));
 // (headless automation's chopped-up scrolling doesn't reliably fire IntersectionObserver
 // the way continuous real-user scrolling does inside the page's own JS session)
 await page.evaluate(() => {
-  document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+  document.querySelectorAll(".reveal").forEach((el) => { el.classList.add("is-visible"); el.classList.add("active"); });
   const sig = document.getElementById("sigBig");
   if (sig) sig.classList.add("is-revealed");
 });
