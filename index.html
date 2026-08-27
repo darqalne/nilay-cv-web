@@ -173,34 +173,47 @@
   }
   .modal-backdrop.open{ opacity:1;pointer-events:auto; }
   .modal-box{
-    background:#fcf8ff;border-radius:1.25rem;max-width:560px;width:100%;max-height:85vh;
+    background:#fcf8ff;border-radius:1.25rem;max-width:560px;width:100%;max-height:88vh;
     overflow-y:auto;overflow-x:hidden;
     box-shadow:0 30px 60px -18px rgba(27,27,35,.28), 0 0 40px rgba(99,102,241,.12);
     position:relative;border:1px solid rgba(99,102,241,.2);
     transform:translateY(24px) scale(.97);opacity:0;
-    transition:transform .35s cubic-bezier(.65,0,.35,1),opacity .35s ease;
+    transition:transform .35s cubic-bezier(.65,0,.35,1),opacity .35s ease,max-width .2s ease;
   }
   .modal-backdrop.open .modal-box{ transform:translateY(0) scale(1);opacity:1; }
   .modal-content-pad{ padding:clamp(1.6rem,4vw,2.4rem); }
   .modal-close{
     position:absolute;top:.9rem;right:.9rem;width:38px;height:38px;border-radius:50%;
-    background:rgba(252,248,255,.85);backdrop-filter:blur(6px);border:none;z-index:5;
+    background:rgba(252,248,255,.9);backdrop-filter:blur(6px);border:none;z-index:5;
     display:flex;align-items:center;justify-content:center;
     color:#1b1b23;transition:background .25s ease,transform .25s ease;
+    box-shadow:0 2px 8px rgba(27,27,35,.15);
   }
   .modal-close:hover{ background:#1b1b23;color:#fcf8ff;transform:rotate(90deg); }
 
   /* ---------- modal preview box ---------- */
   .modal-preview{
-    width:100%;height:200px;position:relative;background:#1e1e1e;overflow:hidden;flex-shrink:0;
+    width:100%;height:260px;position:relative;background:#15151b;overflow:hidden;flex-shrink:0;
+    display:flex;flex-direction:column;
   }
-  .modal-preview img{ width:100%;height:100%;object-fit:cover;object-position:top center;display:block; }
+  .modal-preview .mp-browser{
+    height:28px;flex-shrink:0;background:#232430;
+    display:flex;align-items:center;gap:6px;padding:0 .8rem;
+  }
+  .modal-preview .mp-browser .dot-red{ width:9px;height:9px;border-radius:50%;background:#ef4444; }
+  .modal-preview .mp-browser .dot-yellow{ width:9px;height:9px;border-radius:50%;background:#eab308; }
+  .modal-preview .mp-browser .dot-green{ width:9px;height:9px;border-radius:50%;background:#22c55e; }
+  .modal-preview .mp-browser .mp-url{
+    margin-left:.5rem;font-family:'Fira Code',monospace;font-size:.66rem;color:#767a8a;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .modal-preview .mp-image-area{ flex:1;min-height:0;position:relative; }
+  .modal-preview .mp-image-area img{
+    width:100%;height:100%;object-fit:contain;object-position:center;display:block;
+  }
   .modal-preview-code{
-    height:100%;padding:1.1rem 1.3rem;font-family:'Fira Code',monospace;font-size:.76rem;
-    line-height:1.7;color:#B9BEC9;position:relative;
-  }
-  .modal-preview .mp-tag{
-    position:absolute;bottom:.7rem;right:1rem;font-size:.68rem;color:#9198a6;letter-spacing:.03em;z-index:2;
+    flex:1;min-height:0;padding:1.2rem 1.3rem 2rem;font-family:'Fira Code',monospace;font-size:.78rem;
+    line-height:1.85;color:#B9BEC9;position:relative;overflow:hidden;
   }
   .modal-preview::after{
     content:"";position:absolute;left:0;right:0;bottom:0;height:56px;
@@ -208,6 +221,14 @@
   }
   .modal-preview.is-image::after{ display:none; }
   .mp-kw{color:#7FA7E0;} .mp-str{color:#E7B983;} .mp-key{color:#8FD4B4;} .mp-punc{color:#6E7386;} .mp-com{color:#767a8a;font-style:italic;}
+
+  /* wider viewports: preview sits beside the content instead of above it */
+  @media (min-width:820px){
+    .modal-box{ max-width:900px; }
+    .modal-body{ display:flex;flex-direction:row;align-items:stretch; }
+    .modal-preview{ width:340px;height:auto;border-right:1px solid rgba(99,102,241,.15); }
+    .modal-content-pad{ flex:1;min-width:0; }
+  }
 
   .material-symbols-outlined{
     font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 48;
@@ -533,6 +554,7 @@
     <button class="modal-close" id="modalClose" aria-label="Kapat">
       <span class="material-symbols-outlined">close</span>
     </button>
+    <div class="modal-body">
     <div class="modal-preview" id="modalPreview"></div>
     <div class="modal-content-pad">
       <span class="eyebrow" id="modalEyebrow">// proje</span>
@@ -552,6 +574,7 @@
         <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.43-2.7 5.41-5.27 5.69.42.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .3.21.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
         GitHub'da Görüntüle
       </a>
+    </div>
     </div>
   </div>
 </div>
@@ -706,7 +729,14 @@
         '<div>ctk.set_appearance_mode(<span class="mp-str">"System"</span>)</div>' +
         '<div>root = ctk.CTk()</div>' +
         '<div>root.geometry(<span class="mp-str">"850x750"</span>)</div>' +
-        '<div>root.title(<span class="mp-str">"Restoran Adisyon Sistemi"</span>)</div>' } },
+        '<div>root.title(<span class="mp-str">"Restoran Adisyon Sistemi"</span>)</div>' +
+        '<div>&nbsp;</div>' +
+        '<div><span class="mp-com"># sipariş kalemleri</span></div>' +
+        '<div>fis_no = ctk.StringVar()</div>' +
+        '<div>tavuk_burger = ctk.StringVar(value=<span class="mp-str">"0"</span>)</div>' +
+        '<div>dana_burger = ctk.StringVar(value=<span class="mp-str">"0"</span>)</div>' +
+        '<div>tarih = ctk.StringVar(</div>' +
+        '<div>&nbsp;&nbsp;&nbsp;&nbsp;value=time.strftime(<span class="mp-str">"%d/%m/%Y"</span>))</div>' } },
     { name:"Marvel Web", repo:"Marvel_Web", lang:"PHP", file:"marvel_web.php",
       desc:"Marvel evrenindeki karakterleri listeleyen ve detaylarını sunan, PHP tabanlı dinamik bir web uygulaması.",
       tags:["PHP","MySQL","CRUD"],
@@ -728,6 +758,12 @@
         '<div>&nbsp;&nbsp;<span class="mp-kw">padding</span>: 0;</div>' +
         '<div>&nbsp;&nbsp;<span class="mp-kw">color</span>: <span class="mp-str">#ffffff</span>;</div>' +
         '<div>&nbsp;&nbsp;<span class="mp-kw">background-color</span>: <span class="mp-str">#111</span>;</div>' +
+        '<div>}</div>' +
+        '<div>&nbsp;</div>' +
+        '<div><span class="mp-key">.header-container</span> {</div>' +
+        '<div>&nbsp;&nbsp;<span class="mp-kw">max-width</span>: <span class="mp-str">1200px</span>;</div>' +
+        '<div>&nbsp;&nbsp;<span class="mp-kw">margin</span>: auto;</div>' +
+        '<div>&nbsp;&nbsp;<span class="mp-kw">display</span>: <span class="mp-str">flex</span>;</div>' +
         '<div>}</div>' } },
     { name:"EkoFit Veritabanı", repo:"ekofit-database", lang:"Java", file:"VeriTabani.java",
       desc:"Java ile geliştirilen, ilişkisel veritabanı tasarımı üzerine kurulu; veri bütünlüğünü gözeten bir sistem.",
@@ -794,12 +830,17 @@
   function openModal(p){
     lastFocused = document.activeElement;
 
+    const dots = `<span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>`;
     if(p.preview.type === 'image'){
       modalPreview.className = 'modal-preview is-image';
-      modalPreview.innerHTML = `<img src="${p.preview.src}" alt="${p.name} önizlemesi" loading="lazy">`;
+      modalPreview.innerHTML = `
+        <div class="mp-browser">${dots}<span class="mp-url">github.com/nilaybalci/${p.repo}</span></div>
+        <div class="mp-image-area"><img src="${p.preview.src}" alt="${p.name} önizlemesi" loading="lazy"></div>`;
     } else {
       modalPreview.className = 'modal-preview';
-      modalPreview.innerHTML = `<div class="modal-preview-code">${p.preview.html}</div><span class="mp-tag font-code">${p.preview.file}</span>`;
+      modalPreview.innerHTML = `
+        <div class="mp-browser">${dots}<span class="mp-url">${p.preview.file}</span></div>
+        <div class="modal-preview-code">${p.preview.html}</div>`;
     }
 
     modalTitle.textContent = p.name;
