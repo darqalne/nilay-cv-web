@@ -173,19 +173,41 @@
   }
   .modal-backdrop.open{ opacity:1;pointer-events:auto; }
   .modal-box{
-    background:#fcf8ff;border-radius:1.25rem;max-width:560px;width:100%;max-height:85vh;overflow-y:auto;
+    background:#fcf8ff;border-radius:1.25rem;max-width:560px;width:100%;max-height:85vh;
+    overflow-y:auto;overflow-x:hidden;
     box-shadow:0 30px 60px -18px rgba(27,27,35,.28), 0 0 40px rgba(99,102,241,.12);
-    padding:clamp(1.8rem,4vw,2.6rem);position:relative;border:1px solid rgba(99,102,241,.2);
+    position:relative;border:1px solid rgba(99,102,241,.2);
     transform:translateY(24px) scale(.97);opacity:0;
     transition:transform .35s cubic-bezier(.65,0,.35,1),opacity .35s ease;
   }
   .modal-backdrop.open .modal-box{ transform:translateY(0) scale(1);opacity:1; }
+  .modal-content-pad{ padding:clamp(1.6rem,4vw,2.4rem); }
   .modal-close{
-    position:absolute;top:1.2rem;right:1.2rem;width:38px;height:38px;border-radius:50%;
-    background:#efecf8;border:none;display:flex;align-items:center;justify-content:center;
+    position:absolute;top:.9rem;right:.9rem;width:38px;height:38px;border-radius:50%;
+    background:rgba(252,248,255,.85);backdrop-filter:blur(6px);border:none;z-index:5;
+    display:flex;align-items:center;justify-content:center;
     color:#1b1b23;transition:background .25s ease,transform .25s ease;
   }
   .modal-close:hover{ background:#1b1b23;color:#fcf8ff;transform:rotate(90deg); }
+
+  /* ---------- modal preview box ---------- */
+  .modal-preview{
+    width:100%;height:200px;position:relative;background:#1e1e1e;overflow:hidden;flex-shrink:0;
+  }
+  .modal-preview img{ width:100%;height:100%;object-fit:cover;object-position:top center;display:block; }
+  .modal-preview-code{
+    height:100%;padding:1.1rem 1.3rem;font-family:'Fira Code',monospace;font-size:.76rem;
+    line-height:1.7;color:#B9BEC9;position:relative;
+  }
+  .modal-preview .mp-tag{
+    position:absolute;bottom:.7rem;right:1rem;font-size:.68rem;color:#9198a6;letter-spacing:.03em;z-index:2;
+  }
+  .modal-preview::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:56px;
+    background:linear-gradient(180deg, transparent, rgba(30,30,30,.9));pointer-events:none;
+  }
+  .modal-preview.is-image::after{ display:none; }
+  .mp-kw{color:#7FA7E0;} .mp-str{color:#E7B983;} .mp-key{color:#8FD4B4;} .mp-punc{color:#6E7386;} .mp-com{color:#767a8a;font-style:italic;}
 
   .material-symbols-outlined{
     font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 48;
@@ -223,6 +245,8 @@
   <div class="code-float hidden md:block animate-float-slow select-none text-xs" style="bottom:24%;right:6%;animation-delay:-3s;">public class VeriTabaniBaglantisi {<br/>&nbsp;&nbsp;... <br/>}</div>
   <div class="code-float hidden lg:block animate-float-slow select-none text-[11px]" style="top:34%;right:14%;animation-delay:-1.5s;">def odeme_al(tutar):<br/>&nbsp;&nbsp;return kasa.ekle(tutar)</div>
   <div class="code-float hidden lg:block animate-float-slow select-none text-[11px]" style="bottom:32%;left:12%;animation-delay:-4.5s;">await fetch('/api/urunler');</div>
+  <div class="code-float hidden xl:block animate-float-slow select-none text-[10px]" style="bottom:8%;left:4%;animation-delay:-2.2s;">npm run build &amp;&amp; deploy</div>
+  <div class="code-float hidden xl:block animate-float-slow select-none text-[10px]" style="top:6%;right:30%;animation-delay:-5.5s;">SELECT * FROM kullanicilar WHERE aktif = 1;</div>
 
   <div class="relative z-10 text-center px-4 max-w-4xl mx-auto reveal active glass-panel p-12 rounded-2xl shadow-[0_0_40px_rgba(99,102,241,0.15)]">
     <span class="eyebrow justify-center mb-6">// merhaba, ben</span>
@@ -453,6 +477,7 @@
   <section class="reveal relative py-10" id="projects">
     <div class="absolute inset-0 pattern-dots opacity-30 -z-10 rounded-3xl"></div>
     <div class="code-float hidden lg:block text-[11px]" style="top:-1rem;right:2rem;">$db-&gt;query("SELECT * FROM heroes");</div>
+    <div class="code-float hidden lg:block text-[11px]" style="bottom:-1rem;left:2rem;">git push origin main</div>
     <div class="text-center mb-16 relative">
       <span class="eyebrow justify-center">// projeler</span>
       <h2 class="font-headline text-headline-lg text-on-background inline-block relative bg-surface px-4">
@@ -508,23 +533,26 @@
     <button class="modal-close" id="modalClose" aria-label="Kapat">
       <span class="material-symbols-outlined">close</span>
     </button>
-    <span class="eyebrow" id="modalEyebrow">// proje</span>
-    <h3 id="modalTitle" class="font-headline text-headline-md text-on-background mb-4"></h3>
-    <p id="modalDesc" class="font-body text-body-md text-on-surface-variant mb-6"></p>
+    <div class="modal-preview" id="modalPreview"></div>
+    <div class="modal-content-pad">
+      <span class="eyebrow" id="modalEyebrow">// proje</span>
+      <h3 id="modalTitle" class="font-headline text-headline-md text-on-background mb-4"></h3>
+      <p id="modalDesc" class="font-body text-body-md text-on-surface-variant mb-6"></p>
 
-    <div class="mb-6">
-      <p class="font-code text-xs text-on-surface-variant mb-2 flex items-center gap-2">
-        <span class="material-symbols-outlined text-sm">bar_chart</span> Dil dağılımı (GitHub)
-      </p>
-      <div class="flex w-full h-2.5 rounded-full overflow-hidden bg-surface-container" id="modalLangBar"></div>
-      <div class="flex flex-wrap gap-x-4 gap-y-1 mt-3" id="modalLangLegend"></div>
+      <div class="mb-6">
+        <p class="font-code text-xs text-on-surface-variant mb-2 flex items-center gap-2">
+          <span class="material-symbols-outlined text-sm">bar_chart</span> Dil dağılımı (GitHub)
+        </p>
+        <div class="flex w-full h-2.5 rounded-full overflow-hidden bg-surface-container" id="modalLangBar"></div>
+        <div class="flex flex-wrap gap-x-4 gap-y-1 mt-3" id="modalLangLegend"></div>
+      </div>
+
+      <div class="flex flex-wrap gap-2 mb-8" id="modalTags"></div>
+      <a class="inline-flex w-full items-center justify-center gap-2 px-8 py-4 bg-indigo-electric text-white rounded-full font-code text-sm hover:bg-indigo-deep transition-all shadow-lg shadow-indigo-electric/30" id="modalGh" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.43-2.7 5.41-5.27 5.69.42.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .3.21.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
+        GitHub'da Görüntüle
+      </a>
     </div>
-
-    <div class="flex flex-wrap gap-2 mb-8" id="modalTags"></div>
-    <a class="inline-flex w-full items-center justify-center gap-2 px-8 py-4 bg-indigo-electric text-white rounded-full font-code text-sm hover:bg-indigo-deep transition-all shadow-lg shadow-indigo-electric/30" id="modalGh" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.43-2.7 5.41-5.27 5.69.42.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .3.21.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
-      GitHub'da Görüntüle
-    </a>
   </div>
 </div>
 
@@ -670,27 +698,54 @@
     { name:"Kasa Sistemi", repo:"Kasa_Sistemi", lang:"Python", file:"kasa_sistemi.py",
       desc:"Masaüstü uygulaması olarak geliştirilmiş, satış ve stok yönetimi sağlayan bir kasa / POS sistemi simülasyonu.",
       tags:["Python","Sistem Tasarımı"],
-      langs:[{n:"Python",p:100,c:"#3572A5"}] },
+      langs:[{n:"Python",p:100,c:"#3572A5"}],
+      preview:{ type:"code", file:"ADİSYON SİSTEMİ.py", html:
+        '<div><span class="mp-kw">import</span> customtkinter <span class="mp-kw">as</span> ctk</div>' +
+        '<div><span class="mp-kw">from</span> tkinter <span class="mp-kw">import</span> messagebox</div>' +
+        '<div>&nbsp;</div>' +
+        '<div>ctk.set_appearance_mode(<span class="mp-str">"System"</span>)</div>' +
+        '<div>root = ctk.CTk()</div>' +
+        '<div>root.geometry(<span class="mp-str">"850x750"</span>)</div>' +
+        '<div>root.title(<span class="mp-str">"Restoran Adisyon Sistemi"</span>)</div>' } },
     { name:"Marvel Web", repo:"Marvel_Web", lang:"PHP", file:"marvel_web.php",
       desc:"Marvel evrenindeki karakterleri listeleyen ve detaylarını sunan, PHP tabanlı dinamik bir web uygulaması.",
       tags:["PHP","MySQL","CRUD"],
-      langs:[{n:"PHP",p:50.9,c:"#4F5D95"},{n:"CSS",p:23.5,c:"#563d7c"},{n:"HTML",p:22.3,c:"#e34c26"},{n:"JavaScript",p:3.3,c:"#f1e05a"}] },
+      langs:[{n:"PHP",p:50.9,c:"#4F5D95"},{n:"CSS",p:23.5,c:"#563d7c"},{n:"HTML",p:22.3,c:"#e34c26"},{n:"JavaScript",p:3.3,c:"#f1e05a"}],
+      preview:{ type:"image", src:"assets/previews/marvel-web.jpg" } },
     { name:"Seyahat Takip", repo:"Seyahat_Takip", lang:"JavaScript", file:"seyahat_takip.js",
       desc:"Kullanıcıların gezi planlarını ve ziyaret ettikleri yerleri kaydedebildiği, JavaScript ile geliştirilmiş bir takip uygulaması.",
       tags:["JavaScript","HTML","CSS"],
-      langs:[{n:"JavaScript",p:38.2,c:"#f1e05a"},{n:"CSS",p:37.0,c:"#563d7c"},{n:"HTML",p:24.8,c:"#e34c26"}] },
+      langs:[{n:"JavaScript",p:38.2,c:"#f1e05a"},{n:"CSS",p:37.0,c:"#563d7c"},{n:"HTML",p:24.8,c:"#e34c26"}],
+      preview:{ type:"image", src:"assets/previews/seyahat-takip.jpg" } },
     { name:"Portfolyo Web Sitesi", repo:"portfolyowebsitesi", lang:"CSS", file:"style.css",
       desc:"Kişisel çalışmaları sergilemek amacıyla HTML5 ve CSS3 ile sıfırdan tasarlanmış ilk portfolyo denemem.",
       tags:["HTML5","CSS3","UI/UX"],
-      langs:[{n:"CSS",p:55.1,c:"#563d7c"},{n:"HTML",p:43.9,c:"#e34c26"},{n:"JavaScript",p:0.9,c:"#f1e05a"}] },
+      langs:[{n:"CSS",p:55.1,c:"#563d7c"},{n:"HTML",p:43.9,c:"#e34c26"},{n:"JavaScript",p:0.9,c:"#f1e05a"}],
+      preview:{ type:"code", file:"style.css", html:
+        '<div><span class="mp-key">body</span> {</div>' +
+        '<div>&nbsp;&nbsp;<span class="mp-kw">font-family</span>: Arial, sans-serif;</div>' +
+        '<div>&nbsp;&nbsp;<span class="mp-kw">margin</span>: 0;</div>' +
+        '<div>&nbsp;&nbsp;<span class="mp-kw">padding</span>: 0;</div>' +
+        '<div>&nbsp;&nbsp;<span class="mp-kw">color</span>: <span class="mp-str">#ffffff</span>;</div>' +
+        '<div>&nbsp;&nbsp;<span class="mp-kw">background-color</span>: <span class="mp-str">#111</span>;</div>' +
+        '<div>}</div>' } },
     { name:"EkoFit Veritabanı", repo:"ekofit-database", lang:"Java", file:"VeriTabani.java",
       desc:"Java ile geliştirilen, ilişkisel veritabanı tasarımı üzerine kurulu; veri bütünlüğünü gözeten bir sistem.",
       tags:["Java","SQL","Veritabanı Tasarımı"],
-      langs:[{n:"Java",p:100,c:"#b07219"}] },
+      langs:[{n:"Java",p:100,c:"#b07219"}],
+      preview:{ type:"code", file:"DBConnection.java", html:
+        '<div><span class="mp-kw">public class</span> <span class="mp-key">DBConnection</span> {</div>' +
+        '<div>&nbsp;&nbsp;<span class="mp-kw">private static final</span> String URL =</div>' +
+        '<div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="mp-str">"jdbc:mysql://localhost:3306/ekofit"</span>;</div>' +
+        '<div>&nbsp;</div>' +
+        '<div>&nbsp;&nbsp;<span class="mp-kw">public static</span> Connection <span class="mp-key">connect</span>() {</div>' +
+        '<div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="mp-kw">return</span> DriverManager.getConnection(URL, ...);</div>' +
+        '<div>&nbsp;&nbsp;}</div><div>}</div>' } },
     { name:"Kafe Web Sitesi", repo:"cafe-web-sitesi", lang:"CSS", file:"cafe.css",
       desc:"HTML5 ve CSS3 ile hazırlanmış, menü ve iletişim bölümleriyle duyarlı (responsive) bir kafe tanıtım sitesi.",
       tags:["HTML5","CSS3","Responsive"],
-      langs:[{n:"CSS",p:52.7,c:"#563d7c"},{n:"HTML",p:43.6,c:"#e34c26"},{n:"JavaScript",p:3.6,c:"#f1e05a"}] },
+      langs:[{n:"CSS",p:52.7,c:"#563d7c"},{n:"HTML",p:43.6,c:"#e34c26"},{n:"JavaScript",p:3.6,c:"#f1e05a"}],
+      preview:{ type:"image", src:"assets/previews/cafe-web-sitesi.jpg" } },
   ];
 
   const grid2 = document.getElementById('projectsGrid');
@@ -733,10 +788,20 @@
   const modalClose = document.getElementById('modalClose');
   const modalLangBar = document.getElementById('modalLangBar');
   const modalLangLegend = document.getElementById('modalLangLegend');
+  const modalPreview = document.getElementById('modalPreview');
   let lastFocused = null;
 
   function openModal(p){
     lastFocused = document.activeElement;
+
+    if(p.preview.type === 'image'){
+      modalPreview.className = 'modal-preview is-image';
+      modalPreview.innerHTML = `<img src="${p.preview.src}" alt="${p.name} önizlemesi" loading="lazy">`;
+    } else {
+      modalPreview.className = 'modal-preview';
+      modalPreview.innerHTML = `<div class="modal-preview-code">${p.preview.html}</div><span class="mp-tag font-code">${p.preview.file}</span>`;
+    }
+
     modalTitle.textContent = p.name;
     modalDesc.textContent = p.desc;
     modalTags.innerHTML = p.tags.map(t => `<span class="px-3 py-1.5 rounded-md bg-indigo-electric/10 text-indigo-electric font-code text-xs border border-indigo-electric/20">${t}</span>`).join("");
