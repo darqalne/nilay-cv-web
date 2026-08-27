@@ -147,6 +147,15 @@
   .nav-links a:hover::after{ right:.7rem; }
   .nav-links a:hover .tab-dot{ opacity:1; }
 
+  #mobileMenu{ background:#fcf8ff;border-top:1px solid rgba(99,102,241,.12); }
+  #mobileMenu.open{ display:flex; }
+  .mobile-nav-link{
+    font-family:'Fira Code',monospace;font-size:.85rem;font-weight:500;color:#464554;
+    display:flex;align-items:center;gap:.6rem;padding:.7rem .3rem;
+    border-bottom:1px solid rgba(99,102,241,.08);
+  }
+  .mobile-nav-link .tab-dot{ width:6px;height:6px;border-radius:50%;background:#6366f1; }
+
   /* ---------- contribution graph (bespoke) ---------- */
   .contrib-grid{ display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,1fr);gap:3px;overflow-x:auto;padding-bottom:.3rem; }
   .contrib-cell{ width:11px;height:11px;border-radius:3px; }
@@ -224,6 +233,54 @@
     font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 48;
   }
 
+  /* ---------- phone-only scale-down (does not touch tablet/desktop, ≥768px) ---------- */
+  @media (max-width:767px){
+    /* typography */
+    .text-headline-lg{ font-size:1.6rem !important; }
+    .text-headline-md{ font-size:1.05rem !important; }
+    .text-body-lg{ font-size:.95rem !important; }
+    .text-body-md{ font-size:.88rem !important; }
+    .font-signature.text-5xl{ font-size:2.1rem !important; }
+    .font-signature.text-3xl{ font-size:1.4rem !important; }
+    .text-\[20px\]{ font-size:1rem !important; }
+    .signature-big{ font-size:2.6rem !important; }
+    .eyebrow{ font-size:.68rem !important; margin-bottom:.7rem !important; }
+
+    /* section & card spacing, roughly halved */
+    main{ padding-top:2.75rem !important; padding-bottom:2.75rem !important; }
+    main > section{ margin-top:2.75rem !important; }
+    .p-12{ padding:1.25rem !important; }
+    .p-8{ padding:1.1rem !important; }
+    .p-6{ padding:1rem !important; }
+    .px-8{ padding-left:1.1rem !important; padding-right:1.1rem !important; }
+    .py-4{ padding-top:.7rem !important; padding-bottom:.7rem !important; }
+    .gap-12{ gap:1.25rem !important; }
+    .gap-8{ gap:1rem !important; }
+    .gap-6{ gap:.85rem !important; }
+    .mb-16{ margin-bottom:1.75rem !important; }
+    .mb-12{ margin-bottom:1.25rem !important; }
+    .mb-8{ margin-bottom:.9rem !important; }
+    .mb-6{ margin-bottom:.75rem !important; }
+    .rounded-2xl{ border-radius:1rem !important; }
+
+    /* icon badges */
+    .text-3xl{ font-size:1.35rem !important; }
+    .text-9xl{ font-size:4.5rem !important; }
+    .text-6xl{ font-size:3rem !important; }
+
+    /* reveal background code snippets on phone too, but keep them small and unobtrusive */
+    .code-float{ display:block !important; font-size:9px !important; padding:.3rem .5rem !important; }
+    #top .code-float{ display:none !important; } /* hero card is full-width on phone; floats would sit hidden behind it */
+    /* these were absolutely positioned to peek into the (much larger) desktop gap between
+       sections; on phone that gap is small, so drop them into normal flow instead of overlapping */
+    section > .code-float{
+      position:static !important; display:inline-block !important; margin:0 0 .85rem !important;
+    }
+    /* anchored sections (nav links, scrollIntoView) were scrolling flush under the fixed
+       nav bar, hiding each section's first ~60px (its code-float badge + eyebrow) behind it */
+    section[id]{ scroll-margin-top:70px; }
+  }
+
   ::selection{ background:#dae2fd;color:#4648d4; }
   :focus-visible{ outline:2.5px solid #6366f1;outline-offset:3px;border-radius:4px; }
 </style>
@@ -243,6 +300,16 @@
       <a href="#projects"><span class="tab-dot"></span>projeler.dir</a>
       <a href="#contact" class="ml-3 !bg-indigo-electric !text-white px-5 py-2 !rounded-full font-code text-xs hover:!bg-indigo-deep transition-all cursor-hover animate-pulse-subtle shadow-lg shadow-indigo-electric/30">$ iletişime geç</a>
     </div>
+    <button id="navToggle" class="md:hidden flex items-center justify-center w-9 h-9 text-on-background" aria-label="Menüyü aç" aria-expanded="false">
+      <span class="material-symbols-outlined text-2xl" id="navToggleIcon">menu</span>
+    </button>
+  </div>
+  <div id="mobileMenu" class="hidden md:hidden flex-col gap-1 px-6 pb-5 pt-1">
+    <a href="#about" class="mobile-nav-link"><span class="tab-dot"></span>hakkimda.md</a>
+    <a href="#experience" class="mobile-nav-link"><span class="tab-dot"></span>deneyim.log</a>
+    <a href="#skills" class="mobile-nav-link"><span class="tab-dot"></span>skills.json</a>
+    <a href="#projects" class="mobile-nav-link"><span class="tab-dot"></span>projeler.dir</a>
+    <a href="#contact" class="mt-2 inline-flex justify-center !bg-indigo-electric !text-white px-5 py-2.5 !rounded-full font-code text-xs shadow-lg shadow-indigo-electric/30">$ iletişime geç</a>
   </div>
 </nav>
 
@@ -668,6 +735,21 @@
     navbar.classList.toggle('bg-surface/95', window.scrollY > 50);
     navbar.classList.toggle('bg-surface/80', window.scrollY <= 50);
   });
+
+  // ---------- mobile nav toggle ----------
+  const navToggle = document.getElementById('navToggle');
+  const navToggleIcon = document.getElementById('navToggleIcon');
+  const mobileMenu = document.getElementById('mobileMenu');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggleIcon.textContent = isOpen ? 'close' : 'menu';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggleIcon.textContent = 'menu';
+  }));
 
   // ---------- signature reveal ----------
   const sigBig = document.getElementById('sigBig');
