@@ -147,14 +147,33 @@
   .nav-links a:hover::after{ right:.7rem; }
   .nav-links a:hover .tab-dot{ opacity:1; }
 
-  .cv-nav-btn, .lang-toggle-btn{
+  .cv-nav-btn{
     font-family:'Fira Code',monospace;font-size:.82rem;font-weight:500;
     color:#464554;padding:.5rem .7rem;border-radius:8px;border:1px solid transparent;
     display:inline-flex;align-items:center;gap:.35rem;transition:color .25s ease,background .25s ease,border-color .25s ease;
   }
-  .cv-nav-btn:hover, .lang-toggle-btn:hover{ color:#1b1b23;background:#efecf8; }
-  .lang-toggle-btn{ border-color:rgba(99,102,241,.25); margin-left:.3rem; }
-  .lang-toggle-btn:hover{ border-color:#6366f1; }
+  .cv-nav-btn:hover{ color:#1b1b23;background:#efecf8; }
+
+  /* language toggle: styled like a little terminal chip, matching the site's code motif */
+  .lang-toggle-btn{
+    font-family:'Fira Code',monospace;font-size:.78rem;font-weight:600;letter-spacing:.02em;
+    color:#8FD4B4;background:#1b1b23;border:1px solid rgba(99,102,241,.4);
+    padding:.5rem .75rem;border-radius:8px;margin-left:.4rem;
+    display:inline-flex;align-items:center;gap:.4rem;
+    transition:border-color .25s ease,background .25s ease,transform .15s ease,box-shadow .25s ease;
+  }
+  .lang-toggle-btn .material-symbols-outlined{ color:#6366f1;font-size:16px; }
+  .lang-toggle-btn:hover{ border-color:#6366f1;background:#232430;box-shadow:0 0 0 3px rgba(99,102,241,.15); }
+  .lang-toggle-btn:active{ transform:scale(.94); }
+  .lang-toggle-btn .lang-cursor{
+    display:inline-block;width:2px;height:.9em;background:#6366f1;
+    animation:blink 1s step-end infinite;vertical-align:-1px;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+  .mobile-nav-link .lang-cursor{
+    display:inline-block;width:2px;height:.9em;background:#6366f1;margin-left:2px;
+    animation:blink 1s step-end infinite;vertical-align:-2px;
+  }
 
   #mobileMenu{ background:#fcf8ff;border-top:1px solid rgba(99,102,241,.12); }
   #mobileMenu.open{ display:flex; }
@@ -344,7 +363,7 @@
       <a href="#skills" data-i18n="nav_skills"><span class="tab-dot"></span>skills.json</a>
       <a href="#projects" data-i18n="nav_projects"><span class="tab-dot"></span>projeler.dir</a>
       <button id="cvBtn" class="cv-nav-btn"><span class="material-symbols-outlined text-base">description</span><span data-i18n="nav_cv">CV</span></button>
-      <button id="langToggle" class="lang-toggle-btn" title="Switch language" aria-label="Switch language"><span class="material-symbols-outlined text-base">language</span><span id="langToggleLabel">EN</span></button>
+      <button id="langToggle" class="lang-toggle-btn" title="Switch language" aria-label="Switch language"><span class="material-symbols-outlined">terminal</span><span id="langToggleLabel">EN</span><span class="lang-cursor"></span></button>
       <a href="#contact" class="ml-1 !bg-indigo-electric !text-white px-5 py-2 !rounded-full font-code text-xs hover:!bg-indigo-deep transition-all cursor-hover animate-pulse-subtle shadow-lg shadow-indigo-electric/30" data-i18n="nav_contact_cta">$ iletişime geç</a>
     </div>
     <button id="navToggle" class="md:hidden flex items-center justify-center w-9 h-9 text-on-background" aria-label="Menüyü aç" aria-expanded="false">
@@ -357,7 +376,7 @@
     <a href="#skills" class="mobile-nav-link" data-i18n="nav_skills"><span class="tab-dot"></span>skills.json</a>
     <a href="#projects" class="mobile-nav-link" data-i18n="nav_projects"><span class="tab-dot"></span>projeler.dir</a>
     <button id="cvBtnMobile" class="mobile-nav-link" style="width:100%;text-align:left;"><span class="material-symbols-outlined text-base">description</span><span data-i18n="nav_cv">CV</span></button>
-    <button id="langToggleMobile" class="mobile-nav-link" style="width:100%;text-align:left;"><span class="material-symbols-outlined text-base">language</span><span id="langToggleLabelMobile">English</span></button>
+    <button id="langToggleMobile" class="mobile-nav-link" style="width:100%;text-align:left;"><span class="material-symbols-outlined text-base">terminal</span><span id="langToggleLabelMobile" class="font-code">English</span><span class="lang-cursor"></span></button>
     <a href="#contact" class="mt-2 inline-flex justify-center !bg-indigo-electric !text-white px-5 py-2.5 !rounded-full font-code text-xs shadow-lg shadow-indigo-electric/30" data-i18n="nav_contact_cta">$ iletişime geç</a>
   </div>
 </nav>
@@ -644,6 +663,10 @@
           <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.43-2.7 5.41-5.27 5.69.42.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .3.21.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
           GitHub
         </a>
+        <button id="cvBtnContact" class="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-indigo-electric/40 text-indigo-electric rounded-full font-code text-sm hover:border-indigo-electric hover:bg-indigo-electric/10 transition-all cursor-hover">
+          <span class="material-symbols-outlined text-lg">description</span>
+          <span data-i18n="nav_cv">CV</span>
+        </button>
       </div>
 
       <div class="flex gap-8 justify-center flex-wrap border-t border-surface-variant/50 pt-8">
@@ -692,15 +715,15 @@
 </div>
 
 <div class="modal-backdrop" id="cvModalBackdrop">
-  <div class="modal-box" style="max-width:780px;" role="dialog" aria-modal="true" aria-labelledby="cvModalTitle">
+  <div class="modal-box" style="max-width:620px;" role="dialog" aria-modal="true" aria-labelledby="cvModalTitle">
     <button class="modal-close" id="cvModalClose" aria-label="Kapat">
       <span class="material-symbols-outlined">close</span>
     </button>
     <div class="modal-content-pad" style="padding-top:2.6rem;">
       <span class="eyebrow" data-i18n="cv_eyebrow">// özgeçmiş</span>
       <h3 id="cvModalTitle" class="font-headline text-headline-md text-on-background mb-4" data-i18n="cv_title">Nilay Balcı — CV</h3>
-      <div class="rounded-xl overflow-hidden border border-indigo-electric/20 bg-surface-container" style="height:min(65vh,600px);">
-        <iframe src="assets/docs/Nilay-Balci-CV.pdf" title="Nilay Balcı CV" style="width:100%;height:100%;border:0;"></iframe>
+      <div class="rounded-xl overflow-hidden border border-indigo-electric/20 bg-surface-container" style="height:min(82vh,820px);">
+        <iframe src="assets/docs/Nilay-Balci-CV.pdf#toolbar=0&navpanes=0&statusbar=0&view=FitH" title="Nilay Balcı CV" style="width:100%;height:100%;border:0;"></iframe>
       </div>
       <a href="assets/docs/Nilay-Balci-CV.pdf" download="Nilay-Balci-CV.pdf" class="mt-6 inline-flex w-full items-center justify-center gap-2 px-8 py-4 bg-indigo-electric text-white rounded-full font-code text-sm hover:bg-indigo-deep transition-all shadow-lg shadow-indigo-electric/30">
         <span class="material-symbols-outlined text-lg">download</span>
@@ -1005,6 +1028,7 @@
   }
   document.getElementById('cvBtn').addEventListener('click', openCvModal);
   document.getElementById('cvBtnMobile').addEventListener('click', () => { mobileMenu.classList.remove('open'); openCvModal(); });
+  document.getElementById('cvBtnContact').addEventListener('click', openCvModal);
   cvModalClose.addEventListener('click', closeCvModal);
   cvBackdrop.addEventListener('click', (e) => { if(e.target === cvBackdrop) closeCvModal(); });
 
@@ -1136,7 +1160,7 @@
     },
   };
 
-  function applyLang(lang){
+  function applyLang(lang, skipLabelEl){
     currentLang = lang;
     document.documentElement.lang = lang;
 
@@ -1157,16 +1181,60 @@
     renderProjects();
     if(modalOpenProject) openModal(modalOpenProject);
 
-    const labelEl = document.getElementById('langToggleLabel');
-    const labelElMobile = document.getElementById('langToggleLabelMobile');
-    if(labelEl) labelEl.textContent = lang === 'tr' ? 'EN' : 'TR';
-    if(labelElMobile) labelElMobile.textContent = lang === 'tr' ? 'English' : 'Türkçe';
+    setLangLabels(lang, skipLabelEl);
   }
 
-  document.getElementById('langToggle').addEventListener('click', () => applyLang(currentLang === 'tr' ? 'en' : 'tr'));
+  function setLangLabels(lang, skipEl){
+    const labelEl = document.getElementById('langToggleLabel');
+    const labelElMobile = document.getElementById('langToggleLabelMobile');
+    if(labelEl && labelEl !== skipEl) labelEl.textContent = lang === 'tr' ? 'EN' : 'TR';
+    if(labelElMobile && labelElMobile !== skipEl) labelElMobile.textContent = lang === 'tr' ? 'English' : 'Türkçe';
+  }
+
+  // ---------- terminal-style erase/type animation for the language switcher ----------
+  function eraseText(el, speed){
+    return new Promise(resolve => {
+      (function step(){
+        if(el.textContent.length === 0) return resolve();
+        el.textContent = el.textContent.slice(0, -1);
+        setTimeout(step, speed);
+      })();
+    });
+  }
+  function typeText(el, text, speed){
+    return new Promise(resolve => {
+      let i = 0;
+      (function step(){
+        el.textContent = text.slice(0, i);
+        if(i >= text.length) return resolve();
+        i++; setTimeout(step, speed);
+      })();
+    });
+  }
+  let langAnimBusy = false;
+  async function animatedLangToggle(labelEl, isLong){
+    if(langAnimBusy) return;
+    langAnimBusy = true;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const next = currentLang === 'tr' ? 'en' : 'tr';
+    const finalText = isLong ? (next === 'tr' ? 'English' : 'Türkçe') : (next === 'tr' ? 'EN' : 'TR');
+    if(prefersReduced){
+      applyLang(next);
+      langAnimBusy = false;
+      return;
+    }
+    await eraseText(labelEl, 28);
+    applyLang(next, labelEl);
+    await typeText(labelEl, finalText, 65);
+    langAnimBusy = false;
+  }
+
+  document.getElementById('langToggle').addEventListener('click', () => {
+    animatedLangToggle(document.getElementById('langToggleLabel'), false);
+  });
   document.getElementById('langToggleMobile').addEventListener('click', () => {
     mobileMenu.classList.remove('open');
-    applyLang(currentLang === 'tr' ? 'en' : 'tr');
+    animatedLangToggle(document.getElementById('langToggleLabelMobile'), true);
   });
 </script>
 
