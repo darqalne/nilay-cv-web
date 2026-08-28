@@ -279,6 +279,11 @@
     /* anchored sections (nav links, scrollIntoView) were scrolling flush under the fixed
        nav bar, hiding each section's first ~60px (its code-float badge + eyebrow) behind it */
     section[id]{ scroll-margin-top:70px; }
+
+    /* hero: min-h-screen + flex-centering left the "merhaba, ben" card floating deep in the
+       middle of a full-viewport-tall section; give it a natural height instead so the card
+       sits just under the nav, not stranded in empty space */
+    #top{ min-height:auto !important; padding-top:5.5rem !important; padding-bottom:2.5rem !important; }
   }
 
   ::selection{ background:#dae2fd;color:#4648d4; }
@@ -353,6 +358,7 @@
   <section class="reveal relative" id="about">
     <div class="absolute -left-10 top-20 font-code text-indigo-electric/20 text-xs rotate-90 origin-left select-none hidden lg:block">&lt;section id="about"&gt;</div>
     <div class="code-float hidden lg:block text-[11px]" style="top:-2rem;right:2rem;">// JWT ile güvenli kimlik doğrulama</div>
+    <div class="code-float md:hidden text-[10px]">git blame -- kimlik_dogrulama.cs</div>
     <div class="grid lg:grid-cols-2 gap-12 items-center">
       <div>
         <span class="eyebrow">// hakkımda</span>
@@ -391,6 +397,7 @@
   <!-- ACTIVITY (bespoke) -->
   <section class="reveal relative" id="activity">
     <div class="code-float hidden lg:block text-[11px]" style="top:-1rem;left:2rem;">git log --oneline | wc -l</div>
+    <div class="code-float md:hidden text-[10px]">git commit -m "docs: README güncellendi"</div>
     <div class="text-center mb-16">
       <span class="eyebrow justify-center">// commit geçmişi</span>
       <h2 class="font-headline text-headline-lg text-on-background inline-block relative">
@@ -413,6 +420,7 @@
   <section class="reveal relative py-10" id="experience">
     <div class="absolute inset-0 pattern-grid opacity-50 -z-10 rounded-3xl"></div>
     <div class="code-float hidden lg:block text-[11px]" style="top:-1rem;left:2rem;">git commit -m "feat: JWT auth eklendi"</div>
+    <div class="code-float md:hidden text-[10px]">catch (Exception e) { log.Error(e); }</div>
     <div class="text-center mb-16 relative">
       <span class="eyebrow justify-center">// deneyim</span>
       <h2 class="font-headline text-headline-lg text-on-background inline-block relative bg-surface px-4">
@@ -456,6 +464,7 @@
   <!-- SKILLS -->
   <section class="reveal relative" id="skills">
     <div class="code-float hidden lg:block text-[11px]" style="top:-1rem;right:2rem;">Authorization: Bearer eyJhbGci...</div>
+    <div class="code-float md:hidden text-[10px]">npm install &amp;&amp; npm run dev</div>
     <div class="text-center mb-16">
       <span class="eyebrow justify-center">// yetenekler</span>
       <h2 class="font-headline text-headline-lg text-on-background inline-block relative">
@@ -556,6 +565,7 @@
     <div class="absolute inset-0 pattern-dots opacity-30 -z-10 rounded-3xl"></div>
     <div class="code-float hidden lg:block text-[11px]" style="top:-1rem;right:2rem;">$db-&gt;query("SELECT * FROM heroes");</div>
     <div class="code-float hidden lg:block text-[11px]" style="bottom:-1rem;left:2rem;">git push origin main</div>
+    <div class="code-float md:hidden text-[10px]">git clone github.com/nilaybalci/...</div>
     <div class="text-center mb-16 relative">
       <span class="eyebrow justify-center">// projeler</span>
       <h2 class="font-headline text-headline-lg text-on-background inline-block relative bg-surface px-4">
@@ -570,6 +580,7 @@
   <!-- CONTACT -->
   <section class="reveal relative" id="contact">
     <div class="code-float hidden lg:block text-[11px]" style="top:-1rem;left:2rem;">export default function Contact() { ... }</div>
+    <div class="code-float md:hidden text-[10px]">console.log("Merhaba 👋");</div>
     <div class="max-w-2xl mx-auto text-center glass-panel rounded-2xl p-12 shadow-[0_0_50px_rgba(99,102,241,0.1)] relative overflow-hidden bg-surface/80">
       <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-indigo-electric to-transparent"></div>
       <span class="eyebrow justify-center">// iletişim</span>
