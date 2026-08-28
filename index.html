@@ -362,8 +362,7 @@
       <a href="#experience" data-i18n="nav_exp"><span class="tab-dot"></span>deneyim.log</a>
       <a href="#skills" data-i18n="nav_skills"><span class="tab-dot"></span>skills.json</a>
       <a href="#projects" data-i18n="nav_projects"><span class="tab-dot"></span>projeler.dir</a>
-      <button id="cvBtn" class="cv-nav-btn"><span class="material-symbols-outlined text-base">description</span><span data-i18n="nav_cv">CV</span></button>
-      <button id="langToggle" class="lang-toggle-btn" title="Switch language" aria-label="Switch language"><span class="material-symbols-outlined">terminal</span><span id="langToggleLabel">EN</span><span class="lang-cursor"></span></button>
+      <button id="langToggle" class="lang-toggle-btn" title="Switch language" aria-label="Switch language"><span class="material-symbols-outlined">terminal</span><span id="langToggleLabel">TR</span><span class="lang-cursor"></span></button>
       <a href="#contact" class="ml-1 !bg-indigo-electric !text-white px-5 py-2 !rounded-full font-code text-xs hover:!bg-indigo-deep transition-all cursor-hover animate-pulse-subtle shadow-lg shadow-indigo-electric/30" data-i18n="nav_contact_cta">$ iletişime geç</a>
     </div>
     <button id="navToggle" class="md:hidden flex items-center justify-center w-9 h-9 text-on-background" aria-label="Menüyü aç" aria-expanded="false">
@@ -375,8 +374,7 @@
     <a href="#experience" class="mobile-nav-link" data-i18n="nav_exp"><span class="tab-dot"></span>deneyim.log</a>
     <a href="#skills" class="mobile-nav-link" data-i18n="nav_skills"><span class="tab-dot"></span>skills.json</a>
     <a href="#projects" class="mobile-nav-link" data-i18n="nav_projects"><span class="tab-dot"></span>projeler.dir</a>
-    <button id="cvBtnMobile" class="mobile-nav-link" style="width:100%;text-align:left;"><span class="material-symbols-outlined text-base">description</span><span data-i18n="nav_cv">CV</span></button>
-    <button id="langToggleMobile" class="mobile-nav-link" style="width:100%;text-align:left;"><span class="material-symbols-outlined text-base">terminal</span><span id="langToggleLabelMobile" class="font-code">English</span><span class="lang-cursor"></span></button>
+    <button id="langToggleMobile" class="mobile-nav-link" style="width:100%;text-align:left;"><span class="material-symbols-outlined text-base">terminal</span><span id="langToggleLabelMobile" class="font-code">Türkçe</span><span class="lang-cursor"></span></button>
     <a href="#contact" class="mt-2 inline-flex justify-center !bg-indigo-electric !text-white px-5 py-2.5 !rounded-full font-code text-xs shadow-lg shadow-indigo-electric/30" data-i18n="nav_contact_cta">$ iletişime geç</a>
   </div>
 </nav>
@@ -640,6 +638,24 @@
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid"></div>
   </section>
 
+  <!-- CV BANNER -->
+  <section class="reveal relative">
+    <button id="cvBtnBanner" class="group w-full max-w-4xl mx-auto flex items-center justify-between gap-6 px-8 md:px-10 py-7 md:py-9 rounded-2xl glass-panel hover-card cursor-hover relative overflow-hidden text-left">
+      <div class="absolute inset-0 bg-gradient-to-r from-indigo-electric/0 via-indigo-electric/0 to-indigo-electric/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+      <div class="flex items-center gap-5 relative z-10">
+        <div class="p-3.5 bg-indigo-electric/10 rounded-xl border border-indigo-electric/20 group-hover:bg-indigo-electric group-hover:border-indigo-electric transition-colors duration-300 flex-shrink-0">
+          <span class="material-symbols-outlined text-3xl text-indigo-electric group-hover:text-white transition-colors duration-300">description</span>
+        </div>
+        <div>
+          <span class="eyebrow" data-i18n="cv_eyebrow">// özgeçmiş</span>
+          <h3 class="font-headline text-headline-md text-on-background mt-1" data-i18n="cv_banner_title">Özgeçmişimi İncele</h3>
+          <p class="font-body text-body-md text-on-surface-variant mt-1" data-i18n="cv_banner_sub">Deneyimlerimi ve yeteneklerimi tek sayfada gör, dilersen PDF olarak indir.</p>
+        </div>
+      </div>
+      <span class="material-symbols-outlined text-3xl text-indigo-electric relative z-10 transition-transform duration-300 group-hover:translate-x-2 flex-shrink-0">arrow_forward</span>
+    </button>
+  </section>
+
   <!-- CONTACT -->
   <section class="reveal relative" id="contact">
     <div class="code-float hidden lg:block text-[11px]" style="top:-1rem;left:2rem;">export default function Contact() { ... }</div>
@@ -663,10 +679,6 @@
           <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.43-2.7 5.41-5.27 5.69.42.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .3.21.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
           GitHub
         </a>
-        <button id="cvBtnContact" class="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-indigo-electric/40 text-indigo-electric rounded-full font-code text-sm hover:border-indigo-electric hover:bg-indigo-electric/10 transition-all cursor-hover">
-          <span class="material-symbols-outlined text-lg">description</span>
-          <span data-i18n="nav_cv">CV</span>
-        </button>
       </div>
 
       <div class="flex gap-8 justify-center flex-wrap border-t border-surface-variant/50 pt-8">
@@ -1026,9 +1038,7 @@
     document.body.style.overflow = '';
     if(cvLastFocused) cvLastFocused.focus();
   }
-  document.getElementById('cvBtn').addEventListener('click', openCvModal);
-  document.getElementById('cvBtnMobile').addEventListener('click', () => { mobileMenu.classList.remove('open'); openCvModal(); });
-  document.getElementById('cvBtnContact').addEventListener('click', openCvModal);
+  document.getElementById('cvBtnBanner').addEventListener('click', openCvModal);
   cvModalClose.addEventListener('click', closeCvModal);
   cvBackdrop.addEventListener('click', (e) => { if(e.target === cvBackdrop) closeCvModal(); });
 
@@ -1050,6 +1060,8 @@
       cv_eyebrow: '// özgeçmiş',
       cv_title: 'Nilay Balcı — CV',
       cv_download: 'PDF olarak indir',
+      cv_banner_title: 'Özgeçmişimi İncele',
+      cv_banner_sub: 'Deneyimlerimi ve yeteneklerimi tek sayfada gör, dilersen PDF olarak indir.',
       hero_eyebrow: '// merhaba, ben',
       hero_role: 'Bilgisayar Programcısı',
       hero_lede: 'Java, Python ve C# ile yazılım geliştiren; API entegrasyonları ve JWT tabanlı güvenli kimlik doğrulama sistemleri üzerine çalışan bir programcıyım. Şu anda yapay zekâ alanında kendimi geliştiriyorum.',
@@ -1109,6 +1121,8 @@
       cv_eyebrow: '// resume',
       cv_title: 'Nilay Balcı — Resume',
       cv_download: 'Download as PDF',
+      cv_banner_title: 'View My Resume',
+      cv_banner_sub: 'See my experience and skills on one page, or download it as a PDF.',
       hero_eyebrow: '// hi, i\'m',
       hero_role: 'Computer Programmer',
       hero_lede: 'I\'m a programmer building software with Java, Python, and C#, working on API integrations and JWT-based secure authentication systems. I\'m currently developing my skills in artificial intelligence.',
@@ -1187,8 +1201,8 @@
   function setLangLabels(lang, skipEl){
     const labelEl = document.getElementById('langToggleLabel');
     const labelElMobile = document.getElementById('langToggleLabelMobile');
-    if(labelEl && labelEl !== skipEl) labelEl.textContent = lang === 'tr' ? 'EN' : 'TR';
-    if(labelElMobile && labelElMobile !== skipEl) labelElMobile.textContent = lang === 'tr' ? 'English' : 'Türkçe';
+    if(labelEl && labelEl !== skipEl) labelEl.textContent = lang === 'tr' ? 'TR' : 'EN';
+    if(labelElMobile && labelElMobile !== skipEl) labelElMobile.textContent = lang === 'tr' ? 'Türkçe' : 'English';
   }
 
   // ---------- terminal-style erase/type animation for the language switcher ----------
@@ -1217,7 +1231,7 @@
     langAnimBusy = true;
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const next = currentLang === 'tr' ? 'en' : 'tr';
-    const finalText = isLong ? (next === 'tr' ? 'English' : 'Türkçe') : (next === 'tr' ? 'EN' : 'TR');
+    const finalText = isLong ? (next === 'tr' ? 'Türkçe' : 'English') : (next === 'tr' ? 'TR' : 'EN');
     if(prefersReduced){
       applyLang(next);
       langAnimBusy = false;
