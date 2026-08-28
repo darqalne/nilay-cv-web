@@ -147,6 +147,15 @@
   .nav-links a:hover::after{ right:.7rem; }
   .nav-links a:hover .tab-dot{ opacity:1; }
 
+  .cv-nav-btn, .lang-toggle-btn{
+    font-family:'Fira Code',monospace;font-size:.82rem;font-weight:500;
+    color:#464554;padding:.5rem .7rem;border-radius:8px;border:1px solid transparent;
+    display:inline-flex;align-items:center;gap:.35rem;transition:color .25s ease,background .25s ease,border-color .25s ease;
+  }
+  .cv-nav-btn:hover, .lang-toggle-btn:hover{ color:#1b1b23;background:#efecf8; }
+  .lang-toggle-btn{ border-color:rgba(99,102,241,.25); margin-left:.3rem; }
+  .lang-toggle-btn:hover{ border-color:#6366f1; }
+
   #mobileMenu{ background:#fcf8ff;border-top:1px solid rgba(99,102,241,.12); }
   #mobileMenu.open{ display:flex; }
   .mobile-nav-link{
@@ -330,22 +339,26 @@
   <div class="flex justify-between items-center w-full px-8 py-3 max-w-container-max mx-auto">
     <a href="#top" class="font-signature text-3xl text-on-background hover:text-indigo-electric transition-colors cursor-hover">Nilay Balcı</a>
     <div class="hidden md:flex items-center gap-1 nav-links">
-      <a href="#about"><span class="tab-dot"></span>hakkimda.md</a>
-      <a href="#experience"><span class="tab-dot"></span>deneyim.log</a>
-      <a href="#skills"><span class="tab-dot"></span>skills.json</a>
-      <a href="#projects"><span class="tab-dot"></span>projeler.dir</a>
-      <a href="#contact" class="ml-3 !bg-indigo-electric !text-white px-5 py-2 !rounded-full font-code text-xs hover:!bg-indigo-deep transition-all cursor-hover animate-pulse-subtle shadow-lg shadow-indigo-electric/30">$ iletişime geç</a>
+      <a href="#about" data-i18n="nav_about"><span class="tab-dot"></span>hakkimda.md</a>
+      <a href="#experience" data-i18n="nav_exp"><span class="tab-dot"></span>deneyim.log</a>
+      <a href="#skills" data-i18n="nav_skills"><span class="tab-dot"></span>skills.json</a>
+      <a href="#projects" data-i18n="nav_projects"><span class="tab-dot"></span>projeler.dir</a>
+      <button id="cvBtn" class="cv-nav-btn"><span class="material-symbols-outlined text-base">description</span><span data-i18n="nav_cv">CV</span></button>
+      <button id="langToggle" class="lang-toggle-btn" title="Switch language" aria-label="Switch language"><span class="material-symbols-outlined text-base">language</span><span id="langToggleLabel">EN</span></button>
+      <a href="#contact" class="ml-1 !bg-indigo-electric !text-white px-5 py-2 !rounded-full font-code text-xs hover:!bg-indigo-deep transition-all cursor-hover animate-pulse-subtle shadow-lg shadow-indigo-electric/30" data-i18n="nav_contact_cta">$ iletişime geç</a>
     </div>
     <button id="navToggle" class="md:hidden flex items-center justify-center w-9 h-9 text-on-background" aria-label="Menüyü aç" aria-expanded="false">
       <span class="material-symbols-outlined text-2xl" id="navToggleIcon">menu</span>
     </button>
   </div>
   <div id="mobileMenu" class="hidden md:hidden flex-col gap-1 px-6 pb-5 pt-1">
-    <a href="#about" class="mobile-nav-link"><span class="tab-dot"></span>hakkimda.md</a>
-    <a href="#experience" class="mobile-nav-link"><span class="tab-dot"></span>deneyim.log</a>
-    <a href="#skills" class="mobile-nav-link"><span class="tab-dot"></span>skills.json</a>
-    <a href="#projects" class="mobile-nav-link"><span class="tab-dot"></span>projeler.dir</a>
-    <a href="#contact" class="mt-2 inline-flex justify-center !bg-indigo-electric !text-white px-5 py-2.5 !rounded-full font-code text-xs shadow-lg shadow-indigo-electric/30">$ iletişime geç</a>
+    <a href="#about" class="mobile-nav-link" data-i18n="nav_about"><span class="tab-dot"></span>hakkimda.md</a>
+    <a href="#experience" class="mobile-nav-link" data-i18n="nav_exp"><span class="tab-dot"></span>deneyim.log</a>
+    <a href="#skills" class="mobile-nav-link" data-i18n="nav_skills"><span class="tab-dot"></span>skills.json</a>
+    <a href="#projects" class="mobile-nav-link" data-i18n="nav_projects"><span class="tab-dot"></span>projeler.dir</a>
+    <button id="cvBtnMobile" class="mobile-nav-link" style="width:100%;text-align:left;"><span class="material-symbols-outlined text-base">description</span><span data-i18n="nav_cv">CV</span></button>
+    <button id="langToggleMobile" class="mobile-nav-link" style="width:100%;text-align:left;"><span class="material-symbols-outlined text-base">language</span><span id="langToggleLabelMobile">English</span></button>
+    <a href="#contact" class="mt-2 inline-flex justify-center !bg-indigo-electric !text-white px-5 py-2.5 !rounded-full font-code text-xs shadow-lg shadow-indigo-electric/30" data-i18n="nav_contact_cta">$ iletişime geç</a>
   </div>
 </nav>
 
@@ -355,7 +368,7 @@
   <div class="absolute bottom-[5%] right-[-10%] w-[40%] aspect-square rounded-full bg-indigo-deep/10 blur-[130px] z-0"></div>
   <canvas id="binary-canvas"></canvas>
 
-  <div class="code-float hidden md:block animate-float-slow select-none text-xs" style="top:22%;left:6%;">const nilay = {<br/>&nbsp;&nbsp;role: "Bilgisayar Programcısı"<br/>};</div>
+  <div class="code-float hidden md:block animate-float-slow select-none text-xs" style="top:22%;left:6%;" data-i18n="cf_hero_role">const nilay = {<br/>&nbsp;&nbsp;role: "Bilgisayar Programcısı"<br/>};</div>
   <div class="code-float hidden md:block animate-float-slow select-none text-xs" style="bottom:24%;right:6%;animation-delay:-3s;">public class VeriTabaniBaglantisi {<br/>&nbsp;&nbsp;... <br/>}</div>
   <div class="code-float hidden lg:block animate-float-slow select-none text-[11px]" style="top:34%;right:14%;animation-delay:-1.5s;">def odeme_al(tutar):<br/>&nbsp;&nbsp;return kasa.ekle(tutar)</div>
   <div class="code-float hidden lg:block animate-float-slow select-none text-[11px]" style="bottom:32%;left:12%;animation-delay:-4.5s;">await fetch('/api/urunler');</div>
@@ -363,10 +376,10 @@
   <div class="code-float hidden xl:block animate-float-slow select-none text-[10px]" style="top:6%;right:30%;animation-delay:-5.5s;">SELECT * FROM kullanicilar WHERE aktif = 1;</div>
 
   <div class="relative z-10 text-center px-4 max-w-4xl mx-auto reveal active glass-panel p-12 rounded-2xl shadow-[0_0_40px_rgba(99,102,241,0.15)]">
-    <span class="eyebrow justify-center mb-6">// merhaba, ben</span>
+    <span class="eyebrow justify-center mb-6" data-i18n="hero_eyebrow">// merhaba, ben</span>
     <p class="font-signature text-5xl text-on-background mb-6">Nilay Balcı</p>
-    <p class="font-headline text-headline-md text-indigo-electric mb-4 tracking-widest uppercase">Bilgisayar Programcısı</p>
-    <p class="font-body text-body-lg text-on-surface-variant mb-12 max-w-2xl mx-auto leading-relaxed">
+    <p class="font-headline text-headline-md text-indigo-electric mb-4 tracking-widest uppercase" data-i18n="hero_role">Bilgisayar Programcısı</p>
+    <p class="font-body text-body-lg text-on-surface-variant mb-12 max-w-2xl mx-auto leading-relaxed" data-i18n="hero_lede">
       Java, Python ve C# ile yazılım geliştiren; API entegrasyonları ve JWT tabanlı güvenli kimlik doğrulama sistemleri üzerine çalışan bir programcıyım. Şu anda yapay zekâ alanında kendimi geliştiriyorum.
     </p>
     <div class="flex justify-center gap-4">
@@ -388,19 +401,19 @@
   <!-- ABOUT -->
   <section class="reveal relative" id="about">
     <div class="absolute -left-10 top-20 font-code text-indigo-electric/20 text-xs rotate-90 origin-left select-none hidden lg:block">&lt;section id="about"&gt;</div>
-    <div class="code-float hidden lg:block text-[11px]" style="top:-2rem;right:2rem;">// JWT ile güvenli kimlik doğrulama</div>
+    <div class="code-float hidden lg:block text-[11px]" style="top:-2rem;right:2rem;" data-i18n="cf_about">// JWT ile güvenli kimlik doğrulama</div>
     <div class="code-float md:hidden text-[10px]">git blame -- kimlik_dogrulama.cs</div>
     <div class="grid lg:grid-cols-2 gap-12 items-center">
       <div>
-        <span class="eyebrow">// hakkımda</span>
-        <h2 class="font-headline text-headline-lg text-on-background mb-8 relative inline-block">
+        <span class="eyebrow" data-i18n="about_eyebrow">// hakkımda</span>
+        <h2 class="font-headline text-headline-lg text-on-background mb-8 relative inline-block" data-i18n="about_heading">
           Profesyonel Yaklaşım
           <span class="absolute bottom-0 left-0 w-1/2 h-1 bg-indigo-electric rounded-full shadow-[0_0_3px_rgba(99,102,241,.5),0_0_14px_rgba(99,102,241,.25)]"></span>
         </h2>
-        <p class="font-body text-body-lg text-on-surface-variant mb-6 leading-relaxed">
+        <p class="font-body text-body-lg text-on-surface-variant mb-6 leading-relaxed" data-i18n="about_p1">
           Yazılıma olan yoğun ilgim sayesinde bu alanda kendimi geliştirmeye odaklanmış biriyim. <strong class="text-indigo-electric font-semibold">Analitik düşünme</strong> yeteneğimle karmaşık problemleri küçük ve yönetilebilir parçalara ayırarak çözüme ulaştırıyorum.
         </p>
-        <p class="font-body text-body-lg text-on-surface-variant leading-relaxed">
+        <p class="font-body text-body-lg text-on-surface-variant leading-relaxed" data-i18n="about_p2">
           Bireysel başarı kadar <strong class="text-indigo-electric font-semibold">takım çalışması</strong>nın gücüne inanıyor, projelerde iletişimi güçlü tutarak ortak hedeflere ulaşmayı önemsiyorum.
         </p>
       </div>
@@ -412,13 +425,13 @@
           <span class="ml-4 text-xs text-gray-400">nilay@portfolio ~ zsh</span>
         </div>
         <div class="p-6 space-y-2" id="aboutTerm">
-          <p><span class="text-green-400">➜</span> <span class="text-blue-400">~</span> <span class="term-type" data-cmd="whoami"></span></p>
+          <p><span class="text-green-400">➜</span> <span class="text-blue-400">~</span> <span class="term-type" data-cmd-tr="whoami" data-cmd-en="whoami" data-cmd="whoami"></span></p>
           <p class="term-out opacity-0 transition-opacity duration-300">Nilay Balcı</p>
-          <p class="mt-4"><span class="text-green-400">➜</span> <span class="text-blue-400">~</span> <span class="term-type" data-cmd="cat egitim.txt"></span></p>
+          <p class="mt-4"><span class="text-green-400">➜</span> <span class="text-blue-400">~</span> <span class="term-type" data-cmd-tr="cat egitim.txt" data-cmd-en="cat education.txt" data-cmd="cat egitim.txt"></span></p>
           <p class="term-out opacity-0 transition-opacity duration-300 text-gray-400">İzmir Ekonomi Üniversitesi</p>
-          <p class="term-out opacity-0 transition-opacity duration-300 text-gray-400">Bilgisayar Programcılığı, 2023–2025</p>
-          <p class="mt-4"><span class="text-green-400">➜</span> <span class="text-blue-400">~</span> <span class="term-type" data-cmd="cat sertifikalar.txt"></span></p>
-          <p class="term-out opacity-0 transition-opacity duration-300 text-gray-400">Yapay Zekâ (Techcareer, devam ediyor)</p>
+          <p class="term-out opacity-0 transition-opacity duration-300 text-gray-400" data-i18n="about_term_edu">Bilgisayar Programcılığı, 2023–2025</p>
+          <p class="mt-4"><span class="text-green-400">➜</span> <span class="text-blue-400">~</span> <span class="term-type" data-cmd-tr="cat sertifikalar.txt" data-cmd-en="cat certificates.txt" data-cmd="cat sertifikalar.txt"></span></p>
+          <p class="term-out opacity-0 transition-opacity duration-300 text-gray-400" data-i18n="about_term_cert">Yapay Zekâ (Techcareer, devam ediyor)</p>
           <p class="mt-4 opacity-0 transition-opacity duration-300 term-out"><span class="animate-pulse">_</span></p>
         </div>
       </div>
@@ -428,18 +441,18 @@
   <!-- ACTIVITY (bespoke) -->
   <section class="reveal relative" id="activity">
     <div class="code-float hidden lg:block text-[11px]" style="top:-1rem;left:2rem;">git log --oneline | wc -l</div>
-    <div class="code-float md:hidden text-[10px]">git commit -m "docs: README güncellendi"</div>
+    <div class="code-float md:hidden text-[10px]" data-i18n="cf_activity_m">git commit -m "docs: README güncellendi"</div>
     <div class="text-center mb-16">
-      <span class="eyebrow justify-center">// commit geçmişi</span>
-      <h2 class="font-headline text-headline-lg text-on-background inline-block relative">
+      <span class="eyebrow justify-center" data-i18n="activity_eyebrow">// commit geçmişi</span>
+      <h2 class="font-headline text-headline-lg text-on-background inline-block relative" data-i18n="activity_heading">
         Düzenli üretmeye özen gösteriyorum.
         <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-24 h-1 bg-indigo-electric rounded-full shadow-[0_0_3px_rgba(99,102,241,.5),0_0_14px_rgba(99,102,241,.25)]"></span>
       </h2>
     </div>
     <div class="glass-panel rounded-2xl p-8 hover-card max-w-4xl mx-auto">
       <div class="flex justify-between items-center flex-wrap gap-3 mb-5">
-        <span class="font-code text-xs text-on-surface-variant">son 52 hafta · github.com/nilaybalci</span>
-        <div class="flex items-center gap-1.5 font-code text-xs text-on-surface-variant">
+        <span class="font-code text-xs text-on-surface-variant" data-i18n="activity_weeks">son 52 hafta · github.com/nilaybalci</span>
+        <div class="flex items-center gap-1.5 font-code text-xs text-on-surface-variant" data-i18n="activity_legend">
           Az <span class="contrib-cell clvl-0"></span><span class="contrib-cell clvl-1"></span><span class="contrib-cell clvl-2"></span><span class="contrib-cell clvl-3"></span><span class="contrib-cell clvl-4"></span> Çok
         </div>
       </div>
@@ -450,11 +463,11 @@
   <!-- EXPERIENCE -->
   <section class="reveal relative py-10" id="experience">
     <div class="absolute inset-0 pattern-grid opacity-50 -z-10 rounded-3xl"></div>
-    <div class="code-float hidden lg:block text-[11px]" style="top:-1rem;left:2rem;">git commit -m "feat: JWT auth eklendi"</div>
+    <div class="code-float hidden lg:block text-[11px]" style="top:-1rem;left:2rem;" data-i18n="cf_exp">git commit -m "feat: JWT auth eklendi"</div>
     <div class="code-float md:hidden text-[10px]">catch (Exception e) { log.Error(e); }</div>
     <div class="text-center mb-16 relative">
-      <span class="eyebrow justify-center">// deneyim</span>
-      <h2 class="font-headline text-headline-lg text-on-background inline-block relative bg-surface px-4">
+      <span class="eyebrow justify-center" data-i18n="exp_eyebrow">// deneyim</span>
+      <h2 class="font-headline text-headline-lg text-on-background inline-block relative bg-surface px-4" data-i18n="exp_heading">
         Deneyim
         <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-indigo-electric rounded-full shadow-[0_0_3px_rgba(99,102,241,.5),0_0_14px_rgba(99,102,241,.25)]"></span>
       </h2>
@@ -465,27 +478,27 @@
         <div class="relative z-10">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6">
             <div>
-              <h3 class="font-headline text-headline-md text-on-background mb-2 group-hover:text-indigo-electric transition-colors">Yazılım Stajyeri</h3>
+              <h3 class="font-headline text-headline-md text-on-background mb-2 group-hover:text-indigo-electric transition-colors" data-i18n="exp_role">Yazılım Stajyeri</h3>
               <p class="font-body text-body-md text-on-surface-variant flex items-center gap-2">
                 <span class="material-symbols-outlined text-indigo-electric text-lg">business</span>
                 İndas Teknoloji Ticaret A.Ş.
               </p>
             </div>
             <div class="flex items-center gap-3">
-              <span class="font-code text-xs text-on-surface-variant">Temmuz — Eylül 2024</span>
-              <span class="inline-block px-4 py-2 bg-indigo-electric/10 border border-indigo-electric/30 rounded-full font-code text-xs text-indigo-electric shadow-[0_0_12px_rgba(99,102,241,.15)]">Staj</span>
+              <span class="font-code text-xs text-on-surface-variant" data-i18n="exp_dates">Temmuz — Eylül 2024</span>
+              <span class="inline-block px-4 py-2 bg-indigo-electric/10 border border-indigo-electric/30 rounded-full font-code text-xs text-indigo-electric shadow-[0_0_12px_rgba(99,102,241,.15)]" data-i18n="exp_badge">Staj</span>
             </div>
           </div>
           <ul class="space-y-3 mb-6">
-            <li class="flex gap-3 text-on-surface-variant font-body text-body-md"><span class="w-2 h-2 mt-2 rounded-sm bg-indigo-electric/20 border border-indigo-electric flex-shrink-0"></span>C# ile otomasyon sistemlerinin geliştirilmesi üzerine deneyim edindim.</li>
-            <li class="flex gap-3 text-on-surface-variant font-body text-body-md"><span class="w-2 h-2 mt-2 rounded-sm bg-indigo-electric/20 border border-indigo-electric flex-shrink-0"></span>Web tabanlı projelerde API entegrasyonları gerçekleştirdim ve JWT token mimarisi kullanarak güvenli kimlik doğrulama sistemleri tasarladım.</li>
-            <li class="flex gap-3 text-on-surface-variant font-body text-body-md"><span class="w-2 h-2 mt-2 rounded-sm bg-indigo-electric/20 border border-indigo-electric flex-shrink-0"></span>Takım çalışmasına yatkın yapım sayesinde teslim sürelerinin optimize edilmesine katkı sundum.</li>
+            <li class="flex gap-3 text-on-surface-variant font-body text-body-md"><span class="w-2 h-2 mt-2 rounded-sm bg-indigo-electric/20 border border-indigo-electric flex-shrink-0"></span><span data-i18n="exp_bullet1">C# ile otomasyon sistemlerinin geliştirilmesi üzerine deneyim edindim.</span></li>
+            <li class="flex gap-3 text-on-surface-variant font-body text-body-md"><span class="w-2 h-2 mt-2 rounded-sm bg-indigo-electric/20 border border-indigo-electric flex-shrink-0"></span><span data-i18n="exp_bullet2">Web tabanlı projelerde API entegrasyonları gerçekleştirdim ve JWT token mimarisi kullanarak güvenli kimlik doğrulama sistemleri tasarladım.</span></li>
+            <li class="flex gap-3 text-on-surface-variant font-body text-body-md"><span class="w-2 h-2 mt-2 rounded-sm bg-indigo-electric/20 border border-indigo-electric flex-shrink-0"></span><span data-i18n="exp_bullet3">Takım çalışmasına yatkın yapım sayesinde teslim sürelerinin optimize edilmesine katkı sundum.</span></li>
           </ul>
           <div class="flex gap-2 flex-wrap">
             <span class="px-3 py-1.5 rounded-md bg-indigo-electric/10 text-indigo-electric font-code text-xs border border-indigo-electric/20">C#</span>
             <span class="px-3 py-1.5 rounded-md bg-indigo-electric/10 text-indigo-electric font-code text-xs border border-indigo-electric/20">REST API</span>
             <span class="px-3 py-1.5 rounded-md bg-indigo-electric/10 text-indigo-electric font-code text-xs border border-indigo-electric/20">JWT Authentication</span>
-            <span class="px-3 py-1.5 rounded-md bg-surface-container text-on-surface-variant font-code text-xs border border-outline-variant/30">Ekip Çalışması</span>
+            <span class="px-3 py-1.5 rounded-md bg-surface-container text-on-surface-variant font-code text-xs border border-outline-variant/30" data-i18n="exp_tag_team">Ekip Çalışması</span>
           </div>
         </div>
       </div>
@@ -497,8 +510,8 @@
     <div class="code-float hidden lg:block text-[11px]" style="top:-1rem;right:2rem;">Authorization: Bearer eyJhbGci...</div>
     <div class="code-float md:hidden text-[10px]">npm install &amp;&amp; npm run dev</div>
     <div class="text-center mb-16">
-      <span class="eyebrow justify-center">// yetenekler</span>
-      <h2 class="font-headline text-headline-lg text-on-background inline-block relative">
+      <span class="eyebrow justify-center" data-i18n="skills_eyebrow">// yetenekler</span>
+      <h2 class="font-headline text-headline-lg text-on-background inline-block relative" data-i18n="skills_heading">
         Yetenekler
         <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-indigo-electric rounded-full shadow-[0_0_3px_rgba(99,102,241,.5),0_0_14px_rgba(99,102,241,.25)]"></span>
       </h2>
@@ -511,7 +524,7 @@
           <div class="p-2 bg-indigo-electric/10 rounded-lg border border-indigo-electric/20">
             <span class="material-symbols-outlined text-3xl text-indigo-electric">terminal</span>
           </div>
-          <h3 class="font-headline text-headline-md text-on-background">Programlama</h3>
+          <h3 class="font-headline text-headline-md text-on-background" data-i18n="skills_programming">Programlama</h3>
         </div>
         <div class="space-y-5 relative z-10" id="langBars">
           <div>
@@ -535,7 +548,7 @@
           <div class="p-2 bg-indigo-electric/10 rounded-lg border border-indigo-electric/20">
             <span class="material-symbols-outlined text-3xl text-indigo-electric">database</span>
           </div>
-          <h3 class="font-headline text-headline-md text-on-background">Veritabanı</h3>
+          <h3 class="font-headline text-headline-md text-on-background" data-i18n="skills_database">Veritabanı</h3>
         </div>
         <div class="flex flex-col gap-3 relative z-10 mb-8">
           <div class="p-4 rounded-xl border border-indigo-electric/20 bg-surface-container relative overflow-hidden group hover:border-indigo-electric/50 transition-colors">
@@ -549,7 +562,7 @@
           <div class="p-2 bg-indigo-electric/10 rounded-lg border border-indigo-electric/20">
             <span class="material-symbols-outlined text-3xl text-indigo-electric">key</span>
           </div>
-          <h3 class="font-headline text-headline-md text-on-background">API &amp; Kimlik Doğrulama</h3>
+          <h3 class="font-headline text-headline-md text-on-background" data-i18n="skills_api">API &amp; Kimlik Doğrulama</h3>
         </div>
         <div class="flex flex-wrap gap-2 relative z-10">
           <span class="px-3 py-1.5 rounded-md bg-indigo-electric/10 text-indigo-electric font-code text-xs border border-indigo-electric/20">RESTful API</span>
@@ -563,7 +576,7 @@
           <div class="p-2 bg-indigo-electric/10 rounded-lg border border-indigo-electric/20">
             <span class="material-symbols-outlined text-3xl text-indigo-electric">web</span>
           </div>
-          <h3 class="font-headline text-[20px] text-on-background">Web Geliştirme</h3>
+          <h3 class="font-headline text-[20px] text-on-background" data-i18n="skills_webdev">Web Geliştirme</h3>
         </div>
         <div class="flex flex-wrap gap-2 relative z-10">
           <span class="px-3 py-1.5 rounded-md bg-indigo-electric/10 text-indigo-electric font-code text-xs border border-indigo-electric/20">HTML5</span>
@@ -579,7 +592,7 @@
           <div class="p-2 bg-indigo-electric/10 rounded-lg border border-indigo-electric/20">
             <span class="material-symbols-outlined text-3xl text-indigo-electric">handyman</span>
           </div>
-          <h3 class="font-headline text-[20px] text-on-background">Araçlar</h3>
+          <h3 class="font-headline text-[20px] text-on-background" data-i18n="skills_tools">Araçlar</h3>
         </div>
         <div class="flex flex-wrap gap-2 relative z-10">
           <span class="px-3 py-1.5 rounded-md bg-surface-container text-on-surface-variant font-code text-xs border border-outline-variant/30">Git/GitHub</span>
@@ -598,12 +611,12 @@
     <div class="code-float hidden lg:block text-[11px]" style="bottom:-1rem;left:2rem;">git push origin main</div>
     <div class="code-float md:hidden text-[10px]">git clone github.com/nilaybalci/...</div>
     <div class="text-center mb-16 relative">
-      <span class="eyebrow justify-center">// projeler</span>
-      <h2 class="font-headline text-headline-lg text-on-background inline-block relative bg-surface px-4">
+      <span class="eyebrow justify-center" data-i18n="proj_eyebrow">// projeler</span>
+      <h2 class="font-headline text-headline-lg text-on-background inline-block relative bg-surface px-4" data-i18n="proj_heading">
         Projeler
         <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-indigo-electric rounded-full shadow-[0_0_3px_rgba(99,102,241,.5),0_0_14px_rgba(99,102,241,.25)]"></span>
       </h2>
-      <p class="font-body text-body-md text-on-surface-variant mt-4 max-w-xl mx-auto">github.com/nilaybalci üzerinde yayınlanan 6 projeden seçmeler. Her karta tıklayarak detaylarını görebilir, dosya sekmesinden doğrudan GitHub'a gidebilirsin.</p>
+      <p class="font-body text-body-md text-on-surface-variant mt-4 max-w-xl mx-auto" data-i18n="proj_intro">github.com/nilaybalci üzerinde yayınlanan 6 projeden seçmeler. Her karta tıklayarak detaylarını görebilir, dosya sekmesinden doğrudan GitHub'a gidebilirsin.</p>
     </div>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid"></div>
   </section>
@@ -611,12 +624,12 @@
   <!-- CONTACT -->
   <section class="reveal relative" id="contact">
     <div class="code-float hidden lg:block text-[11px]" style="top:-1rem;left:2rem;">export default function Contact() { ... }</div>
-    <div class="code-float md:hidden text-[10px]">console.log("Merhaba 👋");</div>
+    <div class="code-float md:hidden text-[10px]" data-i18n="cf_contact_m">console.log("Merhaba 👋");</div>
     <div class="max-w-2xl mx-auto text-center glass-panel rounded-2xl p-12 shadow-[0_0_50px_rgba(99,102,241,0.1)] relative overflow-hidden bg-surface/80">
       <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-indigo-electric to-transparent"></div>
-      <span class="eyebrow justify-center">// iletişim</span>
-      <h2 class="font-headline text-headline-lg text-on-background mb-4">İletişime Geçin</h2>
-      <p class="font-body text-body-lg text-on-surface-variant mb-8">Yeni projeler ve işbirlikleri için benimle iletişime geçebilirsiniz.</p>
+      <span class="eyebrow justify-center" data-i18n="contact_eyebrow">// iletişim</span>
+      <h2 class="font-headline text-headline-lg text-on-background mb-4" data-i18n="contact_heading">İletişime Geçin</h2>
+      <p class="font-body text-body-lg text-on-surface-variant mb-8" data-i18n="contact_lede">Yeni projeler ve işbirlikleri için benimle iletişime geçebilirsiniz.</p>
 
       <div class="signature-wrap mb-8">
         <span class="signature-big" id="sigBig">Nilay Balcı</span>
@@ -625,7 +638,7 @@
       <div class="flex flex-col sm:flex-row justify-center gap-6 mb-12">
         <a href="mailto:nilaybalci03@gmail.com" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-indigo-electric text-white rounded-full font-code text-sm hover:bg-indigo-deep transition-all cursor-hover shadow-lg shadow-indigo-electric/30 hover:shadow-indigo-electric/50">
           <span class="material-symbols-outlined text-lg">mail</span>
-          Email Gönder
+          <span data-i18n="contact_email_btn">Email Gönder</span>
         </a>
         <a href="https://github.com/nilaybalci" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-indigo-electric/40 text-indigo-electric rounded-full font-code text-sm hover:border-indigo-electric hover:bg-indigo-electric/10 transition-all cursor-hover">
           <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.43-2.7 5.41-5.27 5.69.42.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .3.21.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
@@ -634,11 +647,11 @@
       </div>
 
       <div class="flex gap-8 justify-center flex-wrap border-t border-surface-variant/50 pt-8">
-        <div class="text-left"><b class="block text-sm text-on-background">Bilgehan Bostan</b><span class="text-xs text-on-surface-variant">Op. Verimlilik Direktörü</span></div>
-        <div class="text-left"><b class="block text-sm text-on-background">Mehmet Semih Hepkorucu</b><span class="text-xs text-on-surface-variant">Dönüşüm Mimarı</span></div>
-        <div class="text-left"><b class="block text-sm text-on-background">Utku</b><span class="text-xs text-on-surface-variant">Bilgisayar Mühendisi</span></div>
+        <div class="text-left"><b class="block text-sm text-on-background">Bilgehan Bostan</b><span class="text-xs text-on-surface-variant" data-i18n="ref_title1">Op. Verimlilik Direktörü</span></div>
+        <div class="text-left"><b class="block text-sm text-on-background">Mehmet Semih Hepkorucu</b><span class="text-xs text-on-surface-variant" data-i18n="ref_title2">Dönüşüm Mimarı</span></div>
+        <div class="text-left"><b class="block text-sm text-on-background">Utku</b><span class="text-xs text-on-surface-variant" data-i18n="ref_title3">Bilgisayar Mühendisi</span></div>
       </div>
-      <p class="text-xs text-on-surface-variant/70 mt-6">Referans detayları istenildiğinde ayrıca paylaşılır.</p>
+      <p class="text-xs text-on-surface-variant/70 mt-6" data-i18n="ref_note">Referans detayları istenildiğinde ayrıca paylaşılır.</p>
     </div>
   </section>
 </main>
@@ -656,12 +669,12 @@
     <div class="modal-body">
     <div class="modal-preview" id="modalPreview"></div>
     <div class="modal-content-pad">
-      <span class="eyebrow" id="modalEyebrow">// proje</span>
+      <span class="eyebrow" id="modalEyebrow" data-i18n="modal_eyebrow">// proje</span>
       <h3 id="modalTitle" class="font-headline text-headline-md text-on-background mb-4"></h3>
       <p id="modalDesc" class="font-body text-body-md text-on-surface-variant mb-6"></p>
 
       <div class="mb-6">
-        <p class="font-code text-xs text-on-surface-variant mb-2 flex items-center gap-2">
+        <p class="font-code text-xs text-on-surface-variant mb-2 flex items-center gap-2" data-i18n="modal_lang_label">
           <span class="material-symbols-outlined text-sm">bar_chart</span> Dil dağılımı (GitHub)
         </p>
         <div class="flex w-full h-2.5 rounded-full overflow-hidden bg-surface-container" id="modalLangBar"></div>
@@ -671,14 +684,36 @@
       <div class="flex flex-wrap gap-2 mb-8" id="modalTags"></div>
       <a class="inline-flex w-full items-center justify-center gap-2 px-8 py-4 bg-indigo-electric text-white rounded-full font-code text-sm hover:bg-indigo-deep transition-all shadow-lg shadow-indigo-electric/30" id="modalGh" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.43-2.7 5.41-5.27 5.69.42.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .3.21.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
-        GitHub'da Görüntüle
+        <span id="modalGhLabel" data-i18n="modal_gh_btn">GitHub'da Görüntüle</span>
       </a>
     </div>
     </div>
   </div>
 </div>
 
+<div class="modal-backdrop" id="cvModalBackdrop">
+  <div class="modal-box" style="max-width:780px;" role="dialog" aria-modal="true" aria-labelledby="cvModalTitle">
+    <button class="modal-close" id="cvModalClose" aria-label="Kapat">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <div class="modal-content-pad" style="padding-top:2.6rem;">
+      <span class="eyebrow" data-i18n="cv_eyebrow">// özgeçmiş</span>
+      <h3 id="cvModalTitle" class="font-headline text-headline-md text-on-background mb-4" data-i18n="cv_title">Nilay Balcı — CV</h3>
+      <div class="rounded-xl overflow-hidden border border-indigo-electric/20 bg-surface-container" style="height:min(65vh,600px);">
+        <iframe src="assets/docs/Nilay-Balci-CV.pdf" title="Nilay Balcı CV" style="width:100%;height:100%;border:0;"></iframe>
+      </div>
+      <a href="assets/docs/Nilay-Balci-CV.pdf" download="Nilay-Balci-CV.pdf" class="mt-6 inline-flex w-full items-center justify-center gap-2 px-8 py-4 bg-indigo-electric text-white rounded-full font-code text-sm hover:bg-indigo-deep transition-all shadow-lg shadow-indigo-electric/30">
+        <span class="material-symbols-outlined text-lg">download</span>
+        <span data-i18n="cv_download">PDF olarak indir</span>
+      </a>
+    </div>
+  </div>
+</div>
+
 <script>
+  // ---------- language state (default: Turkish) ----------
+  let currentLang = 'tr';
+
   // ---------- custom cursor ----------
   const cursor = document.getElementById('custom-cursor');
   if (window.matchMedia("(pointer: fine)").matches && cursor) {
@@ -832,69 +867,81 @@
   // ---------- projects + modal ----------
   // dil dağılımları github.com/nilaybalci/{repo}/languages API'sinden alınmıştır
   const projects = [
-    { name:"Kasa Sistemi", repo:"Kasa_Sistemi", lang:"Python", file:"kasa_sistemi.py",
-      desc:"Masaüstü uygulaması olarak geliştirilmiş, satış ve stok yönetimi sağlayan bir kasa / POS sistemi simülasyonu.",
-      tags:["Python","Sistem Tasarımı"],
+    { name:{tr:"Kasa Sistemi",en:"Cash Register System"}, repo:"Kasa_Sistemi", lang:"Python", file:"kasa_sistemi.py",
+      desc:{tr:"Masaüstü uygulaması olarak geliştirilmiş, satış ve stok yönetimi sağlayan bir kasa / POS sistemi simülasyonu.",
+            en:"A desktop cash register / POS system simulation handling sales and stock management."},
+      tags:{tr:["Python","Sistem Tasarımı"], en:["Python","System Design"]},
       langs:[{n:"Python",p:100,c:"#3572A5"}],
       preview:{ type:"image", src:"assets/previews/kasa-sistemi.jpg" } },
-    { name:"Marvel Web", repo:"Marvel_Web", lang:"PHP", file:"marvel_web.php",
-      desc:"Marvel evrenindeki karakterleri listeleyen ve detaylarını sunan, PHP tabanlı dinamik bir web uygulaması.",
-      tags:["PHP","MySQL","CRUD"],
+    { name:{tr:"Marvel Web",en:"Marvel Web"}, repo:"Marvel_Web", lang:"PHP", file:"marvel_web.php",
+      desc:{tr:"Marvel evrenindeki karakterleri listeleyen ve detaylarını sunan, PHP tabanlı dinamik bir web uygulaması.",
+            en:"A PHP-based dynamic web app listing characters from the Marvel universe with detail pages for each."},
+      tags:{tr:["PHP","MySQL","CRUD"], en:["PHP","MySQL","CRUD"]},
       langs:[{n:"PHP",p:50.9,c:"#4F5D95"},{n:"CSS",p:23.5,c:"#563d7c"},{n:"HTML",p:22.3,c:"#e34c26"},{n:"JavaScript",p:3.3,c:"#f1e05a"}],
       preview:{ type:"image", src:"assets/previews/marvel-web.jpg" } },
-    { name:"Seyahat Takip", repo:"Seyahat_Takip", lang:"JavaScript", file:"seyahat_takip.js",
-      desc:"Kullanıcıların gezi planlarını ve ziyaret ettikleri yerleri kaydedebildiği, JavaScript ile geliştirilmiş bir takip uygulaması.",
-      tags:["JavaScript","HTML","CSS"],
+    { name:{tr:"Seyahat Takip",en:"Travel Tracker"}, repo:"Seyahat_Takip", lang:"JavaScript", file:"seyahat_takip.js",
+      desc:{tr:"Kullanıcıların gezi planlarını ve ziyaret ettikleri yerleri kaydedebildiği, JavaScript ile geliştirilmiş bir takip uygulaması.",
+            en:"A JavaScript app that lets users plan trips and keep track of the places they've visited."},
+      tags:{tr:["JavaScript","HTML","CSS"], en:["JavaScript","HTML","CSS"]},
       langs:[{n:"JavaScript",p:38.2,c:"#f1e05a"},{n:"CSS",p:37.0,c:"#563d7c"},{n:"HTML",p:24.8,c:"#e34c26"}],
       preview:{ type:"image", src:"assets/previews/seyahat-takip.jpg" } },
-    { name:"Portfolyo Web Sitesi", repo:"portfolyowebsitesi", lang:"CSS", file:"style.css",
-      desc:"Kişisel çalışmaları sergilemek amacıyla HTML5 ve CSS3 ile sıfırdan tasarlanmış ilk portfolyo denemem.",
-      tags:["HTML5","CSS3","UI/UX"],
+    { name:{tr:"Portfolyo Web Sitesi",en:"Portfolio Website"}, repo:"portfolyowebsitesi", lang:"CSS", file:"style.css",
+      desc:{tr:"Kişisel çalışmaları sergilemek amacıyla HTML5 ve CSS3 ile sıfırdan tasarlanmış ilk portfolyo denemem.",
+            en:"My first portfolio attempt, designed from scratch with HTML5 and CSS3 to showcase personal work."},
+      tags:{tr:["HTML5","CSS3","UI/UX"], en:["HTML5","CSS3","UI/UX"]},
       langs:[{n:"CSS",p:55.1,c:"#563d7c"},{n:"HTML",p:43.9,c:"#e34c26"},{n:"JavaScript",p:0.9,c:"#f1e05a"}],
       preview:{ type:"image", src:"assets/previews/portfolyo-projeler.jpg" } },
-    { name:"EkoFit Veritabanı", repo:"ekofit-database", lang:"Java", file:"VeriTabani.java",
-      desc:"Java ile geliştirilen, ilişkisel veritabanı tasarımı üzerine kurulu; veri bütünlüğünü gözeten bir sistem.",
-      tags:["Java","SQL","Veritabanı Tasarımı"],
+    { name:{tr:"EkoFit Veritabanı",en:"EkoFit Database"}, repo:"ekofit-database", lang:"Java", file:"VeriTabani.java",
+      desc:{tr:"Java ile geliştirilen, ilişkisel veritabanı tasarımı üzerine kurulu; veri bütünlüğünü gözeten bir sistem.",
+            en:"A Java system built around relational database design, with an emphasis on data integrity."},
+      tags:{tr:["Java","SQL","Veritabanı Tasarımı"], en:["Java","SQL","Database Design"]},
       langs:[{n:"Java",p:100,c:"#b07219"}],
       preview:{ type:"image", src:"assets/previews/ekofit-terminal.jpg" } },
-    { name:"Kafe Web Sitesi", repo:"cafe-web-sitesi", lang:"CSS", file:"cafe.css",
-      desc:"HTML5 ve CSS3 ile hazırlanmış, menü ve iletişim bölümleriyle duyarlı (responsive) bir kafe tanıtım sitesi.",
-      tags:["HTML5","CSS3","Responsive"],
+    { name:{tr:"Kafe Web Sitesi",en:"Cafe Website"}, repo:"cafe-web-sitesi", lang:"CSS", file:"cafe.css",
+      desc:{tr:"HTML5 ve CSS3 ile hazırlanmış, menü ve iletişim bölümleriyle duyarlı (responsive) bir kafe tanıtım sitesi.",
+            en:"A responsive cafe showcase site built with HTML5 and CSS3, with a menu and contact section."},
+      tags:{tr:["HTML5","CSS3","Responsive"], en:["HTML5","CSS3","Responsive"]},
       langs:[{n:"CSS",p:52.7,c:"#563d7c"},{n:"HTML",p:43.6,c:"#e34c26"},{n:"JavaScript",p:3.6,c:"#f1e05a"}],
       preview:{ type:"image", src:"assets/previews/cafe-web-sitesi.jpg" } },
   ];
 
   const grid2 = document.getElementById('projectsGrid');
-  projects.forEach((p, i) => {
-    const card = document.createElement('div');
-    card.className = "glass-panel rounded-2xl p-[1px] hover-card cursor-hover flex flex-col h-full bg-gradient-to-b from-indigo-electric/30 to-surface reveal";
-    card.style.transitionDelay = (i * 90) + "ms";
-    card.innerHTML = `
-      <div class="h-full flex flex-col bg-surface rounded-[15px] relative overflow-hidden">
-        <div class="glass-header px-4 py-2 flex items-center gap-2">
-          <div class="w-2.5 h-2.5 rounded-full bg-red-400"></div>
-          <div class="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
-          <div class="w-2.5 h-2.5 rounded-full bg-green-400"></div>
-          <span class="ml-2 font-code text-[10px] text-on-surface-variant/70">${p.file}</span>
-        </div>
-        <div class="p-6 flex-grow flex flex-col relative z-10">
-          <div class="absolute -right-4 -top-4 w-24 h-24 bg-indigo-electric/10 rounded-full blur-xl pointer-events-none group-hover:bg-indigo-electric/20 transition-colors"></div>
-          <div class="flex justify-between items-start mb-4 relative z-10">
-            <h3 class="font-headline text-headline-md text-on-background">${p.name}</h3>
-            <span class="px-3 py-1 bg-indigo-electric/10 text-indigo-electric rounded-md font-code text-xs border border-indigo-electric/20 whitespace-nowrap ml-2">${p.lang}</span>
+  const VIEW_DETAILS_LABEL = { tr: "Detayları Gör", en: "View Details" };
+
+  function renderProjects(){
+    grid2.innerHTML = "";
+    projects.forEach((p, i) => {
+      const card = document.createElement('div');
+      card.className = "glass-panel rounded-2xl p-[1px] hover-card cursor-hover flex flex-col h-full bg-gradient-to-b from-indigo-electric/30 to-surface reveal";
+      card.style.transitionDelay = (i * 90) + "ms";
+      card.innerHTML = `
+        <div class="h-full flex flex-col bg-surface rounded-[15px] relative overflow-hidden">
+          <div class="glass-header px-4 py-2 flex items-center gap-2">
+            <div class="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+            <span class="ml-2 font-code text-[10px] text-on-surface-variant/70">${p.file}</span>
           </div>
-          <p class="font-body text-body-md text-on-surface-variant flex-grow mb-6 relative z-10">${p.desc}</p>
-          <button class="proj-details h-8 flex items-center gap-2 text-indigo-electric font-code text-sm text-left w-fit group/btn">
-            <span class="material-symbols-outlined text-sm transition-transform duration-300 group-hover/btn:translate-x-1">arrow_forward</span>
-            <span class="relative">Detayları Gör<span class="absolute left-0 -bottom-0.5 w-0 h-px bg-indigo-electric transition-all duration-300 group-hover/btn:w-full"></span></span>
-          </button>
+          <div class="p-6 flex-grow flex flex-col relative z-10">
+            <div class="absolute -right-4 -top-4 w-24 h-24 bg-indigo-electric/10 rounded-full blur-xl pointer-events-none group-hover:bg-indigo-electric/20 transition-colors"></div>
+            <div class="flex justify-between items-start mb-4 relative z-10">
+              <h3 class="font-headline text-headline-md text-on-background">${p.name[currentLang]}</h3>
+              <span class="px-3 py-1 bg-indigo-electric/10 text-indigo-electric rounded-md font-code text-xs border border-indigo-electric/20 whitespace-nowrap ml-2">${p.lang}</span>
+            </div>
+            <p class="font-body text-body-md text-on-surface-variant flex-grow mb-6 relative z-10">${p.desc[currentLang]}</p>
+            <button class="proj-details h-8 flex items-center gap-2 text-indigo-electric font-code text-sm text-left w-fit group/btn">
+              <span class="material-symbols-outlined text-sm transition-transform duration-300 group-hover/btn:translate-x-1">arrow_forward</span>
+              <span class="relative">${VIEW_DETAILS_LABEL[currentLang]}<span class="absolute left-0 -bottom-0.5 w-0 h-px bg-indigo-electric transition-all duration-300 group-hover/btn:w-full"></span></span>
+            </button>
+          </div>
         </div>
-      </div>
-    `;
-    card.querySelector('.proj-details').addEventListener('click', () => openModal(p));
-    grid2.appendChild(card);
-    revealObserver.observe(card);
-  });
+      `;
+      card.querySelector('.proj-details').addEventListener('click', () => openModal(p));
+      grid2.appendChild(card);
+      revealObserver.observe(card);
+    });
+  }
+  renderProjects();
 
   const backdrop = document.getElementById('modalBackdrop');
   const modalTitle = document.getElementById('modalTitle');
@@ -907,17 +954,19 @@
   const modalPreview = document.getElementById('modalPreview');
   let lastFocused = null;
 
+  let modalOpenProject = null;
   function openModal(p){
     lastFocused = document.activeElement;
+    modalOpenProject = p;
 
     const dots = `<span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>`;
     modalPreview.innerHTML = `
       <div class="mp-browser">${dots}<span class="mp-url">github.com/nilaybalci/${p.repo}</span></div>
-      <div class="mp-image-area"><img src="${p.preview.src}" alt="${p.name} önizlemesi" loading="lazy"></div>`;
+      <div class="mp-image-area"><img src="${p.preview.src}" alt="${p.name[currentLang]}" loading="lazy"></div>`;
 
-    modalTitle.textContent = p.name;
-    modalDesc.textContent = p.desc;
-    modalTags.innerHTML = p.tags.map(t => `<span class="px-3 py-1.5 rounded-md bg-indigo-electric/10 text-indigo-electric font-code text-xs border border-indigo-electric/20">${t}</span>`).join("");
+    modalTitle.textContent = p.name[currentLang];
+    modalDesc.textContent = p.desc[currentLang];
+    modalTags.innerHTML = p.tags[currentLang].map(t => `<span class="px-3 py-1.5 rounded-md bg-indigo-electric/10 text-indigo-electric font-code text-xs border border-indigo-electric/20">${t}</span>`).join("");
     modalGh.href = `https://github.com/nilaybalci/${p.repo}`;
 
     modalLangBar.innerHTML = p.langs.map(l => `<span style="width:${l.p}%;background:${l.c};" title="${l.n} ${l.p}%"></span>`).join("");
@@ -933,11 +982,192 @@
   function closeModal(){
     backdrop.classList.remove('open');
     document.body.style.overflow = '';
+    modalOpenProject = null;
     if(lastFocused) lastFocused.focus();
   }
   modalClose.addEventListener('click', closeModal);
   backdrop.addEventListener('click', (e) => { if(e.target === backdrop) closeModal(); });
-  document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && backdrop.classList.contains('open')) closeModal(); });
+
+  // ---------- CV modal ----------
+  const cvBackdrop = document.getElementById('cvModalBackdrop');
+  const cvModalClose = document.getElementById('cvModalClose');
+  let cvLastFocused = null;
+  function openCvModal(){
+    cvLastFocused = document.activeElement;
+    cvBackdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    cvModalClose.focus();
+  }
+  function closeCvModal(){
+    cvBackdrop.classList.remove('open');
+    document.body.style.overflow = '';
+    if(cvLastFocused) cvLastFocused.focus();
+  }
+  document.getElementById('cvBtn').addEventListener('click', openCvModal);
+  document.getElementById('cvBtnMobile').addEventListener('click', () => { mobileMenu.classList.remove('open'); openCvModal(); });
+  cvModalClose.addEventListener('click', closeCvModal);
+  cvBackdrop.addEventListener('click', (e) => { if(e.target === cvBackdrop) closeCvModal(); });
+
+  document.addEventListener('keydown', (e) => {
+    if(e.key !== 'Escape') return;
+    if(backdrop.classList.contains('open')) closeModal();
+    if(cvBackdrop.classList.contains('open')) closeCvModal();
+  });
+
+  // ---------- EN / TR translation ----------
+  const I18N = {
+    tr: {
+      nav_about: '<span class="tab-dot"></span>hakkimda.md',
+      nav_exp: '<span class="tab-dot"></span>deneyim.log',
+      nav_skills: '<span class="tab-dot"></span>skills.json',
+      nav_projects: '<span class="tab-dot"></span>projeler.dir',
+      nav_contact_cta: '$ iletişime geç',
+      nav_cv: 'CV',
+      cv_eyebrow: '// özgeçmiş',
+      cv_title: 'Nilay Balcı — CV',
+      cv_download: 'PDF olarak indir',
+      hero_eyebrow: '// merhaba, ben',
+      hero_role: 'Bilgisayar Programcısı',
+      hero_lede: 'Java, Python ve C# ile yazılım geliştiren; API entegrasyonları ve JWT tabanlı güvenli kimlik doğrulama sistemleri üzerine çalışan bir programcıyım. Şu anda yapay zekâ alanında kendimi geliştiriyorum.',
+      cf_hero_role: 'const nilay = {<br>&nbsp;&nbsp;role: "Bilgisayar Programcısı"<br>};',
+      about_eyebrow: '// hakkımda',
+      about_heading: 'Profesyonel Yaklaşım<span class="absolute bottom-0 left-0 w-1/2 h-1 bg-indigo-electric rounded-full shadow-[0_0_3px_rgba(99,102,241,.5),0_0_14px_rgba(99,102,241,.25)]"></span>',
+      about_p1: 'Yazılıma olan yoğun ilgim sayesinde bu alanda kendimi geliştirmeye odaklanmış biriyim. <strong class="text-indigo-electric font-semibold">Analitik düşünme</strong> yeteneğimle karmaşık problemleri küçük ve yönetilebilir parçalara ayırarak çözüme ulaştırıyorum.',
+      about_p2: 'Bireysel başarı kadar <strong class="text-indigo-electric font-semibold">takım çalışması</strong>nın gücüne inanıyor, projelerde iletişimi güçlü tutarak ortak hedeflere ulaşmayı önemsiyorum.',
+      about_term_edu: 'Bilgisayar Programcılığı, 2023–2025',
+      about_term_cert: 'Yapay Zekâ (Techcareer, devam ediyor)',
+      cf_about: '// JWT ile güvenli kimlik doğrulama',
+      activity_eyebrow: '// commit geçmişi',
+      activity_heading: 'Düzenli üretmeye özen gösteriyorum.<span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-24 h-1 bg-indigo-electric rounded-full shadow-[0_0_3px_rgba(99,102,241,.5),0_0_14px_rgba(99,102,241,.25)]"></span>',
+      activity_weeks: 'son 52 hafta · github.com/nilaybalci',
+      activity_legend: 'Az <span class="contrib-cell clvl-0"></span><span class="contrib-cell clvl-1"></span><span class="contrib-cell clvl-2"></span><span class="contrib-cell clvl-3"></span><span class="contrib-cell clvl-4"></span> Çok',
+      cf_activity_m: 'git commit -m "docs: README güncellendi"',
+      exp_eyebrow: '// deneyim',
+      exp_heading: 'Deneyim<span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-indigo-electric rounded-full shadow-[0_0_3px_rgba(99,102,241,.5),0_0_14px_rgba(99,102,241,.25)]"></span>',
+      exp_role: 'Yazılım Stajyeri',
+      exp_dates: 'Temmuz — Eylül 2024',
+      exp_badge: 'Staj',
+      exp_bullet1: 'C# ile otomasyon sistemlerinin geliştirilmesi üzerine deneyim edindim.',
+      exp_bullet2: 'Web tabanlı projelerde API entegrasyonları gerçekleştirdim ve JWT token mimarisi kullanarak güvenli kimlik doğrulama sistemleri tasarladım.',
+      exp_bullet3: 'Takım çalışmasına yatkın yapım sayesinde teslim sürelerinin optimize edilmesine katkı sundum.',
+      exp_tag_team: 'Ekip Çalışması',
+      cf_exp: 'git commit -m "feat: JWT auth eklendi"',
+      skills_eyebrow: '// yetenekler',
+      skills_heading: 'Yetenekler<span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-indigo-electric rounded-full shadow-[0_0_3px_rgba(99,102,241,.5),0_0_14px_rgba(99,102,241,.25)]"></span>',
+      skills_programming: 'Programlama',
+      skills_database: 'Veritabanı',
+      skills_api: 'API &amp; Kimlik Doğrulama',
+      skills_webdev: 'Web Geliştirme',
+      skills_tools: 'Araçlar',
+      proj_eyebrow: '// projeler',
+      proj_heading: 'Projeler<span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-indigo-electric rounded-full shadow-[0_0_3px_rgba(99,102,241,.5),0_0_14px_rgba(99,102,241,.25)]"></span>',
+      proj_intro: 'github.com/nilaybalci üzerinde yayınlanan 6 projeden seçmeler. Her karta tıklayarak detaylarını görebilir, dosya sekmesinden doğrudan GitHub\'a gidebilirsin.',
+      contact_eyebrow: '// iletişim',
+      contact_heading: 'İletişime Geçin',
+      contact_lede: 'Yeni projeler ve işbirlikleri için benimle iletişime geçebilirsiniz.',
+      contact_email_btn: 'Email Gönder',
+      ref_title1: 'Op. Verimlilik Direktörü',
+      ref_title2: 'Dönüşüm Mimarı',
+      ref_title3: 'Bilgisayar Mühendisi',
+      ref_note: 'Referans detayları istenildiğinde ayrıca paylaşılır.',
+      cf_contact_m: 'console.log("Merhaba 👋");',
+      modal_eyebrow: '// proje',
+      modal_lang_label: '<span class="material-symbols-outlined text-sm">bar_chart</span> Dil dağılımı (GitHub)',
+      modal_gh_btn: 'GitHub\'da Görüntüle',
+    },
+    en: {
+      nav_about: '<span class="tab-dot"></span>about.md',
+      nav_exp: '<span class="tab-dot"></span>experience.log',
+      nav_skills: '<span class="tab-dot"></span>skills.json',
+      nav_projects: '<span class="tab-dot"></span>projects.dir',
+      nav_contact_cta: '$ get in touch',
+      nav_cv: 'Resume',
+      cv_eyebrow: '// resume',
+      cv_title: 'Nilay Balcı — Resume',
+      cv_download: 'Download as PDF',
+      hero_eyebrow: '// hi, i\'m',
+      hero_role: 'Computer Programmer',
+      hero_lede: 'I\'m a programmer building software with Java, Python, and C#, working on API integrations and JWT-based secure authentication systems. I\'m currently developing my skills in artificial intelligence.',
+      cf_hero_role: 'const nilay = {<br>&nbsp;&nbsp;role: "Computer Programmer"<br>};',
+      about_eyebrow: '// about me',
+      about_heading: 'Professional Approach<span class="absolute bottom-0 left-0 w-1/2 h-1 bg-indigo-electric rounded-full shadow-[0_0_3px_rgba(99,102,241,.5),0_0_14px_rgba(99,102,241,.25)]"></span>',
+      about_p1: 'Thanks to my strong interest in software, I\'m someone focused on developing myself in this field. With my <strong class="text-indigo-electric font-semibold">analytical thinking</strong> skills, I break complex problems down into small, manageable pieces to reach solutions.',
+      about_p2: 'I believe in the power of <strong class="text-indigo-electric font-semibold">teamwork</strong> as much as individual success, and I care about keeping communication strong on projects to reach shared goals.',
+      about_term_edu: 'Computer Programming, 2023–2025',
+      about_term_cert: 'Artificial Intelligence (Techcareer, in progress)',
+      cf_about: '// secure auth with JWT',
+      activity_eyebrow: '// commit history',
+      activity_heading: 'I care about shipping consistently.<span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-24 h-1 bg-indigo-electric rounded-full shadow-[0_0_3px_rgba(99,102,241,.5),0_0_14px_rgba(99,102,241,.25)]"></span>',
+      activity_weeks: 'last 52 weeks · github.com/nilaybalci',
+      activity_legend: 'Less <span class="contrib-cell clvl-0"></span><span class="contrib-cell clvl-1"></span><span class="contrib-cell clvl-2"></span><span class="contrib-cell clvl-3"></span><span class="contrib-cell clvl-4"></span> More',
+      cf_activity_m: 'git commit -m "docs: update README"',
+      exp_eyebrow: '// experience',
+      exp_heading: 'Experience<span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-indigo-electric rounded-full shadow-[0_0_3px_rgba(99,102,241,.5),0_0_14px_rgba(99,102,241,.25)]"></span>',
+      exp_role: 'Software Intern',
+      exp_dates: 'July — September 2024',
+      exp_badge: 'Internship',
+      exp_bullet1: 'Gained experience developing automation systems with C#.',
+      exp_bullet2: 'Implemented API integrations for web-based projects and designed secure authentication systems using JWT token architecture.',
+      exp_bullet3: 'Thanks to my collaborative approach, I helped optimize delivery timelines.',
+      exp_tag_team: 'Teamwork',
+      cf_exp: 'git commit -m "feat: add JWT auth"',
+      skills_eyebrow: '// skills',
+      skills_heading: 'Skills<span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-indigo-electric rounded-full shadow-[0_0_3px_rgba(99,102,241,.5),0_0_14px_rgba(99,102,241,.25)]"></span>',
+      skills_programming: 'Programming',
+      skills_database: 'Database',
+      skills_api: 'API &amp; Authentication',
+      skills_webdev: 'Web Development',
+      skills_tools: 'Tools',
+      proj_eyebrow: '// projects',
+      proj_heading: 'Projects<span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-indigo-electric rounded-full shadow-[0_0_3px_rgba(99,102,241,.5),0_0_14px_rgba(99,102,241,.25)]"></span>',
+      proj_intro: 'A selection from 6 projects published on github.com/nilaybalci. Click any card to see details, or jump straight to GitHub from the file tab.',
+      contact_eyebrow: '// contact',
+      contact_heading: 'Get In Touch',
+      contact_lede: 'Feel free to reach out for new projects and collaborations.',
+      contact_email_btn: 'Send Email',
+      ref_title1: 'Ops Efficiency Director',
+      ref_title2: 'Transformation Architect',
+      ref_title3: 'Computer Engineer',
+      ref_note: 'Reference details are shared separately upon request.',
+      cf_contact_m: 'console.log("Hello 👋");',
+      modal_eyebrow: '// project',
+      modal_lang_label: '<span class="material-symbols-outlined text-sm">bar_chart</span> Language breakdown (GitHub)',
+      modal_gh_btn: 'View on GitHub',
+    },
+  };
+
+  function applyLang(lang){
+    currentLang = lang;
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if(I18N[lang][key] !== undefined) el.innerHTML = I18N[lang][key];
+    });
+
+    // About terminal: swap the command text for each language. If a line has already
+    // finished typing, update it instantly instead of re-running the animation.
+    document.querySelectorAll('#aboutTerm .term-type').forEach(el => {
+      const cmd = lang === 'en' ? el.dataset.cmdEn : el.dataset.cmdTr;
+      if(cmd === undefined) return;
+      el.dataset.cmd = cmd;
+      if(el.textContent.length > 0) el.textContent = cmd;
+    });
+
+    renderProjects();
+    if(modalOpenProject) openModal(modalOpenProject);
+
+    const labelEl = document.getElementById('langToggleLabel');
+    const labelElMobile = document.getElementById('langToggleLabelMobile');
+    if(labelEl) labelEl.textContent = lang === 'tr' ? 'EN' : 'TR';
+    if(labelElMobile) labelElMobile.textContent = lang === 'tr' ? 'English' : 'Türkçe';
+  }
+
+  document.getElementById('langToggle').addEventListener('click', () => applyLang(currentLang === 'tr' ? 'en' : 'tr'));
+  document.getElementById('langToggleMobile').addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    applyLang(currentLang === 'tr' ? 'en' : 'tr');
+  });
 </script>
 
 </body>
