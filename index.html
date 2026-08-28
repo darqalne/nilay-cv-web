@@ -286,6 +286,37 @@
     #top{ min-height:auto !important; padding-top:5.5rem !important; padding-bottom:2.5rem !important; }
   }
 
+  /* ---------- phone + tablet only (≤1023px; standard desktop is untouched) ---------- */
+  @media (max-width:1023px){
+    /* hero card: a real frosted-glass look. Transparency alone barely reads as "glass" when
+       there's little behind it, so this also brightens the ambient colour blobs a touch and
+       adds a light sheen/edge so the material reads as glass on its own. */
+    #top .glass-panel{
+      background:rgba(252,248,255,.32) !important;
+      backdrop-filter:blur(22px) saturate(1.6) !important;
+      -webkit-backdrop-filter:blur(22px) saturate(1.6) !important;
+      border:1px solid rgba(255,255,255,.65) !important;
+      box-shadow:0 24px 60px -20px rgba(99,102,241,.28), inset 0 1px 0 rgba(255,255,255,.6) !important;
+    }
+    #top .bg-indigo-electric\/10{ background-color:rgba(99,102,241,.22) !important; }
+    #top .bg-indigo-deep\/10{ background-color:rgba(70,72,212,.20) !important; }
+    /* database rows (MySQL / SQL Server) were quite tall/chunky next to the other chips */
+    #skills .p-4{ padding:.6rem .9rem !important; }
+  }
+  @media (max-width:767px){
+    /* on phone the hero is now content-height (see the earlier fix), so the colour blobs -
+       originally positioned as a % of a full-viewport-tall section - no longer land behind
+       the card. Re-centre them on the (now much shorter) section so the glass has colour
+       to pick up. */
+    #top .bg-indigo-electric\/10{ top:-15% !important; left:-25% !important; width:85% !important; }
+    #top .bg-indigo-deep\/10{ bottom:-15% !important; right:-25% !important; width:80% !important; }
+  }
+
+  /* ---------- all platforms ---------- */
+  /* skills cards had a nearly-invisible passive border; nudge it up slightly so the card
+     edges read clearly even before hover */
+  #skills .glass-panel{ border-color:#c7c4d7; }
+
   ::selection{ background:#dae2fd;color:#4648d4; }
   :focus-visible{ outline:2.5px solid #6366f1;outline-offset:3px;border-radius:4px; }
 </style>
