@@ -248,8 +248,10 @@
   /* section-flow: one fixed full-viewport canvas (desktop only) — lines/dots stream in
      from the true screen edges toward the viewport's center, so whichever section is
      currently centered on screen reads as "what they're converging into" as you scroll */
-  #flowCanvas{ position:fixed;inset:0;pointer-events:none;z-index:1;opacity:0;transition:opacity .6s ease; }
-  #flowCanvas.is-visible{ opacity:1; }
+  /* negative z-index + display:none (not just opacity) so there is no stacking-order or
+     fade-transition edge case where it could ever paint over the hero */
+  #flowCanvas{ position:fixed;inset:0;pointer-events:none;z-index:-1;display:none; }
+  #flowCanvas.is-visible{ display:block; }
   .hero-fade{ display:none; }
 
   .code-float{
@@ -958,11 +960,13 @@
   }, { threshold: .15, rootMargin: "0px 0px -50px 0px" });
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  // ---------- section flow: one unified system, lines/dots stream from the true screen
-  // edges toward the viewport's center. A single fixed canvas (not one per section) means
-  // whichever section is scrolled to the middle of the screen is "what they're gathering
-  // into" — the convergence point never moves, the content just scrolls past underneath it.
-  // Hidden entirely over the hero; fades in once scrolled into <main>. Desktop only.
+  // ---------- section flow: lines/dots stream from the true screen edges, each toward the
+  // center of whichever section is currently the closest to the middle of the screen — not
+  // a fixed point. One shared canvas + one shared particle pool (not one per section), but
+  // each particle eases toward the new target at its own slightly-randomized rate, so
+  // crossing from one section to the next reads as the lines handing off one-by-one rather
+  // than all snapping over at once. Fully removed (display:none, negative z-index) outside
+  // <main> so there is no way for it to paint over the hero. Desktop only.
   (function(){
     if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if(!window.matchMedia("(min-width: 1024px)").matches) return;
@@ -972,6 +976,7 @@
     document.body.prepend(canvas);
     const ctx = canvas.getContext('2d');
     const PATH_COUNT = 34;
+    const sections = Array.from(document.querySelectorAll('main > section'));
     let paths = [], running = false, rafId = null;
 
     function bezierPoint(t, p0, p1, p2, p3){
@@ -981,26 +986,46 @@
         y: u*u*u*p0.y + 3*u*u*t*p1.y + 3*u*t*t*p2.y + t*t*t*p3.y,
       };
     }
+    // the section whose own center is nearest the viewport's vertical center right now —
+    // that section's midpoint is the shared "gather here" target for this frame
+    function currentTarget(){
+      const viewportMid = window.innerHeight / 2;
+      let best = null, bestDist = Infinity;
+      for(const sec of sections){
+        const r = sec.getBoundingClientRect();
+        if(r.bottom < 0 || r.top > window.innerHeight) continue;
+        const midY = r.top + r.height / 2;
+        const dist = Math.abs(midY - viewportMid);
+        if(dist < bestDist){ bestDist = dist; best = { x: r.left + r.width / 2, y: midY }; }
+      }
+      return best || { x: window.innerWidth / 2, y: viewportMid };
+    }
     function resize(){
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      const start = currentTarget();
       paths = Array.from({ length: PATH_COUNT }, (_, i) => ({
         isLeft: i % 2 === 0,
         y: (i / PATH_COUNT) * canvas.height,
         t: Math.random(),
         speed: .0022 + Math.random() * .0028,
+        ease: .012 + Math.random() * .03,
+        cx: start.x, cy: start.y,
       }));
     }
     function draw(){
-      const w = canvas.width, h = canvas.height, cx = w / 2, cy = h / 2;
+      const w = canvas.width, h = canvas.height;
       ctx.clearRect(0, 0, w, h);
       const indigo = getComputedStyle(document.documentElement)
         .getPropertyValue('--c-indigo').trim().split(/\s+/).join(',');
+      const target = currentTarget();
       paths.forEach(p => {
+        p.cx += (target.x - p.cx) * p.ease;
+        p.cy += (target.y - p.cy) * p.ease;
         const p0 = { x: p.isLeft ? 0 : w, y: p.y };
-        const p1 = { x: p.isLeft ? cx * .45 : w - cx * .45, y: p.y };
-        const p2 = { x: p.isLeft ? cx * .8 : w - cx * .8, y: cy };
-        const p3 = { x: cx, y: cy };
+        const p1 = { x: p.isLeft ? p.cx * .45 : w - (w - p.cx) * .45, y: p.y };
+        const p2 = { x: p.isLeft ? p.cx * .8 : w - (w - p.cx) * .2, y: p.cy };
+        const p3 = { x: p.cx, y: p.cy };
         ctx.beginPath();
         ctx.moveTo(p0.x, p0.y);
         ctx.bezierCurveTo(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y);
