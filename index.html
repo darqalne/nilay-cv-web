@@ -1017,12 +1017,23 @@
         speed: .0022 + Math.random() * .0028,
       }));
     }
+    // main's own top edge is the hero/about boundary line. Fade must stay at 0 for as
+    // long as any of that boundary is still below the viewport's top (mainTop > 0 means
+    // hero is still at least partially on screen) — it only starts climbing once the
+    // boundary has scrolled up past the very top of the viewport, i.e. hero is fully
+    // gone, then ramps to full opacity over the next FADE_DISTANCE px, slowly.
+    const FADE_DISTANCE = 260;
+    function entryFade(){
+      const mainTop = mainEl.getBoundingClientRect().top;
+      return Math.min(Math.max(-mainTop / FADE_DISTANCE, 0), 1);
+    }
     function draw(){
       const w = canvas.width, h = canvas.height, n = paths.length;
       ctx.clearRect(0, 0, w, h);
       const indigo = getComputedStyle(document.documentElement)
         .getPropertyValue('--c-indigo').trim().split(/\s+/).join(',');
       const { a, b, progress } = bracket();
+      const fade = entryFade();
       paths.forEach((p, i) => {
         // this particle's own slice of the overall sweep — particle 0 goes first,
         // the last particle isn't done until progress hits 1 (section dead-center)
@@ -1038,7 +1049,7 @@
         ctx.beginPath();
         ctx.moveTo(p0.x, p0.y);
         ctx.bezierCurveTo(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y);
-        ctx.strokeStyle = `rgba(${indigo},.18)`;
+        ctx.strokeStyle = `rgba(${indigo},${.18 * fade})`;
         ctx.lineWidth = 1;
         ctx.setLineDash([1, 5]);
         ctx.stroke();
@@ -1047,7 +1058,7 @@
         p.t += p.speed;
         if(p.t > 1) p.t = 0;
         const pos = bezierPoint(p.t, p0, p1, p2, p3);
-        ctx.fillStyle = `rgba(${indigo},.55)`;
+        ctx.fillStyle = `rgba(${indigo},${.55 * fade})`;
         ctx.fillRect(pos.x - 1.5, pos.y - 1.5, 3, 3);
       });
       if(running) rafId = requestAnimationFrame(draw);
