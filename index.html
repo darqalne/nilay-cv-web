@@ -108,16 +108,25 @@
   .reveal.active{opacity:1;transform:translateY(0);}
   @media (prefers-reduced-motion: reduce){ .reveal{opacity:1!important;transform:none!important;transition:none!important;} }
 
-  /* project cards: same reveal system, with a 3D tilt that straightens into a flat,
-     fully-vertical card once each one is in view (buttons/JS untouched) */
-  #projectsGrid .reveal{
-    transform:perspective(1400px) rotateX(22deg) scale(.93) translateY(26px);
+  /* projects "device frame": one big tablet/monitor-style bezel holding all 6 cards,
+     tilted back in 3D and straightening flat/vertical as it scrolls into view (like the
+     Aceternity ContainerScroll effect) — buttons/JS inside are untouched */
+  .proj-device-frame{
+    max-width:1180px;margin-inline:auto;border-radius:28px;
+    border:10px solid #2a2a32;background:#15151b;
+    padding:clamp(1rem,3vw,2rem);
+    box-shadow:0 40px 80px -30px rgba(15,15,20,.5), 0 10px 40px rgba(99,102,241,.15);
     transform-origin:center bottom;
-    transition:opacity .9s cubic-bezier(.16,.7,.2,1),transform 1.1s cubic-bezier(.16,.7,.2,1);
+    transform:perspective(1800px) rotateX(20deg) scale(.92);
+    transition:opacity .9s cubic-bezier(.16,.7,.2,1),transform 1.2s cubic-bezier(.16,.7,.2,1);
   }
-  #projectsGrid .reveal.active{
-    transform:perspective(1400px) rotateX(0deg) scale(1) translateY(0);
+  .proj-device-frame.active{
+    transform:perspective(1800px) rotateX(0deg) scale(1);
   }
+  .proj-device-bar{
+    display:flex;align-items:center;gap:6px;padding:.35rem .6rem .9rem;
+  }
+  .proj-device-bar span{ width:9px;height:9px;border-radius:50%;background:#3a3c46; }
 
   .glass-panel{ background:rgba(252,248,255,.7); backdrop-filter:blur(24px); border:1px solid rgba(228,225,237,.5); }
   .glass-header{ background:rgba(252,248,255,.4); backdrop-filter:blur(10px); border-bottom:1px solid rgba(228,225,237,.3); }
@@ -660,7 +669,10 @@
       </h2>
       <p class="font-body text-body-md text-on-surface-variant mt-4 max-w-xl mx-auto" data-i18n="proj_intro">github.com/nilaybalci üzerinde yayınlanan 6 projeden seçmeler. Her karta tıklayarak detaylarını görebilir, dosya sekmesinden doğrudan GitHub'a gidebilirsin.</p>
     </div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid"></div>
+    <div class="proj-device-frame reveal">
+      <div class="proj-device-bar"><span></span><span></span><span></span></div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" id="projectsGrid"></div>
+    </div>
   </section>
 
   <!-- CV BANNER -->
