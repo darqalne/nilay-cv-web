@@ -18,8 +18,8 @@
         colors: {
           "indigo-electric": "#6366f1",
           "indigo-deep": "#4648d4",
-          "surface-bright": "#eee9f7",
-          "surface": "#eee9f7",
+          "surface-bright": "#ded1f7",
+          "surface": "#ded1f7",
           "surface-dim": "#dbd8e4",
           "surface-container-lowest": "#ffffff",
           "surface-container-low": "#f5f2fe",
@@ -33,7 +33,7 @@
           "inverse-on-surface": "#f2effb",
           "outline": "#767586",
           "outline-variant": "#c7c4d7",
-          "background": "#eee9f7",
+          "background": "#ded1f7",
           "on-background": "#1b1b23",
         },
         spacing: {
@@ -62,7 +62,7 @@
 </script>
 <style>
   html { scroll-behavior: smooth; }
-  body { background: #eee9f7; color: #1b1b23; overflow-x: hidden; }
+  body { background: #ded1f7; color: #1b1b23; overflow-x: hidden; }
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -128,8 +128,8 @@
   }
   .proj-device-bar span{ width:9px;height:9px;border-radius:50%;background:#3a3c46; }
 
-  .glass-panel{ background:rgba(238,233,247,.7); backdrop-filter:blur(24px); border:1px solid rgba(228,225,237,.5); }
-  .glass-header{ background:rgba(238,233,247,.4); backdrop-filter:blur(10px); border-bottom:1px solid rgba(228,225,237,.3); }
+  .glass-panel{ background:rgba(222,209,247,.7); backdrop-filter:blur(24px); border:1px solid rgba(228,225,237,.5); }
+  .glass-header{ background:rgba(222,209,247,.4); backdrop-filter:blur(10px); border-bottom:1px solid rgba(228,225,237,.3); }
 
   .hover-card{ transition:transform .3s cubic-bezier(.65,0,.35,1),box-shadow .3s ease,border-color .3s ease; }
   .hover-card:hover{ transform:translateY(-8px); box-shadow:0 20px 40px -10px rgba(99,102,241,.20); border-color:rgba(99,102,241,.5); }
@@ -149,7 +149,7 @@
   .code-float{
     position:absolute;font-family:'Fira Code',monospace;color:rgba(99,102,241,.5);
     pointer-events:none;user-select:none;z-index:0;white-space:pre;
-    background:rgba(238,233,247,.55);backdrop-filter:blur(6px);
+    background:rgba(222,209,247,.55);backdrop-filter:blur(6px);
     padding:.4rem .7rem;border-radius:8px;border:1px solid rgba(99,102,241,.12);
   }
 
@@ -194,7 +194,7 @@
     animation:blink 1s step-end infinite;vertical-align:-2px;
   }
 
-  #mobileMenu{ background:#eee9f7;border-top:1px solid rgba(99,102,241,.12); }
+  #mobileMenu{ background:#ded1f7;border-top:1px solid rgba(99,102,241,.12); }
   #mobileMenu.open{ display:flex; }
   .mobile-nav-link{
     font-family:'Fira Code',monospace;font-size:.85rem;font-weight:500;color:#464554;
@@ -228,7 +228,7 @@
   }
   .modal-backdrop.open{ opacity:1;pointer-events:auto; }
   .modal-box{
-    background:#eee9f7;border-radius:1.25rem;max-width:560px;width:100%;max-height:88vh;
+    background:#ded1f7;border-radius:1.25rem;max-width:560px;width:100%;max-height:88vh;
     overflow-y:auto;overflow-x:hidden;
     box-shadow:0 30px 60px -18px rgba(27,27,35,.28), 0 0 40px rgba(99,102,241,.12);
     position:relative;border:1px solid rgba(99,102,241,.2);
@@ -239,12 +239,12 @@
   .modal-content-pad{ padding:clamp(1.6rem,4vw,2.4rem); }
   .modal-close{
     position:absolute;top:.9rem;right:.9rem;width:38px;height:38px;border-radius:50%;
-    background:rgba(238,233,247,.9);backdrop-filter:blur(6px);border:none;z-index:5;
+    background:rgba(222,209,247,.9);backdrop-filter:blur(6px);border:none;z-index:5;
     display:flex;align-items:center;justify-content:center;
     color:#1b1b23;transition:background .25s ease,transform .25s ease;
     box-shadow:0 2px 8px rgba(27,27,35,.15);
   }
-  .modal-close:hover{ background:#1b1b23;color:#eee9f7;transform:rotate(90deg); }
+  .modal-close:hover{ background:#1b1b23;color:#ded1f7;transform:rotate(90deg); }
 
   /* ---------- modal preview box ---------- */
   .modal-preview{
@@ -366,7 +366,7 @@
        there's little behind it, so this also brightens the ambient colour blobs a touch and
        adds a light sheen/edge so the material reads as glass on its own. */
     #top .glass-panel{
-      background:rgba(238,233,247,.32) !important;
+      background:rgba(222,209,247,.32) !important;
       backdrop-filter:blur(22px) saturate(1.6) !important;
       -webkit-backdrop-filter:blur(22px) saturate(1.6) !important;
       border:1px solid rgba(255,255,255,.65) !important;
@@ -831,7 +831,7 @@
     let drops = Array(columns).fill(1);
     function draw(){
       if (Math.floor(canvas.width / fontSize) !== columns) { columns = Math.floor(canvas.width / fontSize); drops = Array(columns).fill(1); }
-      ctx.fillStyle = 'rgba(238,233,247,0.06)';
+      ctx.fillStyle = 'rgba(222,209,247,0.06)';
       ctx.fillRect(0,0,canvas.width,canvas.height);
       ctx.fillStyle = '#6366f1';
       ctx.font = fontSize + 'px monospace';
