@@ -128,7 +128,31 @@
   }
   .proj-device-bar span{ width:9px;height:9px;border-radius:50%;background:#3a3c46; }
 
-  .glass-panel{ background:rgba(203,205,208,.7); backdrop-filter:blur(24px); border:1px solid rgba(228,225,237,.5); }
+  /* liquid glass: gradient fill (not a flat tint) + saturated blur + layered inset
+     highlights so the material reads as glass catching light, not just a tinted
+     rectangle. Kept fairly opaque throughout — no stop drops below .5 — since low
+     opacity alone reads as "faded", not "glass". Project cards opt back out below,
+     since the dark device-frame they sit in needs their original flat panel look. */
+  .glass-panel{
+    position:relative;
+    background:linear-gradient(135deg, rgba(255,255,255,.62) 0%, rgba(203,205,208,.5) 100%);
+    backdrop-filter:blur(26px) saturate(1.7);
+    -webkit-backdrop-filter:blur(26px) saturate(1.7);
+    border:1px solid rgba(255,255,255,.65);
+    box-shadow:
+      0 24px 55px -22px rgba(20,20,35,.25),
+      inset 0 1px 0 rgba(255,255,255,.9),
+      inset 0 -1px 0 rgba(255,255,255,.18);
+  }
+  .glass-panel::before{
+    content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+    background:linear-gradient(155deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 45%);
+  }
+  #projectsGrid .glass-panel{
+    background:rgba(203,205,208,.7); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+    border:1px solid rgba(228,225,237,.5); box-shadow:none;
+  }
+  #projectsGrid .glass-panel::before{ content:none; }
   .glass-header{ background:rgba(203,205,208,.4); backdrop-filter:blur(10px); border-bottom:1px solid rgba(228,225,237,.3); }
 
   .hover-card{ transition:transform .3s cubic-bezier(.65,0,.35,1),box-shadow .3s ease,border-color .3s ease; }
@@ -362,16 +386,8 @@
 
   /* ---------- phone + tablet only (≤1023px; standard desktop is untouched) ---------- */
   @media (max-width:1023px){
-    /* hero card: a real frosted-glass look. Transparency alone barely reads as "glass" when
-       there's little behind it, so this also brightens the ambient colour blobs a touch and
-       adds a light sheen/edge so the material reads as glass on its own. */
-    #top .glass-panel{
-      background:rgba(203,205,208,.32) !important;
-      backdrop-filter:blur(22px) saturate(1.6) !important;
-      -webkit-backdrop-filter:blur(22px) saturate(1.6) !important;
-      border:1px solid rgba(255,255,255,.65) !important;
-      box-shadow:0 24px 60px -20px rgba(99,102,241,.28), inset 0 1px 0 rgba(255,255,255,.6) !important;
-    }
+    /* hero card: the base .glass-panel liquid-glass treatment already reads as glass on
+       its own now, so this just brightens the ambient colour blobs behind it a touch */
     #top .bg-indigo-electric\/10{ background-color:rgba(99,102,241,.22) !important; }
     #top .bg-indigo-deep\/10{ background-color:rgba(70,72,212,.20) !important; }
     /* database rows (MySQL / SQL Server) were quite tall/chunky next to the other chips */
@@ -395,9 +411,6 @@
   }
 
   /* ---------- all platforms ---------- */
-  /* skills cards had a nearly-invisible passive border; nudge it up slightly so the card
-     edges read clearly even before hover */
-  #skills .glass-panel, #experience .glass-panel, #contact .glass-panel{ border-color:#c7c4d7; }
 
   ::selection{ background:#dae2fd;color:#4648d4; }
   :focus-visible{ outline:2.5px solid #6366f1;outline-offset:3px;border-radius:4px; }
