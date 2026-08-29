@@ -109,9 +109,9 @@
   @media (prefers-reduced-motion: reduce){ .reveal{opacity:1!important;transform:none!important;transition:none!important;} }
 
   /* projects "device frame": one big tablet/monitor-style bezel holding all 6 cards,
-     rising into place along a bowed arc as it scrolls into view — no rotation flip,
-     just a curved translate path. Driven continuously by scroll position in JS (no
-     CSS transition — it should track the scrollbar 1:1, not auto-finish on its own). */
+     sliding up from below while de-rotating from tilted-flat to fully upright as it
+     scrolls into view. Driven continuously by scroll position in JS (no CSS transition
+     — it should track the scrollbar 1:1, not auto-finish on its own). */
   .proj-device-frame{
     max-width:1180px;margin-inline:auto;border-radius:28px;position:relative;
     border:10px solid #34343e;background:linear-gradient(160deg,#1c1c24,#0f0f13);
@@ -345,6 +345,13 @@
       -webkit-mask-image:linear-gradient(to bottom, black, transparent);
       mask-image:linear-gradient(to bottom, black, transparent);
     }
+
+    /* project cards: hide the description on phone so each card is just a short
+       title strip — keeps the tall multi-row stack inside the device frame short
+       enough for the scroll animation to read smoothly */
+    #projectsGrid .proj-desc{ display:none !important; }
+    #projectsGrid .p-6{ padding:.85rem 1rem !important; }
+    #projectsGrid .mb-4{ margin-bottom:0 !important; }
   }
 
   /* ---------- phone + tablet only (≤1023px; standard desktop is untouched) ---------- */
@@ -837,11 +844,16 @@
   }, { threshold: .15, rootMargin: "0px 0px -50px 0px" });
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  // ---------- projects device frame: continuous scroll-linked arc rise ----------
-  // (not a one-shot triggered transition — the motion tracks the scrollbar directly,
-  // like framer-motion's useScroll/useTransform in the reference component. Rather than
-  // a rotateX flip, the frame rises in a bowed arc: translateX bulges out mid-transit
-  // and returns to 0, translateY falls to 0, so the path itself curves like a bow.)
+  // ---------- projects device frame: continuous scroll-linked rise + de-rotate ----------
+  // (not a one-shot triggered transition — the motion tracks the scrollbar directly, like
+  // framer-motion's useScroll/useTransform in the reference component. translateY is the
+  // OUTERMOST transform function so it always moves straight up in screen space; rotateX
+  // uses the default center-center transform-origin, so the frame de-rotates around its
+  // own middle rather than hinging off a fixed edge — it reads as sliding up from below
+  // while flattening from horizontal to fully upright, not swinging open like a lid.
+  // Updated every animation frame via a persistent rAF loop rather than only on 'scroll'
+  // events, because mobile momentum/fling scrolling can dispatch 'scroll' very sparsely —
+  // event-gated updates were what made the motion snap in/out abruptly on phone.)
   (function(){
     const frame = document.getElementById('projDeviceFrame');
     if(!frame) return;
@@ -851,16 +863,15 @@
       frame.style.transform = 'none';
       return;
     }
-    const RISE = 170;        // px travelled upward from start to rest
-    const BOW = 46;          // px the arc bulges sideways at the midpoint
-    const MIN_SCALE = 0.9;
-    let ticking = false;
+    const RISE = 150;        // px travelled upward from start to rest
+    const ROTATE = 28;       // deg tilted "flat" at start, 0 (upright) at rest
+    const MIN_SCALE = 0.92;
 
     function progressFor(el){
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight;
       // 0 = frame just entering from the bottom of the viewport, 1 = frame's top has
-      // scrolled up to ~20% of the viewport height (i.e. mostly settled into view)
+      // scrolled up to ~15% of the viewport height (i.e. mostly settled into view)
       let p = (vh - rect.top) / (vh * 0.85);
       return Math.min(Math.max(p, 0), 1);
     }
@@ -868,18 +879,17 @@
     function update(){
       const p = progressFor(frame);
       const translateY = (1 - p) * RISE;
-      const translateX = Math.sin(p * Math.PI) * -BOW;
+      const rotate = (1 - p) * ROTATE;
       const scale = MIN_SCALE + (1 - MIN_SCALE) * p;
       frame.style.opacity = Math.min(p * 1.6, 1);
-      frame.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
-      ticking = false;
+      frame.style.transform =
+        `translateY(${translateY}px) perspective(1400px) rotateX(${rotate}deg) scale(${scale})`;
     }
-    function onScroll(){
-      if(!ticking){ requestAnimationFrame(update); ticking = true; }
+    function loop(){
+      update();
+      requestAnimationFrame(loop);
     }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    update();
+    requestAnimationFrame(loop);
   })();
 
   // ---------- about terminal typewriter ----------
@@ -1045,7 +1055,7 @@
               <h3 class="font-headline text-headline-md text-on-background">${p.name[currentLang]}</h3>
               <span class="px-3 py-1 bg-indigo-electric/10 text-indigo-electric rounded-md font-code text-xs border border-indigo-electric/20 whitespace-nowrap ml-2">${p.lang}</span>
             </div>
-            <p class="font-body text-body-md text-on-surface-variant flex-grow mb-6 relative z-10">${p.desc[currentLang]}</p>
+            <p class="proj-desc font-body text-body-md text-on-surface-variant flex-grow mb-6 relative z-10">${p.desc[currentLang]}</p>
             <button class="proj-details h-8 flex items-center gap-2 text-indigo-electric font-code text-sm text-left w-fit group/btn">
               <span class="material-symbols-outlined text-sm transition-transform duration-300 group-hover/btn:translate-x-1">arrow_forward</span>
               <span class="relative">${VIEW_DETAILS_LABEL[currentLang]}<span class="absolute left-0 -bottom-0.5 w-0 h-px bg-indigo-electric transition-all duration-300 group-hover/btn:w-full"></span></span>
