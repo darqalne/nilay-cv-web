@@ -334,6 +334,15 @@
        sits just under the nav, not stranded in empty space */
     #top{ min-height:auto !important; padding-top:5.5rem !important; padding-bottom:2.5rem !important; }
 
+    /* the colorful "1010" rain canvas itself was still cutting off sharply at the
+       hero's bottom edge (only the static dot-grid extension below it was fading) —
+       fade the canvas's own rendered content out near the bottom so the moving rain
+       blends into the extension strip instead of stopping dead */
+    #binary-canvas{
+      -webkit-mask-image:linear-gradient(to bottom, black 65%, transparent 96%);
+      mask-image:linear-gradient(to bottom, black 65%, transparent 96%);
+    }
+
     /* the hero's dot-grid/binary-rain background used to stop dead against the plain
        background right below it; extend it a little further with a soft fade instead
        of a hard edge */
