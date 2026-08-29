@@ -1024,7 +1024,7 @@
     // hero is still at least partially on screen) — it only starts climbing once the
     // boundary has scrolled up past the very top of the viewport, i.e. hero is fully
     // gone, then ramps to full opacity over the next FADE_DISTANCE px, slowly.
-    const FADE_DISTANCE = 260;
+    const FADE_DISTANCE = 110;
     function entryFade(){
       const mainTop = mainEl.getBoundingClientRect().top;
       return Math.min(Math.max(-mainTop / FADE_DISTANCE, 0), 1);
