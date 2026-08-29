@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Yönlendiriliyor…</title>
+<script>
+  // GitHub Pages has no real routing — a direct load of a clean path like
+  // "/nilay-cv-web/hakkimda" has no matching file, so it serves this file's content
+  // (with a 404 status, which browsers still execute). Stash the intended path and
+  // bounce back to index.html, which reads it from sessionStorage and restores the
+  // clean URL + scrolls to the right section.
+  sessionStorage.setItem('cleanPathRedirect', location.pathname);
+  var parts = location.pathname.split('/').filter(Boolean);
+  var root = parts.length ? '/' + parts[0] + '/' : '/';
+  location.replace(root);
+</script>
+</head>
+<body></body>
+</html>

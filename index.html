@@ -969,6 +969,61 @@
     navToggleIcon.textContent = 'menu';
   }));
 
+  // ---------- clean-path section navigation (no #hash in the address bar) ----------
+  // section links still work as normal in-page anchors (scrollIntoView), but instead of
+  // letting the browser append "#about" etc. to the URL, we push a clean path like
+  // "/hakkimda" via the History API. A direct/refreshed load at one of these paths has
+  // no matching file on GitHub Pages, so 404.html redirects it back here and hands off
+  // the intended slug below so we can restore the clean URL and scroll to it.
+  (function(){
+    const SLUG_TO_ID = { hakkimda:'about', deneyim:'experience', yetenekler:'skills', projeler:'projects', iletisim:'contact' };
+    const ID_TO_SLUG = { top:'', about:'hakkimda', experience:'deneyim', skills:'yetenekler', projects:'projeler', contact:'iletisim' };
+    const KNOWN_SLUGS = Object.keys(SLUG_TO_ID);
+
+    let basePath = location.pathname;
+    for(const slug of KNOWN_SLUGS){
+      if(basePath === '/' + slug || basePath.endsWith('/' + slug)){
+        basePath = basePath.slice(0, basePath.length - slug.length);
+        break;
+      }
+    }
+    if(!basePath.endsWith('/')) basePath += '/';
+
+    const urlForId = (id) => basePath + (ID_TO_SLUG[id] || '');
+
+    function scrollToId(id, smooth){
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto' });
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      const id = a.getAttribute('href').slice(1);
+      if(id !== 'top' && !(id in ID_TO_SLUG)) return;
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        scrollToId(id, true);
+        history.pushState({ sectionId: id }, '', urlForId(id));
+      });
+    });
+
+    window.addEventListener('popstate', (e) => {
+      scrollToId((e.state && e.state.sectionId) || 'top', true);
+    });
+
+    // handed off from 404.html (or a direct load at a clean path in local dev) —
+    // restore the clean URL without adding a new history entry, then scroll once loaded
+    const redirectedPath = sessionStorage.getItem('cleanPathRedirect');
+    sessionStorage.removeItem('cleanPathRedirect');
+    const pathToCheck = redirectedPath || location.pathname;
+    let slug = pathToCheck.startsWith(basePath) ? pathToCheck.slice(basePath.length) : '';
+    slug = slug.replace(/\/$/, '');
+    const initialId = SLUG_TO_ID[slug];
+    if(initialId){
+      history.replaceState({ sectionId: initialId }, '', urlForId(initialId));
+      window.addEventListener('load', () => scrollToId(initialId, false));
+    }
+  })();
+
   // ---------- signature reveal ----------
   const sigBig = document.getElementById('sigBig');
   const sigIo = new IntersectionObserver((entries) => {

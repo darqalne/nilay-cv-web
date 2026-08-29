@@ -34,6 +34,21 @@ http
     }
     fs.readFile(filePath, (err, data) => {
       if (err) {
+        // clean-path section routes (e.g. /hakkimda) have no matching file locally —
+        // serve index.html directly so the page's own JS can pick up location.pathname
+        // and scroll to the right section (mirrors what 404.html hands off to on GH Pages)
+        if (!path.extname(reqPath)) {
+          fs.readFile(path.join(root, "index.html"), (err2, indexData) => {
+            if (err2) {
+              res.writeHead(404, { "Content-Type": "text/plain" });
+              res.end("Not found: " + reqPath);
+              return;
+            }
+            res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+            res.end(indexData);
+          });
+          return;
+        }
         res.writeHead(404, { "Content-Type": "text/plain" });
         res.end("Not found: " + reqPath);
         return;
