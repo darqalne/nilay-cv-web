@@ -960,13 +960,15 @@
   }, { threshold: .15, rootMargin: "0px 0px -50px 0px" });
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  // ---------- section flow: lines/dots stream from the true screen edges, each toward the
-  // center of whichever section is currently the closest to the middle of the screen — not
-  // a fixed point. One shared canvas + one shared particle pool (not one per section), but
-  // each particle eases toward the new target at its own slightly-randomized rate, so
-  // crossing from one section to the next reads as the lines handing off one-by-one rather
-  // than all snapping over at once. Fully removed (display:none, negative z-index) outside
-  // <main> so there is no way for it to paint over the hero. Desktop only.
+  // ---------- section flow: lines/dots stream from the true screen edges toward whichever
+  // section is closest to the viewport's center. The handoff between two sections is driven
+  // entirely by scroll position (not time), and is strictly sequential: as the incoming
+  // section travels from the edge to dead-center, particle 0 retargets first, then 1, then 2,
+  // and so on — never randomized — and the sweep is timed so the very last particle finishes
+  // exactly when the section reaches center, i.e. everything is gathered by the time it's
+  // "there". Scrolling back up reverses the same sequence. One shared canvas + particle pool.
+  // Fully removed (display:none, negative z-index) outside <main> so it can never paint over
+  // the hero. Desktop only.
   (function(){
     if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if(!window.matchMedia("(min-width: 1024px)").matches) return;
@@ -986,46 +988,53 @@
         y: u*u*u*p0.y + 3*u*u*t*p1.y + 3*u*t*t*p2.y + t*t*t*p3.y,
       };
     }
-    // the section whose own center is nearest the viewport's vertical center right now —
-    // that section's midpoint is the shared "gather here" target for this frame
-    function currentTarget(){
-      const viewportMid = window.innerHeight / 2;
-      let best = null, bestDist = Infinity;
-      for(const sec of sections){
+    function easeInOut(t){ return t * t * (3 - 2 * t); }
+
+    // the two section-centers straddling the viewport's vertical middle right now, plus
+    // how far between them that middle sits (0 = "a" is dead-center, 1 = "b" is dead-center)
+    function bracket(){
+      const mid = window.innerHeight / 2;
+      const centers = sections.map(sec => {
         const r = sec.getBoundingClientRect();
-        if(r.bottom < 0 || r.top > window.innerHeight) continue;
-        const midY = r.top + r.height / 2;
-        const dist = Math.abs(midY - viewportMid);
-        if(dist < bestDist){ bestDist = dist; best = { x: r.left + r.width / 2, y: midY }; }
+        return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+      });
+      let a = null, b = null;
+      for(const c of centers){
+        if(c.y <= mid) a = c; else { b = c; break; }
       }
-      return best || { x: window.innerWidth / 2, y: viewportMid };
+      if(!a) return { a: b, b, progress: 1 };
+      if(!b) return { a, b: a, progress: 1 };
+      const progress = (mid - a.y) / (b.y - a.y);
+      return { a, b, progress: Math.min(Math.max(progress, 0), 1) };
     }
     function resize(){
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      const start = currentTarget();
       paths = Array.from({ length: PATH_COUNT }, (_, i) => ({
         isLeft: i % 2 === 0,
         y: (i / PATH_COUNT) * canvas.height,
         t: Math.random(),
         speed: .0022 + Math.random() * .0028,
-        ease: .012 + Math.random() * .03,
-        cx: start.x, cy: start.y,
       }));
     }
     function draw(){
-      const w = canvas.width, h = canvas.height;
+      const w = canvas.width, h = canvas.height, n = paths.length;
       ctx.clearRect(0, 0, w, h);
       const indigo = getComputedStyle(document.documentElement)
         .getPropertyValue('--c-indigo').trim().split(/\s+/).join(',');
-      const target = currentTarget();
-      paths.forEach(p => {
-        p.cx += (target.x - p.cx) * p.ease;
-        p.cy += (target.y - p.cy) * p.ease;
+      const { a, b, progress } = bracket();
+      paths.forEach((p, i) => {
+        // this particle's own slice of the overall sweep — particle 0 goes first,
+        // the last particle isn't done until progress hits 1 (section dead-center)
+        const own = Math.min(Math.max((progress - i / n) / (1 / n), 0), 1);
+        const e = easeInOut(own);
+        const cx = a.x + (b.x - a.x) * e;
+        const cy = a.y + (b.y - a.y) * e;
+
         const p0 = { x: p.isLeft ? 0 : w, y: p.y };
-        const p1 = { x: p.isLeft ? p.cx * .45 : w - (w - p.cx) * .45, y: p.y };
-        const p2 = { x: p.isLeft ? p.cx * .8 : w - (w - p.cx) * .2, y: p.cy };
-        const p3 = { x: p.cx, y: p.cy };
+        const p1 = { x: p.isLeft ? cx * .45 : w - (w - cx) * .45, y: p.y };
+        const p2 = { x: p.isLeft ? cx * .8 : w - (w - cx) * .2, y: cy };
+        const p3 = { x: cx, y: cy };
         ctx.beginPath();
         ctx.moveTo(p0.x, p0.y);
         ctx.bezierCurveTo(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y);
