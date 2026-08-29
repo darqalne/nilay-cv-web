@@ -508,7 +508,7 @@
 <nav class="fixed top-0 w-full z-50 backdrop-blur-md bg-surface/80 border-b border-surface-variant/30 transition-all duration-300" id="navbar">
   <div class="flex justify-between items-center w-full px-8 py-3 max-w-container-max mx-auto">
     <a href="#top" class="font-signature text-3xl text-on-background hover:text-indigo-electric transition-colors cursor-hover">Nilay Balcı</a>
-    <div class="hidden md:flex items-center gap-1 nav-links">
+    <div class="hidden lg:flex items-center gap-1 nav-links">
       <a href="#about" data-i18n="nav_about">Hakkımda</a>
       <a href="#experience" data-i18n="nav_exp">Deneyim</a>
       <a href="#skills" data-i18n="nav_skills">Yetenekler</a>
@@ -517,16 +517,18 @@
       <button id="langToggle" class="lang-toggle-btn" title="Switch language" aria-label="Switch language"><span class="material-symbols-outlined">terminal</span><span id="langToggleLabel">TR</span><span class="lang-cursor"></span></button>
       <a href="#contact" class="ml-1 !bg-indigo-electric !text-white px-5 py-2 !rounded-full font-code text-xs hover:!bg-indigo-deep transition-all cursor-hover animate-pulse-subtle shadow-lg shadow-indigo-electric/30" data-i18n="nav_contact_cta">$ iletişime geç</a>
     </div>
-    <button id="navToggle" class="md:hidden flex items-center justify-center w-9 h-9 text-on-background" aria-label="Menüyü aç" aria-expanded="false">
-      <span class="material-symbols-outlined text-2xl" id="navToggleIcon">menu</span>
-    </button>
+    <div class="lg:hidden flex items-center gap-2">
+      <button id="themeToggleMobile" class="lang-toggle-btn" title="Temayı değiştir" aria-label="Temayı değiştir"><span class="material-symbols-outlined" id="themeToggleIconMobile">dark_mode</span></button>
+      <button id="navToggle" class="flex items-center justify-center w-9 h-9 text-on-background" aria-label="Menüyü aç" aria-expanded="false">
+        <span class="material-symbols-outlined text-2xl" id="navToggleIcon">menu</span>
+      </button>
+    </div>
   </div>
-  <div id="mobileMenu" class="hidden md:hidden flex-col gap-1 px-6 pb-5 pt-1">
+  <div id="mobileMenu" class="hidden lg:hidden flex-col gap-1 px-6 pb-5 pt-1">
     <a href="#about" class="mobile-nav-link" data-i18n="nav_about">Hakkımda</a>
     <a href="#experience" class="mobile-nav-link" data-i18n="nav_exp">Deneyim</a>
     <a href="#skills" class="mobile-nav-link" data-i18n="nav_skills">Yetenekler</a>
     <a href="#projects" class="mobile-nav-link" data-i18n="nav_projects">Projeler</a>
-    <button id="themeToggleMobile" class="mobile-nav-link" style="width:100%;text-align:left;"><span class="material-symbols-outlined text-base" id="themeToggleIconMobile">dark_mode</span><span id="themeToggleLabelMobile" class="font-code">Koyu Tema</span></button>
     <button id="langToggleMobile" class="mobile-nav-link" style="width:100%;text-align:left;"><span class="material-symbols-outlined text-base">terminal</span><span id="langToggleLabelMobile" class="font-code">Türkçe</span><span class="lang-cursor"></span></button>
     <a href="#contact" class="mt-2 inline-flex justify-center !bg-indigo-electric !text-white px-5 py-2.5 !rounded-full font-code text-xs shadow-lg shadow-indigo-electric/30" data-i18n="nav_contact_cta">$ iletişime geç</a>
   </div>
@@ -968,10 +970,10 @@
   // exactly when the section reaches center, i.e. everything is gathered by the time it's
   // "there". Scrolling back up reverses the same sequence. One shared canvas + particle pool.
   // Fully removed (display:none, negative z-index) outside <main> so it can never paint over
-  // the hero. Desktop only.
+  // the hero. Tablet and PC only (≥768px) — off on phone.
   (function(){
     if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if(!window.matchMedia("(min-width: 1024px)").matches) return;
+    if(!window.matchMedia("(min-width: 768px)").matches) return;
 
     const canvas = document.createElement('canvas');
     canvas.id = 'flowCanvas';
@@ -1636,13 +1638,11 @@
   (function(){
     const icon = document.getElementById('themeToggleIcon');
     const iconMobile = document.getElementById('themeToggleIconMobile');
-    const labelMobile = document.getElementById('themeToggleLabelMobile');
 
     function syncButtons(theme){
       const isDark = theme === 'dark';
       icon.textContent = isDark ? 'light_mode' : 'dark_mode';
       iconMobile.textContent = isDark ? 'light_mode' : 'dark_mode';
-      labelMobile.textContent = isDark ? 'Açık Tema' : 'Koyu Tema';
     }
     syncButtons(document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
 
@@ -1657,10 +1657,7 @@
       setTheme(isDark ? 'light' : 'dark');
     }
     document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-    document.getElementById('themeToggleMobile').addEventListener('click', () => {
-      mobileMenu.classList.remove('open');
-      toggleTheme();
-    });
+    document.getElementById('themeToggleMobile').addEventListener('click', toggleTheme);
   })();
 </script>
 
