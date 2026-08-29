@@ -339,8 +339,8 @@
        fade the canvas's own rendered content out near the bottom so the moving rain
        blends into the extension strip instead of stopping dead */
     #binary-canvas{
-      -webkit-mask-image:linear-gradient(to bottom, black 65%, transparent 96%);
-      mask-image:linear-gradient(to bottom, black 65%, transparent 96%);
+      -webkit-mask-image:linear-gradient(to bottom, black 97%, transparent 100%);
+      mask-image:linear-gradient(to bottom, black 97%, transparent 100%);
     }
 
     /* the hero's dot-grid/binary-rain background used to stop dead against the plain
@@ -387,6 +387,14 @@
        to pick up. */
     #top .bg-indigo-electric\/10{ top:-15% !important; left:-25% !important; width:85% !important; }
     #top .bg-indigo-deep\/10{ bottom:-15% !important; right:-25% !important; width:80% !important; }
+
+    /* pushing the blob's box that far past the section's bottom edge meant #top's
+       overflow-hidden was clipping it mid-blur, leaving a hard rectangular purple
+       band visible right under the hero card instead of a soft fade to nothing */
+    #top .bg-indigo-deep\/10{
+      -webkit-mask-image:linear-gradient(to top, transparent, black 45%);
+      mask-image:linear-gradient(to top, transparent, black 45%);
+    }
   }
 
   /* ---------- all platforms ---------- */
