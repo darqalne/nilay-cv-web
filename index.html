@@ -981,7 +981,7 @@
     const ctx = canvas.getContext('2d');
     const PATH_COUNT = 34;
     const sections = Array.from(document.querySelectorAll('main > section'));
-    let paths = [], running = false, rafId = null;
+    let paths = [], running = false, rafId = null, lastScrollY = window.scrollY;
 
     function bezierPoint(t, p0, p1, p2, p3){
       const u = 1 - t;
@@ -1016,7 +1016,7 @@
         isLeft: i % 2 === 0,
         y: (i / PATH_COUNT) * canvas.height,
         t: Math.random(),
-        speed: .0022 + Math.random() * .0028,
+        speed: .0011 + Math.random() * .0014,
       }));
     }
     // main's own top edge is the hero/about boundary line. Fade must stay at 0 for as
@@ -1036,10 +1036,15 @@
         .getPropertyValue('--c-indigo').trim().split(/\s+/).join(',');
       const { a, b, progress } = bracket();
       const fade = entryFade();
+      // scrolling down: new section arrives from below, so the bottom-most lane leads
+      // the handoff; scrolling up: it arrives from above, so the top-most lane leads
+      const scrollingDown = window.scrollY >= lastScrollY;
+      lastScrollY = window.scrollY;
       paths.forEach((p, i) => {
-        // this particle's own slice of the overall sweep — particle 0 goes first,
-        // the last particle isn't done until progress hits 1 (section dead-center)
-        const own = Math.min(Math.max((progress - i / n) / (1 / n), 0), 1);
+        const rank = scrollingDown ? (n - 1 - i) : i;
+        // this particle's own slice of the overall sweep — the leading lane goes first,
+        // the trailing one isn't done until progress hits 1 (section dead-center)
+        const own = Math.min(Math.max((progress - rank / n) / (1 / n), 0), 1);
         const e = easeInOut(own);
         const cx = a.x + (b.x - a.x) * e;
         const cy = a.y + (b.y - a.y) * e;
