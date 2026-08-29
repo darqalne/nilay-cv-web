@@ -110,21 +110,20 @@
 
   /* projects "device frame": one big tablet/monitor-style bezel holding all 6 cards,
      tilted back in 3D and straightening flat/vertical as it scrolls into view (like the
-     Aceternity ContainerScroll effect) — buttons/JS inside are untouched */
+     Aceternity ContainerScroll effect) — buttons/JS inside are untouched.
+     Transform/opacity are driven continuously by scroll position in JS (no CSS
+     transition here — it should track the scrollbar 1:1, not auto-finish on its own). */
   .proj-device-frame{
     max-width:1180px;margin-inline:auto;border-radius:28px;
-    border:10px solid #2a2a32;background:#15151b;
+    border:10px solid #34343e;background:linear-gradient(160deg,#1c1c24,#0f0f13);
     padding:clamp(1rem,3vw,2rem);
-    box-shadow:0 40px 80px -30px rgba(15,15,20,.5), 0 10px 40px rgba(99,102,241,.15);
+    box-shadow:0 50px 100px -30px rgba(10,10,15,.6), 0 15px 50px rgba(99,102,241,.2),
+               inset 0 1px 0 rgba(255,255,255,.06);
     transform-origin:center bottom;
-    transform:perspective(1800px) rotateX(20deg) scale(.92);
-    transition:opacity .9s cubic-bezier(.16,.7,.2,1),transform 1.2s cubic-bezier(.16,.7,.2,1);
-  }
-  .proj-device-frame.active{
-    transform:perspective(1800px) rotateX(0deg) scale(1);
+    will-change:transform,opacity;
   }
   .proj-device-bar{
-    display:flex;align-items:center;gap:6px;padding:.35rem .6rem .9rem;
+    display:flex;align-items:center;gap:6px;padding:0 .6rem;margin-bottom:.6rem;
   }
   .proj-device-bar span{ width:9px;height:9px;border-radius:50%;background:#3a3c46; }
 
@@ -669,7 +668,7 @@
       </h2>
       <p class="font-body text-body-md text-on-surface-variant mt-4 max-w-xl mx-auto" data-i18n="proj_intro">github.com/nilaybalci üzerinde yayınlanan 6 projeden seçmeler. Her karta tıklayarak detaylarını görebilir, dosya sekmesinden doğrudan GitHub'a gidebilirsin.</p>
     </div>
-    <div class="proj-device-frame reveal">
+    <div class="proj-device-frame" id="projDeviceFrame">
       <div class="proj-device-bar"><span></span><span></span><span></span></div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" id="projectsGrid"></div>
     </div>
@@ -836,6 +835,48 @@
     });
   }, { threshold: .15, rootMargin: "0px 0px -50px 0px" });
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ---------- projects device frame: continuous scroll-linked 3D tilt ----------
+  // (not a one-shot triggered transition — the rotation tracks the scrollbar directly,
+  // like framer-motion's useScroll/useTransform in the reference component)
+  (function(){
+    const frame = document.getElementById('projDeviceFrame');
+    if(!frame) return;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(prefersReduced){
+      frame.style.opacity = 1;
+      frame.style.transform = 'none';
+      return;
+    }
+    const MAX_ROTATE = 30;   // degrees, tilted-back starting angle — bigger = more dramatic 3D
+    const MIN_SCALE = 0.85;
+    const PERSPECTIVE = 900; // smaller = stronger 3D depth
+    let ticking = false;
+
+    function progressFor(el){
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // 0 = frame just entering from the bottom of the viewport, 1 = frame's top has
+      // scrolled up to ~20% of the viewport height (i.e. mostly settled into view)
+      let p = (vh - rect.top) / (vh * 0.85);
+      return Math.min(Math.max(p, 0), 1);
+    }
+
+    function update(){
+      const p = progressFor(frame);
+      const rotate = MAX_ROTATE * (1 - p);
+      const scale = MIN_SCALE + (1 - MIN_SCALE) * p;
+      frame.style.opacity = Math.min(p * 1.6, 1);
+      frame.style.transform = `perspective(${PERSPECTIVE}px) rotateX(${rotate}deg) scale(${scale})`;
+      ticking = false;
+    }
+    function onScroll(){
+      if(!ticking){ requestAnimationFrame(update); ticking = true; }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  })();
 
   // ---------- about terminal typewriter ----------
   (function(){
