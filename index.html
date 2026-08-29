@@ -153,20 +153,24 @@
     padding:.4rem .7rem;border-radius:8px;border:1px solid rgba(99,102,241,.12);
   }
 
-  /* ---------- nav file tabs (bespoke) ---------- */
+  /* ---------- nav links ---------- */
+  #navbar{
+    background:linear-gradient(160deg, rgba(28,28,36,.94), rgba(15,15,19,.96));
+    border-bottom:1px solid rgba(99,102,241,.22);
+  }
+  #navbar .font-signature{ color:#f2effb; }
+  #navToggle{ color:#f2effb; }
   .nav-links a{
     font-family:'Fira Code',monospace;font-size:.82rem;font-weight:500;
-    color:#464554;position:relative;padding:.5rem .7rem;border-radius:8px 8px 0 0;
+    color:#a9a7bb;position:relative;padding:.5rem .9rem;border-radius:999px;
     display:inline-flex;align-items:center;gap:.5rem;transition:color .25s ease,background .25s ease;
   }
-  .nav-links a .tab-dot{ width:6px;height:6px;border-radius:50%;background:#6366f1;opacity:0;transition:opacity .25s ease; }
   .nav-links a::after{
-    content:"";position:absolute;left:.7rem;right:calc(100% - .7rem);bottom:0;height:2px;
+    content:"";position:absolute;left:.9rem;right:calc(100% - .9rem);bottom:.15rem;height:2px;
     background:#6366f1;transition:right .3s cubic-bezier(.65,0,.35,1);
   }
-  .nav-links a:hover{ color:#1b1b23; background:#efecf8; }
-  .nav-links a:hover::after{ right:.7rem; }
-  .nav-links a:hover .tab-dot{ opacity:1; }
+  .nav-links a:hover{ color:#fff; background:rgba(255,255,255,.07); }
+  .nav-links a:hover::after{ right:.9rem; }
 
   .cv-nav-btn{
     font-family:'Fira Code',monospace;font-size:.82rem;font-weight:500;
@@ -196,14 +200,13 @@
     animation:blink 1s step-end infinite;vertical-align:-2px;
   }
 
-  #mobileMenu{ background:#fcf8ff;border-top:1px solid rgba(99,102,241,.12); }
+  #mobileMenu{ background:rgba(15,15,19,.97);border-top:1px solid rgba(99,102,241,.2); }
   #mobileMenu.open{ display:flex; }
   .mobile-nav-link{
-    font-family:'Fira Code',monospace;font-size:.85rem;font-weight:500;color:#464554;
+    font-family:'Fira Code',monospace;font-size:.85rem;font-weight:500;color:#a9a7bb;
     display:flex;align-items:center;gap:.6rem;padding:.7rem .3rem;
-    border-bottom:1px solid rgba(99,102,241,.08);
+    border-bottom:1px solid rgba(255,255,255,.08);
   }
-  .mobile-nav-link .tab-dot{ width:6px;height:6px;border-radius:50%;background:#6366f1; }
 
   /* ---------- contribution graph (bespoke) ---------- */
   .contrib-grid{ display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,1fr);gap:3px;overflow-x:auto;padding-bottom:.3rem; }
@@ -415,10 +418,10 @@
   <div class="flex justify-between items-center w-full px-8 py-3 max-w-container-max mx-auto">
     <a href="#top" class="font-signature text-3xl text-on-background hover:text-indigo-electric transition-colors cursor-hover">Nilay Balcı</a>
     <div class="hidden md:flex items-center gap-1 nav-links">
-      <a href="#about" data-i18n="nav_about"><span class="tab-dot"></span>hakkimda.md</a>
-      <a href="#experience" data-i18n="nav_exp"><span class="tab-dot"></span>deneyim.log</a>
-      <a href="#skills" data-i18n="nav_skills"><span class="tab-dot"></span>skills.json</a>
-      <a href="#projects" data-i18n="nav_projects"><span class="tab-dot"></span>projeler.dir</a>
+      <a href="#about" data-i18n="nav_about">Hakkımda</a>
+      <a href="#experience" data-i18n="nav_exp">Deneyim</a>
+      <a href="#skills" data-i18n="nav_skills">Yetenekler</a>
+      <a href="#projects" data-i18n="nav_projects">Projeler</a>
       <button id="langToggle" class="lang-toggle-btn" title="Switch language" aria-label="Switch language"><span class="material-symbols-outlined">terminal</span><span id="langToggleLabel">TR</span><span class="lang-cursor"></span></button>
       <a href="#contact" class="ml-1 !bg-indigo-electric !text-white px-5 py-2 !rounded-full font-code text-xs hover:!bg-indigo-deep transition-all cursor-hover animate-pulse-subtle shadow-lg shadow-indigo-electric/30" data-i18n="nav_contact_cta">$ iletişime geç</a>
     </div>
@@ -427,10 +430,10 @@
     </button>
   </div>
   <div id="mobileMenu" class="hidden md:hidden flex-col gap-1 px-6 pb-5 pt-1">
-    <a href="#about" class="mobile-nav-link" data-i18n="nav_about"><span class="tab-dot"></span>hakkimda.md</a>
-    <a href="#experience" class="mobile-nav-link" data-i18n="nav_exp"><span class="tab-dot"></span>deneyim.log</a>
-    <a href="#skills" class="mobile-nav-link" data-i18n="nav_skills"><span class="tab-dot"></span>skills.json</a>
-    <a href="#projects" class="mobile-nav-link" data-i18n="nav_projects"><span class="tab-dot"></span>projeler.dir</a>
+    <a href="#about" class="mobile-nav-link" data-i18n="nav_about">Hakkımda</a>
+    <a href="#experience" class="mobile-nav-link" data-i18n="nav_exp">Deneyim</a>
+    <a href="#skills" class="mobile-nav-link" data-i18n="nav_skills">Yetenekler</a>
+    <a href="#projects" class="mobile-nav-link" data-i18n="nav_projects">Projeler</a>
     <button id="langToggleMobile" class="mobile-nav-link" style="width:100%;text-align:left;"><span class="material-symbols-outlined text-base">terminal</span><span id="langToggleLabelMobile" class="font-code">Türkçe</span><span class="lang-cursor"></span></button>
     <a href="#contact" class="mt-2 inline-flex justify-center !bg-indigo-electric !text-white px-5 py-2.5 !rounded-full font-code text-xs shadow-lg shadow-indigo-electric/30" data-i18n="nav_contact_cta">$ iletişime geç</a>
   </div>
@@ -1160,10 +1163,10 @@
   // ---------- EN / TR translation ----------
   const I18N = {
     tr: {
-      nav_about: '<span class="tab-dot"></span>hakkimda.md',
-      nav_exp: '<span class="tab-dot"></span>deneyim.log',
-      nav_skills: '<span class="tab-dot"></span>skills.json',
-      nav_projects: '<span class="tab-dot"></span>projeler.dir',
+      nav_about: 'Hakkımda',
+      nav_exp: 'Deneyim',
+      nav_skills: 'Yetenekler',
+      nav_projects: 'Projeler',
       nav_contact_cta: '$ iletişime geç',
       nav_cv: 'CV',
       cv_eyebrow: '// özgeçmiş',
@@ -1221,10 +1224,10 @@
       modal_gh_btn: 'GitHub\'da Görüntüle',
     },
     en: {
-      nav_about: '<span class="tab-dot"></span>about.md',
-      nav_exp: '<span class="tab-dot"></span>experience.log',
-      nav_skills: '<span class="tab-dot"></span>skills.json',
-      nav_projects: '<span class="tab-dot"></span>projects.dir',
+      nav_about: 'About',
+      nav_exp: 'Experience',
+      nav_skills: 'Skills',
+      nav_projects: 'Projects',
       nav_contact_cta: '$ get in touch',
       nav_cv: 'Resume',
       cv_eyebrow: '// resume',
