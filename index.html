@@ -434,10 +434,15 @@
        nav bar, hiding each section's first ~60px (its code-float badge + eyebrow) behind it */
     section[id]{ scroll-margin-top:70px; }
 
-    /* hero: min-h-screen + flex-centering left the "merhaba, ben" card floating deep in the
-       middle of a full-viewport-tall section; give it a natural height instead so the card
-       sits just under the nav, not stranded in empty space */
-    #top{ min-height:auto !important; padding-top:5.5rem !important; padding-bottom:2.5rem !important; }
+    /* hero: keep the full-viewport height so the card is genuinely centered on screen
+       (not just within its own auto-height box sitting up under the nav), and give the
+       card itself a bit more presence — scoped to #top only, so the shared phone
+       type-scale/padding shrink used by every other card elsewhere is untouched */
+    #top{ min-height:100vh !important; }
+    #top .glass-panel{ padding:2.25rem 1.5rem !important; }
+    #top .font-signature.text-5xl{ font-size:2.75rem !important; }
+    #top .text-headline-md{ font-size:1.2rem !important; }
+    #top .text-body-lg{ font-size:1.02rem !important; }
 
     /* the colorful "1010" rain canvas itself was still cutting off sharply at the
        hero's bottom edge (only the static dot-grid extension below it was fading) —
@@ -476,6 +481,15 @@
     #top .bg-indigo-deep\/10{ background-color:rgb(var(--c-indigo-deep) / .20) !important; }
     /* database rows (MySQL / SQL Server) were quite tall/chunky next to the other chips */
     #skills .p-4{ padding:.6rem .9rem !important; }
+  }
+  /* ---------- tablet only (768–1023px; phone and desktop are untouched) ---------- */
+  @media (min-width:768px) and (max-width:1023px){
+    /* hero card already centers fine at this width, but at the same padding/type-scale
+       as desktop it reads as small/lost against a taller tablet viewport — give it a
+       bit more presence without touching phone or PC */
+    #top .glass-panel{ padding:3.5rem 3rem !important; }
+    #top .font-signature.text-5xl{ font-size:3.6rem !important; }
+    #top .text-headline-md{ font-size:1.35rem !important; }
   }
   @media (max-width:767px){
     /* on phone the hero is now content-height (see the earlier fix), so the colour blobs -
@@ -981,7 +995,7 @@
     const ctx = canvas.getContext('2d');
     const PATH_COUNT = 34;
     const sections = Array.from(document.querySelectorAll('main > section'));
-    let paths = [], running = false, rafId = null, lastScrollY = window.scrollY;
+    let paths = [], running = false, rafId = null;
 
     function bezierPoint(t, p0, p1, p2, p3){
       const u = 1 - t;
@@ -1036,12 +1050,13 @@
         .getPropertyValue('--c-indigo').trim().split(/\s+/).join(',');
       const { a, b, progress } = bracket();
       const fade = entryFade();
-      // scrolling down: new section arrives from below, so the bottom-most lane leads
-      // the handoff; scrolling up: it arrives from above, so the top-most lane leads
-      const scrollingDown = window.scrollY >= lastScrollY;
-      lastScrollY = window.scrollY;
+      // a fixed bottom-leads-toward-b mapping (not direction-conditional!) already gives
+      // the right feel both ways: as progress rises (scrolling down, b arriving from
+      // below) the bottom lane hits full convergence first; as progress falls (scrolling
+      // up, a reasserting from above) the top lane is the first to fall back to 0 — same
+      // rank, opposite ends of the same curve.
       paths.forEach((p, i) => {
-        const rank = scrollingDown ? (n - 1 - i) : i;
+        const rank = n - 1 - i;
         // this particle's own slice of the overall sweep — the leading lane goes first,
         // the trailing one isn't done until progress hits 1 (section dead-center)
         const own = Math.min(Math.max((progress - rank / n) / (1 / n), 0), 1);
