@@ -437,8 +437,13 @@
     /* hero: keep the full-viewport height so the card is genuinely centered on screen
        (not just within its own auto-height box sitting up under the nav), and give the
        card itself a bit more presence — scoped to #top only, so the shared phone
-       type-scale/padding shrink used by every other card elsewhere is untouched */
-    #top{ min-height:100vh !important; }
+       type-scale/padding shrink used by every other card elsewhere is untouched.
+       100vh on mobile browsers measures the viewport with the address bar collapsed,
+       taller than what's actually visible on first load — that stretched the section
+       below the fold and made the centered card sit low. 100svh (small viewport height)
+       measures the guaranteed-visible area instead; kept 100vh first as a fallback for
+       browsers that don't support svh yet. */
+    #top{ min-height:100vh !important; min-height:100svh !important; }
     #top .glass-panel{ padding:2.25rem 1.5rem !important; }
     #top .font-signature.text-5xl{ font-size:2.75rem !important; }
     #top .text-headline-md{ font-size:1.2rem !important; }
