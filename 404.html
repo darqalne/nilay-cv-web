@@ -10,15 +10,24 @@
   html[data-theme="dark"],body[data-theme="dark"]{ background:#1a1820; }
 </style>
 <script>
-  // GitHub Pages has no real routing — a direct load of a clean path like
-  // "/nilay-cv-web/hakkimda" has no matching file, so it serves this file's content
-  // (with a 404 status, which browsers still execute). Stash the intended path and
-  // bounce back to index.html, which reads it from sessionStorage and restores the
-  // clean URL + scrolls to the right section.
+  // The host has no real routing — a direct load of a clean path like "/hakkimda"
+  // (or "/nilay-cv-web/hakkimda" on a GitHub Pages project page) has no matching file,
+  // so it serves this file's content (with a 404 status, which browsers still execute).
+  // Stash the intended path and bounce back to index.html, which reads it from
+  // sessionStorage and restores the clean URL + scrolls to the right section.
+  //
+  // The previous version assumed the first path segment was always a repo-name prefix
+  // (root = "/" + parts[0] + "/"). That's wrong for a custom domain served at its own
+  // root: for "/deneyim/" it computed root = "/deneyim/" — redirecting to itself in an
+  // infinite loop, which is exactly the page getting stuck on this "Yönlendiriliyor…"
+  // screen that never resolves. Instead: only strip a *known slug* segment (wherever it
+  // is), so whatever's left — nothing, or an actual repo-name prefix — is the real root.
   if(localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
   sessionStorage.setItem('cleanPathRedirect', location.pathname);
-  var parts = location.pathname.split('/').filter(Boolean);
-  var root = parts.length ? '/' + parts[0] + '/' : '/';
+  var KNOWN_SLUGS = ['hakkimda', 'deneyim', 'yetenekler', 'projeler', 'iletisim'];
+  var parts = location.pathname.replace(/\/$/, '').split('/').filter(Boolean);
+  if(parts.length && KNOWN_SLUGS.indexOf(parts[parts.length - 1]) !== -1) parts.pop();
+  var root = parts.length ? '/' + parts.join('/') + '/' : '/';
   location.replace(root);
 </script>
 </head>

@@ -1227,14 +1227,15 @@
     const ID_TO_SLUG = { top:'', about:'hakkimda', experience:'deneyim', skills:'yetenekler', projects:'projeler', contact:'iletisim' };
     const KNOWN_SLUGS = Object.keys(SLUG_TO_ID);
 
-    let basePath = location.pathname;
-    for(const slug of KNOWN_SLUGS){
-      if(basePath === '/' + slug || basePath.endsWith('/' + slug)){
-        basePath = basePath.slice(0, basePath.length - slug.length);
-        break;
-      }
-    }
-    if(!basePath.endsWith('/')) basePath += '/';
+    // segment-based (not string-suffix) and trailing-slash-safe: the old
+    // basePath.endsWith('/'+slug) check silently failed to match a path like
+    // "/deneyim/" (trailing slash) against "/deneyim", leaving basePath wrong on
+    // hosts that add one (seen on the custom domain, not on the GitHub Pages URL
+    // used during testing) — the fresh 404.html<->index.html handoff below then
+    // computed an incorrect target and could loop.
+    let pathParts = location.pathname.replace(/\/$/, '').split('/').filter(Boolean);
+    if(pathParts.length && KNOWN_SLUGS.indexOf(pathParts[pathParts.length - 1]) !== -1) pathParts.pop();
+    let basePath = pathParts.length ? '/' + pathParts.join('/') + '/' : '/';
 
     const urlForId = (id) => basePath + (ID_TO_SLUG[id] || '');
 
