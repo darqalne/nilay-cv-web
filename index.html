@@ -1267,6 +1267,14 @@
     const initialId = SLUG_TO_ID[slug];
     if(initialId){
       history.replaceState({ sectionId: initialId }, '', urlForId(initialId));
+      // scroll as soon as the browser has actually laid the page out — not the full
+      // 'load' event, which waits on fonts/images/the CV preview jpg and meant visibly
+      // sitting on the hero for a beat before suddenly jumping down (read as broken on
+      // refresh). Tailwind's CDN build injects its generated stylesheet after the DOM is
+      // parsed, so scrolling at parse-time was itself too early (nothing was positioned
+      // yet); a double rAF waits for a real painted frame instead. A final correction
+      // once 'load' fires accounts for any late layout shift from web fonts finishing.
+      requestAnimationFrame(() => requestAnimationFrame(() => scrollToId(initialId, false)));
       window.addEventListener('load', () => scrollToId(initialId, false));
     }
   })();
